@@ -6,6 +6,7 @@ import type {
   Rule,
   OutcomeType,
 } from '../types';
+import { deriveSizingFromVZAE } from '../config';
 import ruleset from './nis2-drk-ruleset.v1.json';
 
 // ── Helpers ──
@@ -300,12 +301,23 @@ export function evaluateAssessment(answers: WizardAnswers): AssessmentResult {
   // Compute BSI registration requirement based on outcome
   const registration = computeRegistration(outcomeType);
 
+  // Derive S/M/L sizing from effective VZÄ
+  // When ORG-03 = 'ev' (RD is department in e.V.), use ORG-09 (Gesamtverband VZÄ)
+  // Otherwise use THR-01 (Rechtsträger VZÄ)
+  const effectiveVZAE = answers['ORG-03'] === 'ev' && typeof answers['ORG-09'] === 'number'
+    ? answers['ORG-09']
+    : typeof answers['THR-01'] === 'number'
+      ? answers['THR-01']
+      : undefined;
+  const sizingType = deriveSizingFromVZAE(effectiveVZAE as number | undefined);
+
   return {
     outcome: { type: outcomeType, label: outcomeLabel, summary: outcomeSummary },
     jurisdiction,
     scope: { technical: technicalScope },
     scoring,
     registration,
+    sizingType,
     roadmapPacks: roadmapPackIds,
     roadmapItems,
     triggeredRules,

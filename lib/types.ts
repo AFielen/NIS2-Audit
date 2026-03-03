@@ -153,6 +153,9 @@ export interface RegistrationResult {
   message: string;
 }
 
+/** S/M/L sizing for roadmap templates */
+export type SizingType = 'S' | 'M' | 'L';
+
 /** Complete assessment result */
 export interface AssessmentResult {
   outcome: OutcomeResult;
@@ -162,6 +165,7 @@ export interface AssessmentResult {
   };
   scoring: ScoringResult;
   registration: RegistrationResult;
+  sizingType: SizingType | null;
   roadmapPacks: string[];
   roadmapItems: Array<{ packId: string; title: string; items: string[] }>;
   triggeredRules: TriggeredRuleInfo[];
