@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { AssessmentResult, WizardAnswers } from '@/lib/types';
 import ExecutiveSummary from '@/components/results/ExecutiveSummary';
+import RegistrationCallout from '@/components/results/RegistrationCallout';
 import ScopeCards from '@/components/results/ScopeCards';
 import MaturityBadge from '@/components/results/MaturityBadge';
 import TriggeredRulesList from '@/components/results/TriggeredRulesList';
@@ -80,6 +81,7 @@ export default function ErgebnisPage() {
         </div>
 
         <ExecutiveSummary result={result} />
+        <RegistrationCallout registration={result.registration} outcomeType={result.outcome.type} />
         <ScopeCards result={result} />
         <MaturityBadge scoring={result.scoring} />
         <TriggeredRulesList rules={result.triggeredRules} />

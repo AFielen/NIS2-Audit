@@ -143,6 +143,15 @@ export interface TriggeredRuleInfo {
   description: string;
 }
 
+/** BSI registration determination */
+export interface RegistrationResult {
+  required: boolean;
+  recommended: boolean;
+  deadline: string;
+  url: string;
+  message: string;
+}
+
 /** Complete assessment result */
 export interface AssessmentResult {
   outcome: OutcomeResult;
@@ -151,6 +160,7 @@ export interface AssessmentResult {
     technical: TechnicalScopeResult;
   };
   scoring: ScoringResult;
+  registration: RegistrationResult;
   roadmapPacks: string[];
   roadmapItems: Array<{ packId: string; title: string; items: string[] }>;
   triggeredRules: TriggeredRuleInfo[];
