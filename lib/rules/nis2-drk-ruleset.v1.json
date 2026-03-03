@@ -46,7 +46,7 @@
     {
       "id": "OPS-01",
       "section": "ops",
-      "label": "Erbringt der Verbund rettungsdienstliche Leistungen (Notfallrettung / Rettungsdienst)?",
+      "label": "Erbringt der Verband rettungsdienstliche Leistungen (Notfallrettung / Rettungsdienst)?",
       "hint": "Gemeint ist der tatsächliche Betrieb von Rettungswagen (RTW), Notarzteinsatzfahrzeugen (NEF) oder Krankentransportwagen (KTW) im Rahmen des öffentlichen Rettungsdienstes. Sanitätsdienste bei Veranstaltungen zählen hier nicht.",
       "type": "single_select",
       "options": [
@@ -110,6 +110,19 @@
       "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
     },
     {
+      "id": "IT-OVERVIEW",
+      "section": "it",
+      "label": "Teilen sich Rettungsdienst und restlicher Verband IT-Infrastruktur?",
+      "hint": "Gemeinsame IT-Infrastruktur bedeutet z.B. dasselbe Active Directory, denselben M365-Tenant, gemeinsame Firewalls, Backup-Systeme oder Geräteverwaltung. Wenn alles geteilt wird oder alles getrennt ist, können Sie hier direkt antworten. Bei gemischter Situation wählen Sie »Teilweise« für die Detailfragen.",
+      "type": "single_select",
+      "options": [
+        { "value": "all_shared", "label": "Ja, alles geteilt (ein AD, ein Tenant, gemeinsame Infrastruktur)" },
+        { "value": "partial", "label": "Teilweise (einige Systeme geteilt, andere getrennt)" },
+        { "value": "all_separate", "label": "Nein, komplett getrennte IT-Systeme" }
+      ],
+      "required": true
+    },
+    {
       "id": "IT-01",
       "section": "it",
       "label": "Gemeinsame Identitäten (AD/Entra ID/M365) für mehrere Einheiten?",
@@ -120,7 +133,8 @@
         { "value": "no", "label": "Nein" },
         { "value": "partial", "label": "Teilweise" }
       ],
-      "required": true
+      "required": true,
+      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
     },
     {
       "id": "IT-02",
@@ -133,7 +147,8 @@
         { "value": "no", "label": "Nein" },
         { "value": "partial", "label": "Teilweise" }
       ],
-      "required": true
+      "required": true,
+      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
     },
     {
       "id": "IT-03",
@@ -146,7 +161,8 @@
         { "value": "no", "label": "Nein" },
         { "value": "partial", "label": "Teilweise" }
       ],
-      "required": true
+      "required": true,
+      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
     },
     {
       "id": "IT-04",
@@ -159,12 +175,13 @@
         { "value": "no", "label": "Nein" },
         { "value": "partial", "label": "Teilweise" }
       ],
-      "required": true
+      "required": true,
+      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
     },
     {
       "id": "IT-05",
       "section": "it",
-      "label": "Segmentierung Rettungsdienst vs. restlicher Verbund",
+      "label": "Segmentierung Rettungsdienst vs. restlicher Verband",
       "hint": "Ist das IT-Netzwerk des Rettungsdienstes vom restlichen Verbandsnetzwerk getrennt? »Keine« bedeutet alles läuft im selben Netzwerk. »Rudimentär« bedeutet z.B. eigene VLANs (virtuelle Netzwerk-Bereiche), aber gemeinsame Administratoren. »Sauber« bedeutet vollständige Trennung mit dokumentierten, kontrollierten Übergangspunkten.",
       "type": "single_select",
       "options": [
@@ -172,7 +189,22 @@
         { "value": "rudimentary", "label": "Rudimentär (z.B. VLAN ohne harte Admin-/Identity-Trennung)" },
         { "value": "clean", "label": "Sauber (mit kontrollierten Übergängen und dokumentiert)" }
       ],
-      "required": true
+      "required": true,
+      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
+    },
+    {
+      "id": "SEP-OVERVIEW",
+      "section": "separation",
+      "label": "Ist eine harte technische Trennung zwischen RD und restlichem Verband nachweisbar?",
+      "hint": "Harte Trennung bedeutet: eigener Tenant/Domain, getrennte Admins, eigene Netzsegmente, getrenntes Backup, getrenntes Endpoint-Management, getrenntes Logging, eigenes Inventar und Nachweis, dass ein Vorfall im Verband den RD nicht beeinträchtigt. Wenn alle 8 Kriterien erfüllt sind, wählen Sie »Ja, vollständig«. Wenn keines erfüllt ist, wählen Sie »Nein«. Bei teilweiser Erfüllung wählen Sie »Teilweise« für die Detailfragen.",
+      "type": "single_select",
+      "options": [
+        { "value": "full", "label": "Ja, vollständig (alle 8 Trennungskriterien erfüllt)" },
+        { "value": "partial_sep", "label": "Teilweise (einige Kriterien erfüllt, andere nicht)" },
+        { "value": "none", "label": "Nein, keine harte Trennung" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
     },
     {
       "id": "SEP-01",
@@ -185,7 +217,7 @@
         { "value": "no", "label": "Nein" }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
     },
     {
       "id": "SEP-02",
@@ -198,7 +230,7 @@
         { "value": "no", "label": "Nein" }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
     },
     {
       "id": "SEP-03",
@@ -211,7 +243,7 @@
         { "value": "no", "label": "Nein" }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
     },
     {
       "id": "SEP-04",
@@ -224,7 +256,7 @@
         { "value": "no", "label": "Nein" }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
     },
     {
       "id": "SEP-05",
@@ -237,7 +269,7 @@
         { "value": "no", "label": "Nein" }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
     },
     {
       "id": "SEP-06",
@@ -250,7 +282,7 @@
         { "value": "no", "label": "Nein" }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
     },
     {
       "id": "SEP-07",
@@ -263,7 +295,7 @@
         { "value": "no", "label": "Nein" }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
     },
     {
       "id": "SEP-08",
@@ -276,7 +308,7 @@
         { "value": "no", "label": "Nein" }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
     },
     {
       "id": "SEC-01",

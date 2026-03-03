@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import type { AssessmentResult, WizardAnswers } from '@/lib/types';
+import type { AssessmentResult, WizardAnswers, Grunddaten } from '@/lib/types';
 import { buildRoadmap } from '@/lib/roadmap/build-roadmap';
 import ExecutiveSummary from '@/components/results/ExecutiveSummary';
 import RegistrationCallout from '@/components/results/RegistrationCallout';
@@ -16,17 +16,22 @@ import ExportActions from '@/components/results/ExportActions';
 export default function ErgebnisPage() {
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const [answers, setAnswers] = useState<WizardAnswers>({});
+  const [grunddaten, setGrunddaten] = useState<Grunddaten>({ kreisverband: '', adresse: '', vorstand: '' });
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     try {
       const resultRaw = localStorage.getItem('nis2-audit-result');
       const answersRaw = localStorage.getItem('nis2-audit-answers');
+      const grunddatenRaw = localStorage.getItem('nis2-audit-grunddaten');
       if (resultRaw) {
         setResult(JSON.parse(resultRaw));
       }
       if (answersRaw) {
         setAnswers(JSON.parse(answersRaw));
+      }
+      if (grunddatenRaw) {
+        setGrunddaten(JSON.parse(grunddatenRaw));
       }
     } catch {
       // ignore
@@ -78,9 +83,32 @@ export default function ErgebnisPage() {
         <div className="hidden print:block mb-6">
           <h1 className="text-2xl font-bold" style={{ color: 'var(--drk)' }}>NIS-2 Audit – Ergebnis</h1>
           <p className="text-sm" style={{ color: 'var(--text-light)' }}>
-            DRK Kreisverband StädteRegion Aachen e.V. · Regelwerk v1.0
+            {grunddaten.kreisverband || 'DRK Kreisverband'} · Regelwerk v1.0 · {new Date().toLocaleDateString('de-DE')}
           </p>
+          {grunddaten.adresse && (
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{grunddaten.adresse}</p>
+          )}
+          {grunddaten.vorstand && (
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Vorstand/KGF: {grunddaten.vorstand}</p>
+          )}
         </div>
+
+        {/* Grunddaten summary (on-screen) */}
+        {grunddaten.kreisverband && (
+          <div className="drk-card drk-fade-in no-print">
+            <div className="flex items-center gap-3">
+              <div className="text-sm">
+                <span className="font-bold" style={{ color: 'var(--text)' }}>{grunddaten.kreisverband}</span>
+                {grunddaten.adresse && (
+                  <span style={{ color: 'var(--text-light)' }}> · {grunddaten.adresse}</span>
+                )}
+                {grunddaten.vorstand && (
+                  <span style={{ color: 'var(--text-light)' }}> · {grunddaten.vorstand}</span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         <ExecutiveSummary result={result} />
         <RegistrationCallout registration={result.registration} outcomeType={result.outcome.type} />

@@ -36,7 +36,7 @@ Rettungsdienst wird als potenziell NIS-2-relevante Einrichtungsart behandelt.
 
 ### Web-App
 - 7-Schritte-Wizard mit ~32 Fragen in 6 Bereichen
-- 3 Presets für typische KV-Verbundstrukturen
+- 3 Presets für typische KV-Verbandsstrukturen
 - Ergebnis A/B/C/D mit regelbasierter Ableitung
 - Getrennte Darstellung von juristischem und technischem Scope
 - Shared-IT-Analyse und harte Trennungslogik (8/8 Kriterien)

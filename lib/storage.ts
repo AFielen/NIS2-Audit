@@ -5,6 +5,7 @@ const STORAGE_KEY = 'nis2-audit-wizard-state';
 export function createEmptyState(): WizardState {
   return {
     answers: {},
+    grunddaten: { kreisverband: '', adresse: '', vorstand: '' },
     currentStep: 0,
     selectedPreset: null,
     timestamp: Date.now(),

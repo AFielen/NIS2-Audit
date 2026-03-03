@@ -50,7 +50,7 @@ const shared = {
 const appTranslations = {
   de: {
     'app.title': 'NIS-2 Audit',
-    'app.subtitle': 'Self-Check für Rettungsdienst, Verbundstruktur und Shared IT im DRK',
+    'app.subtitle': 'Self-Check für Rettungsdienst, Verbandsstruktur und Shared IT im DRK',
     'app.description': 'DRK-spezifische NIS-2-Betroffenheitsanalyse mit Ergebnislogik, Scope-Bewertung und 90-Tage-Roadmap.',
     // Landing
     'landing.hero.title': 'NIS-2 Self-Check für DRK-Verbände',
@@ -75,7 +75,7 @@ const appTranslations = {
     'wizard.step.sicherheit': 'Sicherheitsreife',
     'wizard.step.ergebnis': 'Ergebnis',
     'wizard.preset.title': 'Preset wählen (optional)',
-    'wizard.preset.desc': 'Wählen Sie eine typische Verbundstruktur als Ausgangspunkt. Antworten können anschließend angepasst werden.',
+    'wizard.preset.desc': 'Wählen Sie eine typische Verbandsstruktur als Ausgangspunkt. Antworten können anschließend angepasst werden.',
     'wizard.preset.none': 'Ohne Preset starten',
     'wizard.complete': 'Auswertung starten',
     'wizard.resume': 'Vorherige Eingaben fortsetzen',

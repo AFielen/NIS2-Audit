@@ -15,7 +15,7 @@ export default function PresetSelector({ value, onChange }: PresetSelectorProps)
         Preset wählen (optional)
       </h3>
       <p className="text-sm mb-4" style={{ color: 'var(--text-light)' }}>
-        Wählen Sie eine typische Verbundstruktur, um Antworten vorzubefüllen.
+        Wählen Sie eine typische Verbandsstruktur, um Antworten vorzubefüllen.
       </p>
       <div className="space-y-2">
         {presets.map((preset) => {
