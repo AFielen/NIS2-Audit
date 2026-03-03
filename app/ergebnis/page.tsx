@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { AssessmentResult, WizardAnswers, Grunddaten } from '@/lib/types';
+import { buildRoadmap } from '@/lib/roadmap/build-roadmap';
 import ExecutiveSummary from '@/components/results/ExecutiveSummary';
 import RegistrationCallout from '@/components/results/RegistrationCallout';
 import ScopeCards from '@/components/results/ScopeCards';
 import MaturityBadge from '@/components/results/MaturityBadge';
 import TriggeredRulesList from '@/components/results/TriggeredRulesList';
-import RoadmapView from '@/components/results/RoadmapView';
+import LayeredRoadmapView from '@/components/results/LayeredRoadmapView';
 import OpenItems from '@/components/results/OpenItems';
 import ExportActions from '@/components/results/ExportActions';
 
@@ -124,7 +125,7 @@ export default function ErgebnisPage() {
         <ScopeCards result={result} />
         <MaturityBadge scoring={result.scoring} />
         <TriggeredRulesList rules={result.triggeredRules} />
-        <RoadmapView result={result} answers={answers} />
+        <LayeredRoadmapView roadmap={buildRoadmap(result.outcome.type, result.sizingType)} />
         <OpenItems answers={answers} />
 
         {/* Signature line — print only */}
