@@ -180,3 +180,32 @@ body {
   font-size: 0.75rem;
   font-weight: 600;
 }
+
+/* ── Print Styles ── */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .drk-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 1rem;
+  }
+
+  .drk-btn-primary,
+  .drk-btn-secondary {
+    display: none !important;
+  }
+
+  .hidden.print\:block {
+    display: block !important;
+  }
+}
