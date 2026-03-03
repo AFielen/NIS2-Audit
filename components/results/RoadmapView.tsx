@@ -77,7 +77,7 @@ export default function RoadmapView({ result, answers }: RoadmapViewProps) {
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between text-left"
+        className="w-full flex items-center justify-between text-left no-print"
       >
         <h3 className="font-bold" style={{ color: 'var(--text)' }}>
           Vorschlag: 90-Tage-Roadmap nach BSI
@@ -85,13 +85,19 @@ export default function RoadmapView({ result, answers }: RoadmapViewProps) {
         <svg
           xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
           fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          className="shrink-0 transition-transform"
+          className="shrink-0 transition-transform print-hide-toggle"
           style={{ color: 'var(--text-muted)', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </button>
-      {expanded && <>
+
+      {/* Print-only heading */}
+      <h3 className="hidden print:block font-bold mb-2" style={{ color: 'var(--text)' }}>
+        Vorschlag: 90-Tage-Roadmap nach BSI
+      </h3>
+
+      <div className={expanded ? '' : 'hidden print:block'}>
       <p className="text-sm mb-4 mt-4" style={{ color: 'var(--text-light)' }}>
         {showSchritt0 && 'Beginnen Sie mit Schritt 0 (BSI-Registrierung) vor Tag 1. '}
         {hasRoadmapItems && `${result.roadmapPacks.length} Maßnahmenpakete basierend auf Ihrem Ergebnis und Reifegrad.`}
@@ -164,7 +170,7 @@ export default function RoadmapView({ result, answers }: RoadmapViewProps) {
                 border: isFulfilled ? '1px solid var(--success)' : 'none',
               }}
             >
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span
                   className="text-xs font-mono font-bold px-2 py-0.5 rounded"
                   style={{
@@ -212,7 +218,7 @@ export default function RoadmapView({ result, answers }: RoadmapViewProps) {
           );
         })}
       </div>
-      </>}
+      </div>
     </div>
   );
 }

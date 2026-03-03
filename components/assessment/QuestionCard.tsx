@@ -18,8 +18,8 @@ function HintToggle({ hint }: { hint: string }) {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="text-sm flex items-center gap-1.5 hover:underline"
-        style={{ color: 'var(--info)' }}
+        className="text-sm flex items-center gap-1.5 hover:underline py-2"
+        style={{ color: 'var(--info)', minHeight: '44px' }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

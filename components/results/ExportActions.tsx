@@ -61,8 +61,8 @@ export default function ExportActions({ result, answers }: ExportActionsProps) {
       {/* QR Code preview - visible on screen */}
       {qrSvg && (
         <div className="drk-card drk-fade-in no-print">
-          <div className="flex items-start gap-4">
-            <div dangerouslySetInnerHTML={{ __html: qrSvg }} className="shrink-0 rounded border" style={{ borderColor: 'var(--border)', padding: '4px' }} />
+          <div className="flex flex-col sm:flex-row items-start gap-4">
+            <div dangerouslySetInnerHTML={{ __html: qrSvg }} className="shrink-0 rounded border mx-auto sm:mx-0" style={{ borderColor: 'var(--border)', padding: '4px' }} />
             <div>
               <h3 className="font-bold text-sm mb-1" style={{ color: 'var(--text)' }}>
                 QR-Code: Audit wiederherstellen

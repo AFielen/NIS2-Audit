@@ -90,44 +90,47 @@ export default function LayeredRoadmapView({ roadmap }: LayeredRoadmapViewProps)
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between text-left"
+        className="w-full flex items-center justify-between text-left no-print"
       >
         <h3 className="font-bold" style={{ color: 'var(--text)' }}>
-          Vorschlag: Umsetzungs-Roadmap nach BSI
+          Vorschlag: Individuelle Umsetzungs-Roadmap nach BSI
         </h3>
         <svg
           xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
           fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          className="shrink-0 transition-transform"
+          className="shrink-0 transition-transform print-hide-toggle"
           style={{ color: 'var(--text-muted)', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </button>
 
-      {expanded && (
-        <div className="mt-4">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-sm" style={{ color: 'var(--text-light)' }}>
-              {layers.length === 3
-                ? 'Drei Ebenen: Sofort-Maßnahmen (BSI-Registrierung), Grundschutz-Basis und größenangepasste 90-Tage-Roadmap.'
-                : layers.length === 2
-                  ? 'Grundschutz-Basis und größenangepasste 90-Tage-Roadmap für Ihren Kreisverband.'
-                  : 'Empfohlene Maßnahmen basierend auf Ihrem Ergebnis.'}
-            </p>
-            <Link
-              href="/grundschutz"
-              className="text-xs font-semibold underline shrink-0 ml-4"
-              style={{ color: 'var(--drk)' }}
-            >
-              Grundschutz-10 ansehen
-            </Link>
-          </div>
-          {layers.map((layer, i) => (
-            <LayerSection key={layer.id} layer={layer} index={i} />
-          ))}
+      {/* Print-only heading (since the button is hidden in print) */}
+      <h3 className="hidden print:block font-bold mb-2" style={{ color: 'var(--text)' }}>
+        Vorschlag: Individuelle Umsetzungs-Roadmap nach BSI
+      </h3>
+
+      <div className={expanded ? 'mt-4' : 'hidden print:block mt-4'}>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+          <p className="text-sm" style={{ color: 'var(--text-light)' }}>
+            {layers.length === 3
+              ? 'Drei Ebenen: Sofort-Maßnahmen (BSI-Registrierung), Grundschutz-Basis und größenangepasste 90-Tage-Roadmap.'
+              : layers.length === 2
+                ? 'Grundschutz-Basis und größenangepasste 90-Tage-Roadmap für Ihren Kreisverband.'
+                : 'Empfohlene Maßnahmen basierend auf Ihrem Ergebnis.'}
+          </p>
+          <Link
+            href="/grundschutz"
+            className="text-xs font-semibold underline shrink-0 no-print"
+            style={{ color: 'var(--drk)' }}
+          >
+            Grundschutz-10 ansehen
+          </Link>
         </div>
-      )}
+        {layers.map((layer, i) => (
+          <LayerSection key={layer.id} layer={layer} index={i} />
+        ))}
+      </div>
     </div>
   );
 }

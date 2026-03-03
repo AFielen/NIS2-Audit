@@ -51,7 +51,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <img src="/logo.png" alt="DRK Logo" width={42} height={42} />
             <div>
               <h1 className="text-[1.4rem] font-bold leading-tight">NIS-2 Audit</h1>
-              <div className="text-[0.8rem] opacity-85">Self-Check für Rettungsdienst, Verbandsstruktur und Shared IT im DRK</div>
+              <div className="text-[0.8rem] opacity-85 hidden sm:block">Self-Check für Rettungsdienst, Verbandsstruktur und Shared IT im DRK</div>
+              <div className="text-[0.8rem] opacity-85 sm:hidden">Self-Check für DRK-Verbände</div>
             </div>
           </Link>
 

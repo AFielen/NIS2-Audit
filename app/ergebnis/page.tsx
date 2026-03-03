@@ -96,9 +96,9 @@ export default function ErgebnisPage() {
 
         {/* Report header (on-screen) */}
         <div className="drk-card drk-fade-in">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
             <div>
-              <h2 className="text-lg font-bold" style={{ color: 'var(--text)' }}>
+              <h2 className="text-base sm:text-lg font-bold" style={{ color: 'var(--text)' }}>
                 {grunddaten.kreisverband || 'DRK Kreisverband'}
               </h2>
               {grunddaten.adresse && (
@@ -110,7 +110,7 @@ export default function ErgebnisPage() {
                 </p>
               )}
             </div>
-            <div className="text-right shrink-0">
+            <div className="sm:text-right shrink-0">
               <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
                 {new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
               </div>
@@ -130,9 +130,9 @@ export default function ErgebnisPage() {
         <RoadmapView result={result} answers={answers} />
         <OpenItems answers={answers} />
 
-        {/* Signature line */}
-        <div className="drk-card drk-fade-in" style={{ pageBreakInside: 'avoid' }}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {/* Signature line — print only */}
+        <div className="hidden print:block drk-card" style={{ pageBreakInside: 'avoid' }}>
+          <div className="grid grid-cols-2 gap-8">
             <div>
               <div className="text-xs font-semibold uppercase mb-1" style={{ color: 'var(--text-muted)' }}>
                 Datum
