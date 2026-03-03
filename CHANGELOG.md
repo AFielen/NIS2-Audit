@@ -9,6 +9,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Grundschutz-10 Handlungsempfehlungen**: Jede der 10 Grundschutz-Karten ist jetzt klickbar und öffnet eine Detailansicht mit GF-orientierten Handlungsempfehlungen (Bottom Sheet mobil / Modal desktop). Content-Datei `lib/content/grundschutz-details.ts` als Single Source of Truth. Wiederverwendbar auf `/grundschutz`-Seite und in der Ergebnis-Roadmap.
 - **Grunddaten im QR-Code**: Name, Adresse und Vorstand werden jetzt mit im QR-Code gespeichert und beim Scannen wiederhergestellt. Der bisherige Hinweis, dass Grunddaten nicht enthalten sind, entfällt.
 - **Gesamt-VZÄ und Gesamtumsatz des Verbands**: Neue Felder in den Grunddaten erfassen VZÄ und Umsatz des gesamten Kreisverbands. Die S/L/M-Größenklasse wird darauf basierend abgeleitet.
 - **Roadmap-Fulfillment-Anzeige**: Roadmap-Packs, deren zugrunde liegende Fragen bereits positiv beantwortet wurden, werden mit grünem Haken und „Erfüllt"-Badge dargestellt. Teilerfüllung wird als Fortschrittsanzeige (z. B. „1/2 Kriterien") angezeigt.

@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import type { GeneratedRoadmap, RoadmapLayer, RoadmapItem } from '@/lib/roadmap/types';
+import { grundschutzDetails, getGrundschutzDetail } from '@/lib/content/grundschutz-details';
+import GrundschutzDetailSheet from '@/components/grundschutz/GrundschutzDetailSheet';
 
 interface LayeredRoadmapViewProps {
   roadmap: GeneratedRoadmap;
@@ -14,7 +16,7 @@ const PRIORITY_STYLES: Record<RoadmapItem['priority'], { bg: string; text: strin
   niedrig: { bg: '#f0fdf4', text: 'var(--success)', label: 'Niedrig' },
 };
 
-function LayerSection({ layer, index }: { layer: RoadmapLayer; index: number }) {
+function LayerSection({ layer, index, onItemClick }: { layer: RoadmapLayer; index: number; onItemClick?: (itemIndex: number) => void }) {
   const layerColors = [
     { border: 'var(--drk)', badge: 'var(--drk)', bg: 'var(--drk-bg)' },
     { border: 'var(--info)', badge: 'var(--info)', bg: '#eff6ff' },
@@ -44,22 +46,36 @@ function LayerSection({ layer, index }: { layer: RoadmapLayer; index: number }) 
       <div className="space-y-2">
         {layer.items.map((item, i) => {
           const ps = PRIORITY_STYLES[item.priority];
+          const isClickable = !!onItemClick;
           return (
             <div
               key={i}
-              className="rounded-lg p-3"
+              className={`rounded-lg p-3 ${isClickable ? 'cursor-pointer hover:bg-white/90 transition-colors' : ''}`}
               style={{ background: 'rgba(255,255,255,0.7)' }}
+              onClick={isClickable ? () => onItemClick(i) : undefined}
+              role={isClickable ? 'button' : undefined}
+              tabIndex={isClickable ? 0 : undefined}
+              onKeyDown={isClickable ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onItemClick(i); } } : undefined}
             >
               <div className="flex items-start justify-between gap-2 mb-1">
                 <span className="font-medium text-sm" style={{ color: 'var(--text)' }}>
                   {item.title}
                 </span>
-                <span
-                  className="shrink-0 text-[10px] font-bold px-1.5 py-0.5 rounded"
-                  style={{ background: ps.bg, color: ps.text }}
-                >
-                  {ps.label}
-                </span>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <span
+                    className="text-[10px] font-bold px-1.5 py-0.5 rounded"
+                    style={{ background: ps.bg, color: ps.text }}
+                  >
+                    {ps.label}
+                  </span>
+                  {isClickable && (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                         style={{ color: 'var(--text-muted)' }}>
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  )}
+                </div>
               </div>
               <p className="text-xs mb-1" style={{ color: 'var(--text-light)' }}>
                 {item.description}
@@ -77,6 +93,7 @@ function LayerSection({ layer, index }: { layer: RoadmapLayer; index: number }) 
 
 export default function LayeredRoadmapView({ roadmap }: LayeredRoadmapViewProps) {
   const [expanded, setExpanded] = useState(true);
+  const [selectedGsIndex, setSelectedGsIndex] = useState<number | null>(null);
 
   const layers: RoadmapLayer[] = [];
   if (roadmap.step0) layers.push(roadmap.step0);
@@ -128,9 +145,21 @@ export default function LayeredRoadmapView({ roadmap }: LayeredRoadmapViewProps)
           </Link>
         </div>
         {layers.map((layer, i) => (
-          <LayerSection key={layer.id} layer={layer} index={i} />
+          <LayerSection
+            key={layer.id}
+            layer={layer}
+            index={i}
+            onItemClick={layer.id === 'grundschutz10' ? (itemIndex) => setSelectedGsIndex(itemIndex) : undefined}
+          />
         ))}
       </div>
+
+      <GrundschutzDetailSheet
+        detail={selectedGsIndex !== null ? getGrundschutzDetail(selectedGsIndex) ?? null : null}
+        onClose={() => setSelectedGsIndex(null)}
+        onNext={selectedGsIndex !== null && selectedGsIndex < grundschutzDetails.length - 1 ? () => setSelectedGsIndex(prev => prev !== null ? prev + 1 : null) : undefined}
+        hasNext={selectedGsIndex !== null && selectedGsIndex < grundschutzDetails.length - 1}
+      />
     </div>
   );
 }
