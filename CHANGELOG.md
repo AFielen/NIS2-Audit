@@ -26,7 +26,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **Accessibility**: `focus-visible`-Outline für `<details>`/`<summary>` Elemente auf der Hilfe-Seite.
 
 ### Changed
-- **Beide Roadmaps deaktiviert**: RoadmapView (Pack-basiert) und LayeredRoadmapView (Individuelle Umsetzungs-Roadmap) werden vorübergehend nicht angezeigt. Überarbeitung folgt in einem späteren Schritt.
+- **Pack-Roadmap deaktiviert**: RoadmapView (Pack-basierte 90-Tage-Roadmap mit P1–P7) wird vorübergehend nicht angezeigt. LayeredRoadmapView (Individuelle Umsetzungs-Roadmap) bleibt aktiv.
 - **S/L/M-Sizing auf Verbands-Gesamtwerte**: Größenklasse basiert jetzt auf Gesamt-VZÄ des Verbands (Grunddaten) statt auf den RD-spezifischen Schwellenwerten.
 - `RoadmapView`-Komponente akzeptiert jetzt optionale `answers`-Prop für Fulfillment-Check.
 - `QuestionCard` zeigt „Nicht bekannt"-Auswahl visuell in Gelb statt Rot an.
