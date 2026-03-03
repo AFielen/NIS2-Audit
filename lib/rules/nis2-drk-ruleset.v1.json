@@ -1325,8 +1325,8 @@
       "then": {
         "set": {
           "outcome.type": "D",
-          "outcome.label": "Unklar – konservativ behandeln",
-          "outcome.summary": "Schwellenwerte sind nicht belastbar angegeben. VZÄ und Finanzdaten sind zu ermitteln."
+          "outcome.label": "Unklar – konservativ den gesamten Kreisverband absichern",
+          "outcome.summary": "Die Schwellenwerte sind nicht belastbar geklärt. Solange keine harte Trennung nachgewiesen ist, muss konservativ davon ausgegangen werden, dass der gesamte Kreisverband unter NIS-2 fällt — nicht nur der Rettungsdienst."
         },
         "addRoadmapPacks": [
           "P1_GOV_REG",
@@ -1394,8 +1394,8 @@
       "then": {
         "set": {
           "outcome.type": "C",
-          "outcome.label": "Direkt betroffen – faktisch gruppenweiter technischer Scope",
-          "outcome.summary": "Rettungsdienst ist direkt betroffen; aufgrund Shared-IT bzw. fehlender harter Trennung erstreckt sich der technische Scope auf zentrale/weitere IT-Bereiche."
+          "outcome.label": "Direkt betroffen – der gesamte Kreisverband fällt unter NIS-2",
+          "outcome.summary": "Durch fehlende harte Trennung zwischen Rettungsdienst und restlichem Verband fällt de facto der gesamte DRK-Kreisverband in den NIS-2-Scope — nicht nur der Rettungsdienst. Alle IT-Systeme, Prozesse und Strukturen des Kreisverbands müssen die NIS-2-Anforderungen erfüllen."
         },
         "addRoadmapPacks": [
           "P2_IAM_ADMIN",

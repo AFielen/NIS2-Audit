@@ -110,6 +110,36 @@ export default function ExecutiveSummary({ result }: ExecutiveSummaryProps) {
         </div>
       )}
 
+      {/* Full-scope warning for C and D */}
+      {(result.outcome.type === 'C' || result.outcome.type === 'D') && (
+        <div
+          className="p-4 rounded-lg border-l-4 mb-4"
+          style={{ borderLeftColor: result.outcome.type === 'C' ? '#b45309' : 'var(--drk)', background: result.outcome.type === 'C' ? 'var(--warning-bg)' : 'var(--drk-bg)' }}
+        >
+          <div className="flex items-start gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                 className="shrink-0 mt-0.5" style={{ color: result.outcome.type === 'C' ? '#b45309' : 'var(--drk)' }}>
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <div>
+              <div className="text-sm font-bold mb-1" style={{ color: result.outcome.type === 'C' ? '#b45309' : 'var(--drk)' }}>
+                {result.outcome.type === 'C'
+                  ? 'Nicht nur der Rettungsdienst — der gesamte Kreisverband ist betroffen'
+                  : 'Konservative Annahme: Der gesamte Kreisverband fällt unter NIS-2'}
+              </div>
+              <p className="text-sm" style={{ color: 'var(--text-light)' }}>
+                {result.outcome.type === 'C'
+                  ? 'Da keine harte technische Trennung zwischen Rettungsdienst und restlichem Verband nachgewiesen ist, erstreckt sich der NIS-2-Scope auf den gesamten DRK-Kreisverband. Das bedeutet: Alle IT-Systeme, Prozesse, Netzwerke und Zugänge des Verbands — nicht nur die des Rettungsdienstes — müssen die NIS-2-Anforderungen erfüllen. Die Geschäftsführung des gesamten Kreisverbands steht in der Verantwortung.'
+                  : 'Solange die Schwellenwerte nicht belastbar geklärt und keine harte Trennung nachgewiesen ist, muss konservativ davon ausgegangen werden, dass der gesamte DRK-Kreisverband unter NIS-2 fällt. Alle IT-Systeme und Prozesse des Verbands — nicht nur die des Rettungsdienstes — sollten entsprechend abgesichert werden.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Key facts */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
         <div className="p-3 rounded-lg" style={{ background: 'var(--bg)' }}>

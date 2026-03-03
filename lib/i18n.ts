@@ -98,8 +98,8 @@ const appTranslations = {
     // Outcome labels
     'outcome.A': 'Nicht direkt betroffen und kein technischer Mit-Scope',
     'outcome.B': 'Direkt betroffen, Scope plausibel begrenzbar',
-    'outcome.C': 'Direkt betroffen und Shared IT zieht den technischen Scope hoch',
-    'outcome.D': 'Strukturell oder technisch unklar; konservative Umsetzung empfohlen',
+    'outcome.C': 'Direkt betroffen – gesamter Kreisverband fällt unter NIS-2',
+    'outcome.D': 'Unklar – konservativ gesamten Kreisverband absichern',
     // Affectedness
     'affected.yes': 'Ja',
     'affected.no': 'Nein',
@@ -160,8 +160,8 @@ const appTranslations = {
     // Outcome labels
     'outcome.A': 'Not directly affected and no technical co-scope',
     'outcome.B': 'Directly affected, scope plausibly limitable',
-    'outcome.C': 'Directly affected and shared IT extends technical scope',
-    'outcome.D': 'Structurally or technically unclear; conservative implementation recommended',
+    'outcome.C': 'Directly affected – entire association falls under NIS-2',
+    'outcome.D': 'Unclear – conservatively secure entire association',
     // Affectedness
     'affected.yes': 'Yes',
     'affected.no': 'No',
