@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import type { AssessmentResult, WizardAnswers } from '@/lib/types';
+import type { AssessmentResult, WizardAnswers, Grunddaten } from '@/lib/types';
 import { downloadJSON } from '@/lib/report';
 import { encodeState } from '@/lib/state-codec';
 import { generateQrSvg } from '@/lib/qr-svg';
@@ -10,14 +10,15 @@ import { generateQrSvg } from '@/lib/qr-svg';
 interface ExportActionsProps {
   result: AssessmentResult;
   answers: WizardAnswers;
+  grunddaten?: Grunddaten;
 }
 
-export default function ExportActions({ result, answers }: ExportActionsProps) {
+export default function ExportActions({ result, answers, grunddaten }: ExportActionsProps) {
   const [qrSvg, setQrSvg] = useState<string>('');
 
   useEffect(() => {
     try {
-      const encoded = encodeState({ answers });
+      const encoded = encodeState({ answers, grunddaten });
       const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
       const stateUrl = `${baseUrl}/check?state=${encoded}`;
       const svg = generateQrSvg(stateUrl, 120);
@@ -25,7 +26,7 @@ export default function ExportActions({ result, answers }: ExportActionsProps) {
     } catch {
       // QR generation failed silently
     }
-  }, [answers]);
+  }, [answers, grunddaten]);
 
   const handlePrint = () => {
     window.print();
@@ -50,8 +51,7 @@ export default function ExportActions({ result, answers }: ExportActionsProps) {
                 Scannen Sie diesen QR-Code, um den NIS-2 Self-Check mit allen Antworten erneut zu öffnen.
               </p>
               <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
-                Alle Antworten sind komprimiert im QR-Code gespeichert — es werden keine Daten auf einem Server abgelegt.
-                Grunddaten (Name, Adresse, Vorstand) sind NICHT im QR-Code enthalten.
+                Alle Daten sind komprimiert im QR-Code gespeichert — es werden keine Daten auf einem Server abgelegt.
               </p>
             </div>
           </div>
@@ -72,7 +72,6 @@ export default function ExportActions({ result, answers }: ExportActionsProps) {
               </p>
               <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
                 Alle Daten sind ausschließlich im QR-Code gespeichert — es werden keine Daten auf einem Server abgelegt.
-                Grunddaten (Name, Adresse, Vorstand) sind NICHT im QR-Code enthalten und müssen ggf. erneut eingegeben werden.
               </p>
               <div className="mt-2 p-2 rounded text-xs" style={{ background: 'var(--warning-bg)', color: '#b45309' }}>
                 <strong>Hinweis:</strong> Behandeln Sie diesen QR-Code vertraulich. Wer ihn scannt, kann alle Ihre Audit-Antworten einsehen.

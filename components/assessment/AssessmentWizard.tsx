@@ -51,7 +51,7 @@ export default function AssessmentWizard() {
       if (decoded) {
         setState({
           answers: decoded.answers,
-          grunddaten: { kreisverband: '', adresse: '', vorstand: '' },
+          grunddaten: decoded.grunddaten ?? { kreisverband: '', adresse: '', vorstand: '' },
           currentStep: 0,
           selectedPreset: null,
           timestamp: Date.now(),

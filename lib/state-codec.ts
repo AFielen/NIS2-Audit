@@ -1,8 +1,9 @@
 import LZString from 'lz-string';
-import type { WizardAnswers } from './types';
+import type { WizardAnswers, Grunddaten } from './types';
 
 export interface EncodedState {
   answers: WizardAnswers;
+  grunddaten?: Grunddaten;
 }
 
 export function encodeState(state: EncodedState): string {
@@ -18,7 +19,11 @@ export function decodeState(encoded: string): EncodedState | null {
     const parsed = JSON.parse(json);
     if (!parsed || typeof parsed !== 'object' || !parsed.answers) return null;
 
-    return { answers: parsed.answers as WizardAnswers };
+    const state: EncodedState = { answers: parsed.answers as WizardAnswers };
+    if (parsed.grunddaten) {
+      state.grunddaten = parsed.grunddaten as Grunddaten;
+    }
+    return state;
   } catch {
     return null;
   }

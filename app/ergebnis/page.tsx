@@ -156,7 +156,7 @@ export default function ErgebnisPage() {
           </div>
         </div>
 
-        <ExportActions result={result} answers={answers} />
+        <ExportActions result={result} answers={answers} grunddaten={grunddaten} />
       </div>
     </div>
   );
