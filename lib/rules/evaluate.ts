@@ -146,18 +146,17 @@ function determineLegalScope(answers: WizardAnswers): ScopeInfo {
   }
 
   if (rdOrg === 'EV_ABT') {
-    const entityType = drkType === 'LV' ? 'Landesverband' : 'Kreisverband e.V.';
     return {
       summary: {
-        de: `Gesamter Rechtsträger (${entityType})`,
-        en: `Entire legal entity (${entityType === 'Landesverband' ? 'State Association' : 'District Association'})`,
+        de: 'Gesamter Rechtsträger (Kreisverband e.V.)',
+        en: 'Entire legal entity (District Association)',
       },
       details: {
-        de: `Der Rettungsdienst ist als Abteilung im ${entityType} organisiert. Juristisch ist voraussichtlich der gesamte Rechtsträger maßgeblich.`,
-        en: `The EMS is organized as a department in the ${entityType === 'Landesverband' ? 'state association' : 'district association'}. The entire legal entity is likely the relevant scope.`,
+        de: 'Der Rettungsdienst ist als Abteilung im Kreisverband organisiert. Juristisch ist voraussichtlich der gesamte Rechtsträger maßgeblich.',
+        en: 'The EMS is organized as a department in the district association. The entire legal entity is likely the relevant scope.',
       },
       factors: [
-        { de: 'Rettungsdienst als Abteilung im Verein', en: 'EMS as department in association' },
+        { de: 'Rettungsdienst als Abteilung im KV', en: 'EMS as department in district association' },
         { de: 'Kein eigener Rechtsträger für den RD', en: 'No separate legal entity for EMS' },
       ],
     };

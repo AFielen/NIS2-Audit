@@ -11,6 +11,49 @@ export default function Hilfe() {
           </p>
         </div>
 
+        {/* Zentrale Begriffe */}
+        <div className="drk-card">
+          <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text)' }}>Zentrale Begriffe</h3>
+          <div className="space-y-4">
+            <details className="group" open>
+              <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
+                Was ist ein Regelstand?
+              </summary>
+              <div className="mt-2 text-sm pl-4 space-y-2" style={{ color: 'var(--text-light)' }}>
+                <p>
+                  Der <strong>Regelstand</strong> bestimmt, nach welcher Auslegung die NIS-2-Betroffenheit bewertet wird. Es gibt zwei Regelstände in diesem Tool:
+                </p>
+                <p>
+                  <strong>1. Verbandslinie konservativ (Standard):</strong> Diese Auslegung behandelt Rettungsdienst als sektoralen Trigger im Gesundheitssektor. Das bedeutet: Betreibt Ihr KV einen Rettungsdienst, wird automatisch eine sektorale Betroffenheit angenommen. Dies ist die empfohlene Einstellung, da sie dem DRK-internen Vorsichtsprinzip folgt.
+                </p>
+                <p>
+                  <strong>2. BSI-öffentlich:</strong> Diese Auslegung folgt der veröffentlichten BSI-Interpretation. Hier wird Rettungsdienst nicht automatisch als Gesundheitssektor-Trigger gewertet. Das Ergebnis kann daher milder ausfallen. Allerdings ist diese Auslegung weniger konservativ und birgt das Risiko, dass eine spätere behördliche Auslegung strenger ist.
+                </p>
+                <p>
+                  Wenn das Ergebnis zwischen beiden Regelständen unterschiedlich ausfällt, wird das Ergebnis als <strong>regelstandssensitiv</strong> markiert. In diesem Fall empfiehlt das Tool, die konservative Variante umzusetzen.
+                </p>
+              </div>
+            </details>
+
+            <details className="group" open>
+              <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
+                Was ist ein sektoraler Trigger?
+              </summary>
+              <div className="mt-2 text-sm pl-4 space-y-2" style={{ color: 'var(--text-light)' }}>
+                <p>
+                  NIS-2 reguliert Einrichtungen in bestimmten <strong>Sektoren</strong> (z.B. Gesundheit, Energie, Transport). Ein <strong>sektoraler Trigger</strong> bedeutet, dass die Tätigkeit Ihrer Organisation in einen dieser regulierten Sektoren fällt.
+                </p>
+                <p>
+                  Im DRK-Kontext ist der wichtigste sektorale Trigger der <strong>Rettungsdienst</strong>: Notfallrettung und Rettungsdienst gehören zum Gesundheitssektor. Ob Rettungsdienst automatisch als Trigger gilt, hängt vom gewählten Regelstand ab (siehe oben).
+                </p>
+                <p>
+                  <strong>Wichtig:</strong> Ein sektoraler Trigger allein reicht nicht aus. Zusätzlich müssen die Schwellenwerte (VZÄ, Umsatz, Bilanzsumme) erreicht werden, damit eine NIS-2-Betroffenheit eintritt. Erst die Kombination aus sektoralem Trigger UND Schwellenwertüberschreitung führt zur direkten Betroffenheit.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+
         {/* NIS-2 spezifische FAQ */}
         <div className="drk-card">
           <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text)' }}>NIS-2 Self-Check – Häufige Fragen</h3>
@@ -20,16 +63,7 @@ export default function Hilfe() {
                 Was ist der Unterschied zwischen juristischem und technischem Scope?
               </summary>
               <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Der <strong>juristische Scope</strong> beschreibt, welcher Rechtsträger voraussichtlich von NIS-2 reguliert wird – z.B. der Kreisverband e.V. oder eine Rettungsdienst-gGmbH. Der <strong>technische Scope</strong> zeigt, welche IT-Systeme faktisch mit abgesichert werden müssen – auch wenn sie einem anderen Rechtsträger zugeordnet sind. Typisches Beispiel: Die gGmbH ist juristisch betroffen, nutzt aber die zentrale IT des e.V. Dann muss die IT des e.V. technisch mitbetrachtet werden.
-              </p>
-            </details>
-
-            <details className="group">
-              <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
-                Wann ist ein Ergebnis „regelstandssensitiv"?
-              </summary>
-              <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Ein Ergebnis ist regelstandssensitiv, wenn es sich je nach gewähltem Regelstand (BSI-öffentlich vs. Verbandslinie konservativ) unterscheidet. Unter der konservativen Verbandslinie wird Rettungsdienst als sektoraler Trigger behandelt, unter dem öffentlichen BSI-Stand nicht automatisch. Wenn dies das Ergebnis kippt, weist das Tool auf die Regelstandssensitivität hin und empfiehlt eine konservative Umsetzung.
+                Der <strong>juristische Scope</strong> beschreibt, welcher Rechtsträger voraussichtlich von NIS-2 reguliert wird – z.B. der Kreisverband e.V. oder eine Rettungsdienst-gGmbH. Der <strong>technische Scope</strong> zeigt, welche IT-Systeme faktisch mit abgesichert werden müssen – auch wenn sie einem anderen Rechtsträger zugeordnet sind. Typisches Beispiel: Die gGmbH ist juristisch betroffen, nutzt aber die zentrale IT des KV. Dann muss die IT des KV technisch mitbetrachtet werden.
               </p>
             </details>
 
@@ -93,7 +127,7 @@ export default function Hilfe() {
                 Was ist diese Anwendung?
               </summary>
               <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Der NIS-2 Self-Check ist ein DRK-spezifisches Tool, mit dem Kreisverbände und Landesverbände in 10–15 Minuten ihre wahrscheinliche NIS-2-Betroffenheit prüfen können. Die App analysiert Organisationsstruktur, Leistungsbereiche, Schwellenwerte und IT-Architektur und generiert ein Ergebnis mit priorisierter 90-Tage-Roadmap.
+                Der NIS-2 Self-Check ist ein DRK-spezifisches Tool, mit dem Kreisverbände (KV) in 10–15 Minuten ihre wahrscheinliche NIS-2-Betroffenheit prüfen können. Die App analysiert Organisationsstruktur, Leistungsbereiche, Schwellenwerte und IT-Architektur und generiert ein Ergebnis mit priorisierter 90-Tage-Roadmap.
               </p>
             </details>
 
@@ -112,6 +146,15 @@ export default function Hilfe() {
               </summary>
               <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
                 Nein. Die Anwendung funktioniert ohne Registrierung, ohne Login und ohne persönliche Daten.
+              </p>
+            </details>
+
+            <details className="group">
+              <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
+                Was ist der QR-Code auf dem PDF?
+              </summary>
+              <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
+                Der QR-Code auf dem gedruckten PDF enthält alle Ihre Antworten in komprimierter Form. Scannen Sie den QR-Code mit Ihrem Handy, um die Bearbeitung fortzusetzen oder das Ergebnis zu einem späteren Zeitpunkt erneut aufzurufen – ohne dass Daten auf einem Server gespeichert werden.
               </p>
             </details>
           </div>
