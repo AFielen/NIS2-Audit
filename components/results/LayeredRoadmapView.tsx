@@ -76,7 +76,7 @@ function LayerSection({ layer, index }: { layer: RoadmapLayer; index: number }) 
 }
 
 export default function LayeredRoadmapView({ roadmap }: LayeredRoadmapViewProps) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   const layers: RoadmapLayer[] = [];
   if (roadmap.step0) layers.push(roadmap.step0);

@@ -104,6 +104,8 @@ export interface Grunddaten {
   kreisverband: string;
   adresse: string;
   vorstand: string;
+  gesamtVzae?: number;
+  gesamtUmsatz?: number;
 }
 
 /** Wizard state for localStorage */
