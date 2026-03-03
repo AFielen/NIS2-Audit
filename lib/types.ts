@@ -13,6 +13,7 @@ export interface RulesetQuestion {
   id: string;
   section: string;
   label: string;
+  hint?: string;
   type: 'single_select' | 'number';
   options?: Array<{ value: string; label: string }>;
   min?: number;
