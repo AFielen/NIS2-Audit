@@ -21,6 +21,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **QR-Code-Sicherheitshinweise**: QR-Code-Sektion enthält jetzt Hinweise zur Datenspeicherung (nur im QR-Code, nicht auf Servern), Vertraulichkeitswarnung und Hinweis, dass Grunddaten nicht im QR-Code enthalten sind.
 - `CHANGELOG.md` erstellt.
 - CLAUDE.md um Pflicht zur CHANGELOG-Pflege ergänzt.
+- **Accessibility**: `focus-visible`-Outline für `<details>`/`<summary>` Elemente auf der Hilfe-Seite.
 
 ### Changed
 - `RoadmapView`-Komponente akzeptiert jetzt optionale `answers`-Prop für Fulfillment-Check.
@@ -31,6 +32,12 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **SEP-OVERVIEW Hilfetext erweitert**: Hinweis auf Dokumentationspflicht und Notwendigkeit externer Bestätigung ergänzt.
 - **Roadmaps klappbar**: Beide Roadmap-Sektionen (Umsetzungs-Roadmap und 90-Tage-Roadmap) sind jetzt standardmäßig eingeklappt mit Titel „Vorschlag: … Roadmap nach BSI".
 - **Projekt-Links aktualisiert**: DRK Vereinsabstimmung → `https://abstimmung.henryagi.de`, DRK Selbstauskunft → `https://selbstauskunft.henryagi.de/`.
+- **Druckansicht**: Zugeklappte Sektionen öffnen sich automatisch im Druckmodus. TriggeredRulesList zeigt alle Regeln im Druck.
+- **Unterschriftenzeile**: Nur noch im Druck/PDF sichtbar, nicht mehr auf dem Bildschirm.
+- **Roadmap-Titel**: „Umsetzungs-Roadmap" umbenannt in „Vorschlag: Individuelle Umsetzungs-Roadmap nach BSI".
+- **Mobile-Optimierung**: Ergebnisseite (Outcome-Badge, Report-Header, QR-Code-Bereich, Tooltip-Positionierung), Header-Subtitle responsive für kleine Screens, Step-Navigation mit größeren Touch-Targets.
+- **Konsistenz**: `not-found.tsx` und `spenden/page.tsx` nutzen jetzt CSS-Variablen statt Tailwind-Hardcoded-Farben. QR-Banner-Close-Button nutzt SVG statt Emoji.
+- **Touch-Targets**: Hilfe-Toggle in QuestionCard auf 44px Mindesthöhe erweitert.
 
 ---
 

@@ -64,7 +64,7 @@ export default function StepNavigation({ steps, currentStep, onStepClick }: Step
               className="flex-1 flex justify-center"
             >
               <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors"
+                className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold transition-colors"
                 style={{
                   background: isActive ? 'var(--drk)' : isCompleted ? 'var(--success)' : 'var(--border)',
                   color: isActive || isCompleted ? '#fff' : 'var(--text-muted)',

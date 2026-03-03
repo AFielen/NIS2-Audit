@@ -130,6 +130,13 @@ body {
   font-size: 0.875rem;
 }
 
+/* ── Accessibility ── */
+details summary:focus-visible {
+  outline: 2px solid var(--drk);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
 /* ── Animationen ── */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -205,7 +212,20 @@ body {
     display: none !important;
   }
 
-  .hidden.print\:block {
+  /* Force elements with print:block to display in print */
+  .hidden.print\:block,
+  [class*="print\:block"].hidden {
     display: block !important;
+  }
+
+  /* Force collapsible sections open when printing */
+  .print-expand {
+    display: block !important;
+    max-height: none !important;
+  }
+
+  /* Hide toggle chevrons when printing */
+  .print-hide-toggle {
+    display: none !important;
   }
 }

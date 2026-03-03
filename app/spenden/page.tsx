@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Spenden() {
   return (
-    <div className="py-8 px-4">
+    <div className="py-8 px-4" style={{ background: 'var(--bg)' }}>
       <div className="max-w-2xl mx-auto space-y-6">
         {/* ── Danke Box ── */}
         <div className="drk-card drk-fade-in text-center">

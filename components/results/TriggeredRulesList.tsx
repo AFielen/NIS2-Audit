@@ -13,6 +13,7 @@ export default function TriggeredRulesList({ rules }: TriggeredRulesListProps) {
   if (rules.length === 0) return null;
 
   const displayRules = expanded ? rules : rules.slice(0, 5);
+  const hasMore = rules.length > 5;
 
   return (
     <div className="drk-card drk-fade-in">
@@ -38,10 +39,34 @@ export default function TriggeredRulesList({ rules }: TriggeredRulesListProps) {
           </div>
         ))}
       </div>
-      {rules.length > 5 && (
+
+      {/* Print: show all remaining rules that were hidden */}
+      {hasMore && !expanded && (
+        <div className="hidden print:block space-y-2 mt-2">
+          {rules.slice(5).map((rule, index) => (
+            <div
+              key={index + 5}
+              className="flex items-start gap-2 p-2 rounded-lg"
+              style={{ background: 'var(--bg)' }}
+            >
+              <span
+                className="text-xs font-mono px-2 py-0.5 rounded shrink-0 mt-0.5"
+                style={{ background: 'var(--drk-bg)', color: 'var(--text-muted)' }}
+              >
+                {rule.id}
+              </span>
+              <span className="text-sm" style={{ color: 'var(--text-light)' }}>
+                {rule.description}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {hasMore && (
         <button
           onClick={() => setExpanded(!expanded)}
-          className="mt-3 text-sm font-semibold"
+          className="mt-3 text-sm font-semibold no-print"
           style={{ color: 'var(--drk)' }}
         >
           {expanded ? 'Weniger anzeigen' : `Alle ${rules.length} Regeln anzeigen`}

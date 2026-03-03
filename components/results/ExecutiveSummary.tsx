@@ -18,25 +18,20 @@ function HintIcon({ hint }: { hint: string }) {
         onClick={() => setShow(!show)}
         className="inline-flex items-center justify-center w-4 h-4 rounded-full text-[10px] font-bold leading-none"
         style={{ background: 'var(--text-muted)', color: '#fff' }}
-        aria-label="Erklärung"
+        aria-label="Erklärung anzeigen"
       >
         ?
       </button>
       {show && (
-        <span
-          className="absolute left-1/2 -translate-x-1/2 top-6 z-10 w-64 p-2 rounded-lg text-xs font-normal shadow-lg"
-          style={{ background: 'var(--bg-card)', color: 'var(--text-light)', border: '1px solid var(--border)' }}
-        >
-          {hint}
-          <button
-            type="button"
-            onClick={() => setShow(false)}
-            className="block mt-1 text-[10px] font-semibold underline"
-            style={{ color: 'var(--text-muted)' }}
+        <>
+          <div className="fixed inset-0 z-[9]" onClick={() => setShow(false)} />
+          <span
+            className="drk-hint-tooltip absolute left-1/2 -translate-x-1/2 top-6 z-10 w-64 max-w-[calc(100vw-2rem)] p-2 rounded-lg text-xs font-normal shadow-lg"
+            style={{ background: 'var(--bg-card)', color: 'var(--text-light)', border: '1px solid var(--border)' }}
           >
-            Schließen
-          </button>
-        </span>
+            {hint}
+          </span>
+        </>
       )}
     </span>
   );
@@ -65,21 +60,21 @@ export default function ExecutiveSummary({ result }: ExecutiveSummaryProps) {
       </h2>
 
       {/* Outcome Badge */}
-      <div className="flex items-center gap-4 mb-4 p-4 rounded-xl" style={{ background: outcomeBg }}>
+      <div className="flex items-center gap-3 sm:gap-4 mb-4 p-3 sm:p-4 rounded-xl" style={{ background: outcomeBg }}>
         <div
-          className="w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold shrink-0"
+          className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold shrink-0"
           style={{ background: outcomeColor, color: '#fff' }}
         >
           {result.outcome.type}
         </div>
-        <div>
-          <div className="font-bold text-lg" style={{ color: outcomeColor }}>
+        <div className="min-w-0">
+          <div className="font-bold text-base sm:text-lg" style={{ color: outcomeColor }}>
             Ergebnis {result.outcome.type}*
           </div>
           <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
             {result.outcome.label}
           </div>
-          <div className="text-sm mt-1" style={{ color: 'var(--text-light)' }}>
+          <div className="text-xs sm:text-sm mt-1" style={{ color: 'var(--text-light)' }}>
             {result.outcome.summary}
           </div>
         </div>
