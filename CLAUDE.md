@@ -393,6 +393,11 @@ Für das exakte Format: READMEs in https://github.com/AFielen/abstimmung und htt
 ### Commits
 - `feat:` / `fix:` / `docs:` / `style:` / `refactor:`
 
+### Changelog
+- **WICHTIG:** Bei jeder Änderung am Code MUSS die `CHANGELOG.md` aktualisiert werden.
+- Format: [Keep a Changelog](https://keepachangelog.com/) mit Abschnitten `Added`, `Changed`, `Fixed`, `Removed`.
+- Einträge unter `## [Unreleased]` sammeln, bei Release mit Versionsnummer und Datum versehen.
+
 ---
 
 ## Kontakt

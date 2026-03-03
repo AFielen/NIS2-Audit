@@ -92,13 +92,18 @@ export default function QuestionCard({ question, value, onChange, hasError }: Qu
       <div className="space-y-2 mt-3">
         {question.options?.map((option) => {
           const isSelected = value === option.value;
+          const isUnknown = option.value === 'unknown';
           return (
             <label
               key={option.value}
               className="flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-colors"
               style={{
-                background: isSelected ? 'var(--drk-bg)' : 'transparent',
-                border: `2px solid ${isSelected ? 'var(--drk)' : 'var(--border)'}`,
+                background: isSelected
+                  ? (isUnknown ? 'var(--warning-bg)' : 'var(--drk-bg)')
+                  : 'transparent',
+                border: `2px solid ${isSelected
+                  ? (isUnknown ? 'var(--warning)' : 'var(--drk)')
+                  : 'var(--border)'}`,
                 minHeight: '44px',
               }}
             >
