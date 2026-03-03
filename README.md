@@ -50,6 +50,21 @@ npm run build
 
 Der statische Export liegt in `out/` und kann auf GitHub Pages, Cloudflare Pages oder jedem statischen Webserver deployt werden.
 
+### Docker (VPS)
+
+```bash
+git clone https://github.com/AFielen/NIS2-Audit.git
+cd NIS2-Audit
+docker compose up -d --build
+```
+
+Die App läuft auf Port `3000`. Zum Aktualisieren:
+
+```bash
+git pull
+docker compose up -d --build
+```
+
 ---
 
 ## Tech-Stack
