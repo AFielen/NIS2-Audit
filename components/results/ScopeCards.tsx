@@ -36,8 +36,8 @@ export default function ScopeCards({ result }: ScopeCardsProps) {
     techSummary = 'Technischer Scope begrenzbar';
     techDetails = 'Eine harte Trennung ist nachgewiesen. Der Scope lässt sich auf den Rettungsdienst begrenzen.';
   } else if (techFactors.length > 0) {
-    techSummary = `Erweiterter Scope (${techFactors.length} Shared-IT-Faktoren)`;
-    techDetails = 'Aufgrund gemeinsamer IT-Infrastruktur erstreckt sich der technische Scope über den Rettungsdienst hinaus.';
+    techSummary = 'Gesamter Kreisverband im NIS-2-Scope';
+    techDetails = 'Ohne harte Trennung erstreckt sich der NIS-2-Scope auf den gesamten DRK-Kreisverband — nicht nur auf den Rettungsdienst. Alle IT-Systeme, Netzwerke und Prozesse des Verbands müssen die Anforderungen erfüllen.';
   } else {
     techSummary = 'Keine Shared-IT-Faktoren erkannt';
     techDetails = 'Es wurden keine gemeinsamen IT-Abhängigkeiten angegeben.';
