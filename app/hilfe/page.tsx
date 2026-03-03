@@ -17,20 +17,18 @@ export default function Hilfe() {
           <div className="space-y-4">
             <details className="group" open>
               <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
-                Was ist ein Regelstand?
+                Was ist das DRK Standard Pack v1.0?
               </summary>
               <div className="mt-2 text-sm pl-4 space-y-2" style={{ color: 'var(--text-light)' }}>
                 <p>
-                  Der <strong>Regelstand</strong> bestimmt, nach welcher Auslegung die NIS-2-Betroffenheit bewertet wird. Es gibt zwei Regelstände in diesem Tool:
+                  Das <strong>DRK Standard Pack v1.0</strong> ist das einheitliche Regelwerk dieses Tools.
+                  Rettungsdienst wird als potenziell NIS-2/BSIG-relevante Einrichtungsart behandelt.
+                  Die Betroffenheit hängt an den Schwellenwerten (VZÄ, Umsatz, Bilanzsumme).
                 </p>
                 <p>
-                  <strong>1. Verbandslinie konservativ (Standard):</strong> Diese Auslegung behandelt Rettungsdienst als sektoralen Trigger im Gesundheitssektor. Das bedeutet: Betreibt Ihr KV einen Rettungsdienst, wird automatisch eine sektorale Betroffenheit angenommen. Dies ist die empfohlene Einstellung, da sie dem DRK-internen Vorsichtsprinzip folgt.
-                </p>
-                <p>
-                  <strong>2. BSI-öffentlich:</strong> Diese Auslegung folgt der veröffentlichten BSI-Interpretation. Hier wird Rettungsdienst nicht automatisch als Gesundheitssektor-Trigger gewertet. Das Ergebnis kann daher milder ausfallen. Allerdings ist diese Auslegung weniger konservativ und birgt das Risiko, dass eine spätere behördliche Auslegung strenger ist.
-                </p>
-                <p>
-                  Wenn das Ergebnis zwischen beiden Regelständen unterschiedlich ausfällt, wird das Ergebnis als <strong>regelstandssensitiv</strong> markiert. In diesem Fall empfiehlt das Tool, die konservative Variante umzusetzen.
+                  Es gibt keine unterschiedlichen Regelstände mehr — die frühere Unterscheidung zwischen
+                  &quot;BSI-öffentlich&quot; und &quot;Verbandslinie konservativ&quot; entfällt, da das BSI inzwischen
+                  die Nichtbetroffenheit von Rettungsdiensten revidiert hat.
                 </p>
               </div>
             </details>
@@ -41,13 +39,13 @@ export default function Hilfe() {
               </summary>
               <div className="mt-2 text-sm pl-4 space-y-2" style={{ color: 'var(--text-light)' }}>
                 <p>
-                  NIS-2 reguliert Einrichtungen in bestimmten <strong>Sektoren</strong> (z.B. Gesundheit, Energie, Transport). Ein <strong>sektoraler Trigger</strong> bedeutet, dass die Tätigkeit Ihrer Organisation in einen dieser regulierten Sektoren fällt.
+                  NIS-2 reguliert Einrichtungen in bestimmten <strong>Sektoren</strong> (z.B. Gesundheit, Energie, Transport).
+                  Im DRK-Kontext ist der wichtigste sektorale Trigger der <strong>Rettungsdienst</strong>:
+                  Notfallrettung gehört zum Gesundheitssektor.
                 </p>
                 <p>
-                  Im DRK-Kontext ist der wichtigste sektorale Trigger der <strong>Rettungsdienst</strong>: Notfallrettung und Rettungsdienst gehören zum Gesundheitssektor. Ob Rettungsdienst automatisch als Trigger gilt, hängt vom gewählten Regelstand ab (siehe oben).
-                </p>
-                <p>
-                  <strong>Wichtig:</strong> Ein sektoraler Trigger allein reicht nicht aus. Zusätzlich müssen die Schwellenwerte (VZÄ, Umsatz, Bilanzsumme) erreicht werden, damit eine NIS-2-Betroffenheit eintritt. Erst die Kombination aus sektoralem Trigger UND Schwellenwertüberschreitung führt zur direkten Betroffenheit.
+                  <strong>Wichtig:</strong> Ein sektoraler Trigger allein reicht nicht aus. Zusätzlich müssen die
+                  Schwellenwerte (VZÄ &gt; 50 oder Umsatz &gt; 10 Mio. + Bilanzsumme &gt; 10 Mio.) erreicht werden.
                 </p>
               </div>
             </details>
@@ -63,7 +61,9 @@ export default function Hilfe() {
                 Was ist der Unterschied zwischen juristischem und technischem Scope?
               </summary>
               <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Der <strong>juristische Scope</strong> beschreibt, welcher Rechtsträger voraussichtlich von NIS-2 reguliert wird – z.B. der Kreisverband e.V. oder eine Rettungsdienst-gGmbH. Der <strong>technische Scope</strong> zeigt, welche IT-Systeme faktisch mit abgesichert werden müssen – auch wenn sie einem anderen Rechtsträger zugeordnet sind. Typisches Beispiel: Die gGmbH ist juristisch betroffen, nutzt aber die zentrale IT des KV. Dann muss die IT des KV technisch mitbetrachtet werden.
+                Der <strong>juristische Scope</strong> beschreibt, welcher Rechtsträger voraussichtlich von NIS-2 reguliert wird.
+                Der <strong>technische Scope</strong> zeigt, welche IT-Systeme faktisch mit abgesichert werden müssen.
+                Typisches Beispiel: Die gGmbH ist juristisch betroffen, nutzt aber die zentrale IT des KV.
               </p>
             </details>
 
@@ -72,35 +72,20 @@ export default function Hilfe() {
                 Wann reicht eine Trennung nur auf dem Papier nicht aus?
               </summary>
               <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Ergebnis B (Scope begrenzbar) wird nur ausgegeben, wenn eine harte technische Trennung für alle 8 Kriterien nachgewiesen ist: getrennte Identität, getrennte Administration, getrennte Netzwerke, getrenntes Backup, getrenntes Endpoint-Management, getrenntes Logging, getrennte Asset-Dokumentation und ein dokumentierter Impact-Nachweis. Fehlt auch nur eines, kann die Trennung nicht als belastbar gelten.
+                Ergebnis B (Scope begrenzbar) wird nur ausgegeben, wenn eine harte technische Trennung für alle 8 Kriterien nachgewiesen ist:
+                getrennter Tenant, getrennte Administration, getrennte Netzsegmente, getrenntes Backup, getrenntes Endpoint-Management,
+                getrenntes Logging, getrennte Asset-Dokumentation und dokumentierter Impact-Nachweis.
               </p>
             </details>
 
             <details className="group">
               <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
-                Wie werden VZÄ berücksichtigt?
+                Wie werden VZÄ und Schwellenwerte berücksichtigt?
               </summary>
               <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                VZÄ (Vollzeitäquivalente) sind einer der drei Schwellenwerte. Wichtig ist, dass die VZÄ je Rechtsträger vorliegen – nicht konsolidiert über den gesamten Verbund. Bei konsolidierten Daten kann keine belastbare Schwellenwertprüfung erfolgen.
-              </p>
-            </details>
-
-            <details className="group">
-              <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
-                Was bedeutet „Shared IT" in diesem Tool?
-              </summary>
-              <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Shared IT beschreibt gemeinsam genutzte IT-Infrastruktur zwischen dem Rettungsdienst und anderen Teilen des Verbands. Dazu zählen: gemeinsames Active Directory, gemeinsame Cloud-Tenants, gemeinsame Netzwerke, Backup-Systeme, Admin-Konten, Server, Endpoint-Management und IT-Dienstleister. Je mehr Shared IT besteht, desto größer wird der technische Scope.
-              </p>
-            </details>
-
-            <details className="group">
-              <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
-                Was ist der Unterschied zwischen Ergebnis B und C?
-              </summary>
-              <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                <strong>Ergebnis B</strong>: Der Verband ist direkt betroffen, aber der Scope lässt sich plausibel begrenzen, weil eine vollständige technische Trennung nachweisbar ist.
-                <br /><strong>Ergebnis C</strong>: Der Verband ist direkt betroffen und Shared IT zieht den technischen Scope hoch. Eine Begrenzung ist derzeit nicht belastbar nachweisbar.
+                VZÄ (Vollzeitäquivalente), Jahresumsatz und Jahresbilanzsumme werden als numerische Werte abgefragt.
+                Wichtige Einrichtung: VZÄ &gt; 50 oder (Umsatz &gt; 10 Mio. UND Bilanzsumme &gt; 10 Mio.).
+                Besonders wichtige Einrichtung: VZÄ &gt; 250 oder (Umsatz &gt; 50 Mio. UND Bilanzsumme &gt; 43 Mio.).
               </p>
             </details>
 
@@ -109,11 +94,22 @@ export default function Hilfe() {
                 Was bedeuten die Ergebnisarten A, B, C und D?
               </summary>
               <div className="mt-2 text-sm pl-4 space-y-2" style={{ color: 'var(--text-light)' }}>
-                <p><strong>A</strong> – Nicht direkt betroffen und kein technischer Mit-Scope.</p>
-                <p><strong>B</strong> – Direkt betroffen, Scope plausibel begrenzbar (alle Trennkriterien erfüllt).</p>
-                <p><strong>C</strong> – Direkt betroffen und Shared IT zieht den technischen Scope hoch.</p>
-                <p><strong>D</strong> – Regelstandssensitiv oder strukturell/technisch unklar; konservative Umsetzung empfohlen.</p>
+                <p><strong>A</strong> – Nicht RD-getrieben betroffen. Kein Rettungsdienst oder Schwellenwerte nicht erreicht.</p>
+                <p><strong>B</strong> – Direkt betroffen, Scope begrenzbar. Alle 8 Trennkriterien erfüllt.</p>
+                <p><strong>C</strong> – Direkt betroffen, faktisch gruppenweiter technischer Scope. Shared IT oder fehlende Trennung.</p>
+                <p><strong>D</strong> – Unklar, konservativ behandeln. Schwellenwerte fehlen oder sind nicht belastbar.</p>
               </div>
+            </details>
+
+            <details className="group">
+              <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
+                Was bedeutet &quot;Shared IT&quot; in diesem Tool?
+              </summary>
+              <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
+                Shared IT beschreibt gemeinsam genutzte IT-Infrastruktur zwischen dem Rettungsdienst und anderen Teilen
+                des Verbands: gemeinsames Active Directory, gemeinsame Netzwerke, Backup-Systeme, Endpoint-Management.
+                Je mehr Shared IT besteht, desto größer wird der technische Scope.
+              </p>
             </details>
           </div>
         </div>
@@ -127,7 +123,9 @@ export default function Hilfe() {
                 Was ist diese Anwendung?
               </summary>
               <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Der NIS-2 Self-Check ist ein DRK-spezifisches Tool, mit dem Kreisverbände (KV) in 10–15 Minuten ihre wahrscheinliche NIS-2-Betroffenheit prüfen können. Die App analysiert Organisationsstruktur, Leistungsbereiche, Schwellenwerte und IT-Architektur und generiert ein Ergebnis mit priorisierter 90-Tage-Roadmap.
+                Der NIS-2 Self-Check ist ein DRK-spezifisches Tool, mit dem Kreisverbände (KV)
+                ihre wahrscheinliche NIS-2-Betroffenheit prüfen können. Die App analysiert Organisationsstruktur,
+                Schwellenwerte, IT-Architektur und Sicherheitsreife und generiert ein Ergebnis mit 90-Tage-Roadmap.
               </p>
             </details>
 
@@ -136,16 +134,8 @@ export default function Hilfe() {
                 Werden meine Daten gespeichert?
               </summary>
               <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Nein. Alle Eingaben verbleiben ausschließlich in Ihrem Browser (localStorage). Es werden keine Daten an einen Server übertragen. Beim Schließen oder Löschen des Browserspeichers werden alle Daten entfernt.
-              </p>
-            </details>
-
-            <details className="group">
-              <summary className="cursor-pointer font-semibold hover:text-[#e30613] transition-colors" style={{ color: 'var(--text)' }}>
-                Brauche ich einen Account?
-              </summary>
-              <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Nein. Die Anwendung funktioniert ohne Registrierung, ohne Login und ohne persönliche Daten.
+                Nein. Alle Eingaben verbleiben ausschließlich in Ihrem Browser (localStorage).
+                Es werden keine Daten an einen Server übertragen.
               </p>
             </details>
 
@@ -154,7 +144,8 @@ export default function Hilfe() {
                 Was ist der QR-Code auf dem PDF?
               </summary>
               <p className="mt-2 text-sm pl-4" style={{ color: 'var(--text-light)' }}>
-                Der QR-Code auf dem gedruckten PDF enthält alle Ihre Antworten in komprimierter Form. Scannen Sie den QR-Code mit Ihrem Handy, um die Bearbeitung fortzusetzen oder das Ergebnis zu einem späteren Zeitpunkt erneut aufzurufen – ohne dass Daten auf einem Server gespeichert werden.
+                Der QR-Code enthält alle Ihre Antworten in komprimierter Form. Scannen Sie ihn,
+                um den Check später fortzusetzen oder auf einem anderen Gerät zu öffnen.
               </p>
             </details>
           </div>
