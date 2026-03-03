@@ -11,6 +11,7 @@ import MaturityBadge from '@/components/results/MaturityBadge';
 import TriggeredRulesList from '@/components/results/TriggeredRulesList';
 import RoadmapView from '@/components/results/RoadmapView';
 import LayeredRoadmapView from '@/components/results/LayeredRoadmapView';
+import OpenItems from '@/components/results/OpenItems';
 import ExportActions from '@/components/results/ExportActions';
 
 export default function ErgebnisPage() {
@@ -116,7 +117,8 @@ export default function ErgebnisPage() {
         <MaturityBadge scoring={result.scoring} />
         <TriggeredRulesList rules={result.triggeredRules} />
         <LayeredRoadmapView roadmap={buildRoadmap(result.outcome.type, result.sizingType)} />
-        <RoadmapView result={result} />
+        <RoadmapView result={result} answers={answers} />
+        <OpenItems answers={answers} />
         <ExportActions result={result} answers={answers} />
       </div>
     </div>

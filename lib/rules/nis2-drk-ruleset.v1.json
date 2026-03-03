@@ -11,12 +11,40 @@
     ]
   },
   "enums": {
-    "yesNoPartial": ["yes", "no", "partial"],
-    "triState": ["no", "partial", "yes"],
-    "segmentationLevel": ["none", "rudimentary", "clean"],
-    "evidenceLevel": ["self", "document", "technical", "external_audit"],
-    "orgModel": ["ev_only", "ev_plus_one_sub", "ev_plus_multi_sub", "mixed_other"],
-    "entityType": ["ev", "ggmbh", "gmbh", "department_unselbst", "other"],
+    "yesNoPartial": [
+      "yes",
+      "no",
+      "partial"
+    ],
+    "triState": [
+      "no",
+      "partial",
+      "yes"
+    ],
+    "segmentationLevel": [
+      "none",
+      "rudimentary",
+      "clean"
+    ],
+    "evidenceLevel": [
+      "self",
+      "document",
+      "technical",
+      "external_audit"
+    ],
+    "orgModel": [
+      "ev_only",
+      "ev_plus_one_sub",
+      "ev_plus_multi_sub",
+      "mixed_other"
+    ],
+    "entityType": [
+      "ev",
+      "ggmbh",
+      "gmbh",
+      "department_unselbst",
+      "other"
+    ],
     "roadmapPack": [
       "P1_GOV_REG",
       "P2_IAM_ADMIN",
@@ -26,7 +54,12 @@
       "P6_SUPPLY_CHAIN",
       "P7_DOC_AUDIT"
     ],
-    "outcomeType": ["A", "B", "C", "D"]
+    "outcomeType": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ]
   },
   "questions": [
     {
@@ -36,10 +69,22 @@
       "hint": "Wie ist Ihr DRK-Kreisverband rechtlich aufgebaut? Wenn der Rettungsdienst direkt im Kreisverband (e.V.) angesiedelt ist, wählen Sie die erste Option. Bei einer ausgegliederten Tochtergesellschaft (z.B. gGmbH für den Rettungsdienst) wählen Sie die zweite.",
       "type": "single_select",
       "options": [
-        { "value": "ev_only", "label": "Alles im Kreisverband (Rettungsdienst als Abteilung möglich)" },
-        { "value": "ev_plus_one_sub", "label": "Kreisverband + 1 Tochter (Rettungsdienst in gGmbH/GmbH)" },
-        { "value": "ev_plus_multi_sub", "label": "Kreisverband + mehrere Töchter" },
-        { "value": "mixed_other", "label": "Mischform / Sonstiges" }
+        {
+          "value": "ev_only",
+          "label": "Alles im Kreisverband (Rettungsdienst als Abteilung möglich)"
+        },
+        {
+          "value": "ev_plus_one_sub",
+          "label": "Kreisverband + 1 Tochter (Rettungsdienst in gGmbH/GmbH)"
+        },
+        {
+          "value": "ev_plus_multi_sub",
+          "label": "Kreisverband + mehrere Töchter"
+        },
+        {
+          "value": "mixed_other",
+          "label": "Mischform / Sonstiges"
+        }
       ],
       "required": true
     },
@@ -50,8 +95,14 @@
       "hint": "Gemeint ist der tatsächliche Betrieb von Rettungswagen (RTW), Notarzteinsatzfahrzeugen (NEF) oder Krankentransportwagen (KTW) im Rahmen des öffentlichen Rettungsdienstes. Sanitätsdienste bei Veranstaltungen zählen hier nicht.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        }
       ],
       "required": true
     },
@@ -62,12 +113,27 @@
       "hint": "In welcher rechtlichen Einheit wird der Rettungsdienst konkret durchgeführt? Direkt im Kreisverband als Abteilung, oder in einer eigenen Gesellschaft (z.B. DRK Rettungsdienst gGmbH)?",
       "type": "single_select",
       "options": [
-        { "value": "ev", "label": "Im Kreisverband (Abteilung)" },
-        { "value": "subsidiary", "label": "In einer Beteiligungsgesellschaft (gGmbH/GmbH)" },
-        { "value": "multiple", "label": "Auf mehrere Einheiten verteilt" }
+        {
+          "value": "ev",
+          "label": "Im Kreisverband (Abteilung)"
+        },
+        {
+          "value": "subsidiary",
+          "label": "In einer Beteiligungsgesellschaft (gGmbH/GmbH)"
+        },
+        {
+          "value": "multiple",
+          "label": "Auf mehrere Einheiten verteilt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        }
+      ]
     },
     {
       "id": "ORG-09",
@@ -77,7 +143,13 @@
       "type": "number",
       "min": 0,
       "required": true,
-      "visibleIf": [{ "questionId": "ORG-03", "op": "eq", "value": "ev" }]
+      "visibleIf": [
+        {
+          "questionId": "ORG-03",
+          "op": "eq",
+          "value": "ev"
+        }
+      ]
     },
     {
       "id": "THR-01",
@@ -87,7 +159,13 @@
       "type": "number",
       "min": 0,
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        }
+      ]
     },
     {
       "id": "THR-02",
@@ -97,7 +175,13 @@
       "type": "number",
       "min": 0,
       "required": false,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        }
+      ]
     },
     {
       "id": "THR-03",
@@ -107,7 +191,13 @@
       "type": "number",
       "min": 0,
       "required": false,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        }
+      ]
     },
     {
       "id": "IT-OVERVIEW",
@@ -116,9 +206,18 @@
       "hint": "Gemeinsame IT-Infrastruktur bedeutet z.B. dasselbe Active Directory, denselben M365-Tenant, gemeinsame Firewalls, Backup-Systeme oder Geräteverwaltung. Wenn alles geteilt wird oder alles getrennt ist, können Sie hier direkt antworten. Bei gemischter Situation wählen Sie »Teilweise« für die Detailfragen.",
       "type": "single_select",
       "options": [
-        { "value": "all_shared", "label": "Ja, alles geteilt (ein AD, ein Tenant, gemeinsame Infrastruktur)" },
-        { "value": "partial", "label": "Teilweise (einige Systeme geteilt, andere getrennt)" },
-        { "value": "all_separate", "label": "Nein, komplett getrennte IT-Systeme" }
+        {
+          "value": "all_shared",
+          "label": "Ja, alles geteilt (ein AD, ein Tenant, gemeinsame Infrastruktur)"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise (einige Systeme geteilt, andere getrennt)"
+        },
+        {
+          "value": "all_separate",
+          "label": "Nein, komplett getrennte IT-Systeme"
+        }
       ],
       "required": true
     },
@@ -129,12 +228,31 @@
       "hint": "Nutzen mehrere Organisationseinheiten (z.B. Kreisverband und Rettungsdienst-GmbH) dieselben Benutzerkonten? Typische Beispiele: ein gemeinsames Active Directory, ein Microsoft-365-Tenant oder ein Entra-ID-Verzeichnis für alle Mitarbeitenden. Wenn alle das gleiche Login nutzen, ist die Antwort »Ja«.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
+      "visibleIf": [
+        {
+          "questionId": "IT-OVERVIEW",
+          "op": "eq",
+          "value": "partial"
+        }
+      ]
     },
     {
       "id": "IT-02",
@@ -143,12 +261,31 @@
       "hint": "Teilen sich mehrere Einheiten die Netzwerk-Schutzkomponenten? Eine Firewall schützt das Netzwerk vor unerwünschtem Datenverkehr, ein VPN ermöglicht sichere Fernzugriffe. Wenn z.B. Kreisverband und gGmbH über dasselbe Netzwerk und dieselbe Firewall verbunden sind, ist die Antwort »Ja«.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
+      "visibleIf": [
+        {
+          "questionId": "IT-OVERVIEW",
+          "op": "eq",
+          "value": "partial"
+        }
+      ]
     },
     {
       "id": "IT-03",
@@ -157,12 +294,31 @@
       "hint": "Werden die Datensicherungen (Backups) von Kreisverband und Tochtergesellschaft(en) über dasselbe System erstellt? Beispiel: ein zentraler Backup-Server oder Cloud-Backup-Dienst, der Daten aller Einheiten sichert.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
+      "visibleIf": [
+        {
+          "questionId": "IT-OVERVIEW",
+          "op": "eq",
+          "value": "partial"
+        }
+      ]
     },
     {
       "id": "IT-04",
@@ -171,12 +327,31 @@
       "hint": "Werden Computer, Laptops und Mobilgeräte aller Einheiten zentral verwaltet? Endpoint-Management (z.B. Microsoft Intune, SCCM) ermöglicht die zentrale Steuerung von Sicherheitseinstellungen, Updates und Software auf allen Geräten. MDM steht für Mobile Device Management (Verwaltung von Smartphones/Tablets).",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
+      "visibleIf": [
+        {
+          "questionId": "IT-OVERVIEW",
+          "op": "eq",
+          "value": "partial"
+        }
+      ]
     },
     {
       "id": "IT-05",
@@ -185,12 +360,31 @@
       "hint": "Ist das IT-Netzwerk des Rettungsdienstes vom restlichen Verbandsnetzwerk getrennt? »Keine« bedeutet alles läuft im selben Netzwerk. »Rudimentär« bedeutet z.B. eigene VLANs (virtuelle Netzwerk-Bereiche), aber gemeinsame Administratoren. »Sauber« bedeutet vollständige Trennung mit dokumentierten, kontrollierten Übergangspunkten.",
       "type": "single_select",
       "options": [
-        { "value": "none", "label": "Keine" },
-        { "value": "rudimentary", "label": "Rudimentär (z.B. VLAN ohne harte Admin-/Identity-Trennung)" },
-        { "value": "clean", "label": "Sauber (mit kontrollierten Übergängen und dokumentiert)" }
+        {
+          "value": "none",
+          "label": "Keine"
+        },
+        {
+          "value": "rudimentary",
+          "label": "Rudimentär (z.B. VLAN ohne harte Admin-/Identity-Trennung)"
+        },
+        {
+          "value": "clean",
+          "label": "Sauber (mit kontrollierten Übergängen und dokumentiert)"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "IT-OVERVIEW", "op": "eq", "value": "partial" }]
+      "visibleIf": [
+        {
+          "questionId": "IT-OVERVIEW",
+          "op": "eq",
+          "value": "partial"
+        }
+      ]
     },
     {
       "id": "SEP-OVERVIEW",
@@ -199,12 +393,27 @@
       "hint": "Harte Trennung bedeutet: eigener Tenant/Domain, getrennte Admins, eigene Netzsegmente, getrenntes Backup, getrenntes Endpoint-Management, getrenntes Logging, eigenes Inventar und Nachweis, dass ein Vorfall im Verband den RD nicht beeinträchtigt. Wenn alle 8 Kriterien erfüllt sind, wählen Sie »Ja, vollständig«. Wenn keines erfüllt ist, wählen Sie »Nein«. Bei teilweiser Erfüllung wählen Sie »Teilweise« für die Detailfragen.",
       "type": "single_select",
       "options": [
-        { "value": "full", "label": "Ja, vollständig (alle 8 Trennungskriterien erfüllt)" },
-        { "value": "partial_sep", "label": "Teilweise (einige Kriterien erfüllt, andere nicht)" },
-        { "value": "none", "label": "Nein, keine harte Trennung" }
+        {
+          "value": "full",
+          "label": "Ja, vollständig (alle 8 Trennungskriterien erfüllt)"
+        },
+        {
+          "value": "partial_sep",
+          "label": "Teilweise (einige Kriterien erfüllt, andere nicht)"
+        },
+        {
+          "value": "none",
+          "label": "Nein, keine harte Trennung"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        }
+      ]
     },
     {
       "id": "SEP-01",
@@ -213,11 +422,32 @@
       "hint": "Hat der Rettungsdienst eine eigene Microsoft-365-Umgebung (Tenant) oder eine eigene Windows-Domäne? Ein Tenant ist eine abgeschlossene Cloud-Umgebung mit eigenen Benutzerkonten. Wenn der RD im selben M365-Tenant wie der restliche Verband arbeitet, ist die Antwort »Nein«.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "SEP-OVERVIEW",
+          "op": "eq",
+          "value": "partial_sep"
+        }
+      ]
     },
     {
       "id": "SEP-02",
@@ -226,11 +456,32 @@
       "hint": "Haben die IT-Administratoren für den Rettungsdienst eigene, separate Admin-Konten, die keinen Zugriff auf die restliche Verbands-IT haben (und umgekehrt)? Wenn derselbe Admin mit demselben Konto sowohl RD-Server als auch Verbands-Server verwaltet, ist die Antwort »Nein«.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "SEP-OVERVIEW",
+          "op": "eq",
+          "value": "partial_sep"
+        }
+      ]
     },
     {
       "id": "SEP-03",
@@ -239,11 +490,32 @@
       "hint": "Ist das Netzwerk des Rettungsdienstes physisch oder logisch vom restlichen Netzwerk getrennt, mit einer Firewall oder ähnlicher Kontrolle an den Übergangspunkten? Das bedeutet: Datenverkehr zwischen RD-Netzwerk und Verbands-Netzwerk wird gefiltert und überwacht.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "SEP-OVERVIEW",
+          "op": "eq",
+          "value": "partial_sep"
+        }
+      ]
     },
     {
       "id": "SEP-04",
@@ -252,11 +524,32 @@
       "hint": "Hat der Rettungsdienst ein eigenes Backup-System, das unabhängig vom Verbands-Backup funktioniert? Und wurde getestet, ob die Daten des RD im Ernstfall daraus wiederhergestellt werden können, ohne auf Verbands-Infrastruktur angewiesen zu sein?",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "SEP-OVERVIEW",
+          "op": "eq",
+          "value": "partial_sep"
+        }
+      ]
     },
     {
       "id": "SEP-05",
@@ -265,11 +558,32 @@
       "hint": "Werden die Computer und Mobilgeräte des Rettungsdienstes über ein eigenes Verwaltungssystem gesteuert, getrennt von den Geräten des restlichen Verbands? Wenn alle Geräte über ein einziges System (z.B. Intune) verwaltet werden, ist die Antwort »Nein«.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "SEP-OVERVIEW",
+          "op": "eq",
+          "value": "partial_sep"
+        }
+      ]
     },
     {
       "id": "SEP-06",
@@ -278,11 +592,32 @@
       "hint": "Werden Sicherheitsereignisse und Systemprotokolle (Logs) des Rettungsdienstes in einem eigenen System gesammelt und überwacht? Logging erfasst, wer wann was getan hat. Monitoring überwacht Systeme auf Auffälligkeiten. Getrennt bedeutet: RD-Logs sind unabhängig vom Verbands-Logging.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "SEP-OVERVIEW",
+          "op": "eq",
+          "value": "partial_sep"
+        }
+      ]
     },
     {
       "id": "SEP-07",
@@ -291,11 +626,32 @@
       "hint": "Gibt es eine eigene, aktuelle Liste aller IT-Geräte und Systeme des Rettungsdienstes (Server, PCs, Drucker, Netzwerkgeräte)? Diese Liste sollte unabhängig vom restlichen Verbandsinventar gepflegt werden, damit im Ernstfall klar ist, welche Geräte zum RD gehören.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "SEP-OVERVIEW",
+          "op": "eq",
+          "value": "partial_sep"
+        }
+      ]
     },
     {
       "id": "SEP-08",
@@ -304,11 +660,32 @@
       "hint": "Können Sie belegen, dass ein IT-Sicherheitsvorfall (z.B. Ransomware) im restlichen Verband den Rettungsdienst nicht lahmlegt? Dies erfordert technische und organisatorische Nachweise, dass die RD-IT unabhängig weiterlaufen kann.",
       "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Ja" },
-        { "value": "no", "label": "Nein" }
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true,
-      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }, { "questionId": "SEP-OVERVIEW", "op": "eq", "value": "partial_sep" }]
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "SEP-OVERVIEW",
+          "op": "eq",
+          "value": "partial_sep"
+        }
+      ]
     },
     {
       "id": "SEC-01",
@@ -317,9 +694,22 @@
       "hint": "Ist eine konkrete Person als verantwortlich für IT-Sicherheit benannt? CISO steht für Chief Information Security Officer, ISB für IT-Sicherheitsbeauftragter. »Dokumentiert« bedeutet: Die Benennung ist schriftlich festgehalten und der Geschäftsführung/dem Vorstand bekannt.",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -330,9 +720,22 @@
       "hint": "Hat die Geschäftsführung/der Vorstand eine Schulung zu den neuen NIS-2-Pflichten erhalten? NIS-2 verpflichtet das Management persönlich, sich mit IT-Sicherheitsrisiken zu befassen. BSIG ist das deutsche Umsetzungsgesetz (BSI-Gesetz). »Teilweise« z.B. wenn nur ein Teil des Vorstands geschult wurde.",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -343,9 +746,22 @@
       "hint": "Wurde systematisch erfasst, welche IT-Systeme besonders wichtig sind und welche Risiken bestehen? Eine Risikoanalyse bewertet: Was kann ausfallen? Wie wahrscheinlich ist das? Welche Auswirkungen hätte es? Für NIS-2 müssen mindestens die rettungsdienstlich kritischen Systeme betrachtet werden.",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -356,9 +772,22 @@
       "hint": "MFA (Multi-Faktor-Authentifizierung) bedeutet: Neben dem Passwort wird ein zweiter Faktor benötigt (z.B. App auf dem Handy, SMS-Code). Privilegierte Konten sind Admin-Accounts mit erweiterten Rechten. Remote-Zugriff ist der Zugang von außerhalb (Homeoffice, VPN). Alle diese Zugänge sollten MFA-geschützt sein.",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -369,9 +798,22 @@
       "hint": "Gibt es ein schriftliches Konzept, wer welche Rechte im IT-System hat? »Least Privilege« bedeutet: Jeder bekommt nur die minimal nötigen Berechtigungen. »Admin-Trennung« bedeutet: Admins nutzen für tägliche Arbeit ein normales Konto und nur bei Bedarf das Admin-Konto. Ist das dokumentiert und umgesetzt?",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -382,9 +824,22 @@
       "hint": "Ist das Netzwerk in verschiedene Bereiche unterteilt, sodass ein Angreifer nicht von einem Bereich in alle anderen gelangen kann? Beispiel: Verwaltung, Rettungsdienst und Gäste-WLAN sind getrennte Netzsegmente mit Firewall-Regeln dazwischen. Ist dies dokumentiert (Netzplan, Firewall-Regeln)?",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -395,9 +850,22 @@
       "hint": "Offline-Backups sind Datensicherungen, die nicht dauerhaft mit dem Netzwerk verbunden sind (z.B. externe Festplatten, Bandlaufwerke, Cloud-Backups mit Zugriffsschutz). Diese sind bei Ransomware-Angriffen entscheidend. »Getestet« bedeutet: Es wurde tatsächlich ausprobiert, ob die Daten aus dem Backup wiederhergestellt werden können.",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -408,9 +876,22 @@
       "hint": "Werden wichtige Ereignisse (Anmeldungen, Fehler, Sicherheitswarnungen) zentral gesammelt und regelmäßig ausgewertet? Gibt es automatische Alarme bei verdächtigen Aktivitäten (z.B. viele fehlgeschlagene Anmeldeversuche)? »Teilweise« z.B. wenn Logs gesammelt, aber nicht regelmäßig ausgewertet werden.",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -421,9 +902,22 @@
       "hint": "Gibt es einen schriftlichen Notfallplan für IT-Sicherheitsvorfälle? NIS-2 fordert eine Erstmeldung an das BSI innerhalb von 24 Stunden und einen Zwischenbericht innerhalb von 72 Stunden nach einem erheblichen Vorfall. Ist dokumentiert, wer intern wen informiert und wer die BSI-Meldung abgibt?",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -434,9 +928,22 @@
       "hint": "BCM = Business Continuity Management (Notfallvorsorge). RTO = Recovery Time Objective: Wie schnell muss ein System nach einem Ausfall wieder laufen? RPO = Recovery Point Objective: Wie viel Datenverlust ist maximal akzeptabel (z.B. max. 4 Stunden)? Ist geplant, wie der Rettungsdienst bei einem IT-Totalausfall weiterbetrieben wird?",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -447,9 +954,22 @@
       "hint": "Wurden Ihre IT-Dienstleister (z.B. Systemhaus, Cloud-Anbieter, Software-Hersteller) hinsichtlich ihrer Sicherheit bewertet? Sind Sicherheitsanforderungen vertraglich festgehalten (z.B. Auftragsverarbeitungsvertrag, SLA für Verfügbarkeit, Meldepflichten bei Vorfällen)?",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     },
@@ -460,9 +980,22 @@
       "hint": "Sind alle IT-Sicherheitsrichtlinien (z.B. Passwort-Richtlinie, Backup-Konzept, Notfallplan) aktuell, freigegeben und an einem zentralen Ort abgelegt? Können Nachweise (Schulungsteilnahmen, Testergebnisse, Protokolle) bei einer Prüfung schnell vorgelegt werden?",
       "type": "single_select",
       "options": [
-        { "value": "no", "label": "Nein" },
-        { "value": "partial", "label": "Teilweise" },
-        { "value": "yes", "label": "Ja" }
+        {
+          "value": "no",
+          "label": "Nein"
+        },
+        {
+          "value": "partial",
+          "label": "Teilweise"
+        },
+        {
+          "value": "yes",
+          "label": "Ja"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
       ],
       "required": true
     }
@@ -471,7 +1004,13 @@
     {
       "id": "REG-J1",
       "description": "Ohne Rettungsdienst keine RD-getriebene Betroffenheit.",
-      "when": [{ "questionId": "OPS-01", "op": "eq", "value": "no" }],
+      "when": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "no"
+        }
+      ],
       "then": {
         "set": {
           "jurisdiction.isRdProvider": false,
@@ -479,13 +1018,21 @@
           "jurisdiction.classification": "none",
           "outcome.type": "A"
         },
-        "addRoadmapPacks": ["P7_DOC_AUDIT"]
+        "addRoadmapPacks": [
+          "P7_DOC_AUDIT"
+        ]
       }
     },
     {
       "id": "REG-J2",
       "description": "Mit Rettungsdienst: Rechtsträgerlogik (ev vs subsidiary).",
-      "when": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }],
+      "when": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        }
+      ],
       "then": {
         "set": {
           "jurisdiction.isRdProvider": true
@@ -496,74 +1043,138 @@
       "id": "REG-J3-WICHTIG-VZA",
       "description": "Wichtige Einrichtung wenn VZÄ > 50.",
       "when": [
-        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
-        { "questionId": "THR-01", "op": "gt", "value": 50 }
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "THR-01",
+          "op": "gt",
+          "value": 50
+        }
       ],
       "then": {
         "set": {
           "jurisdiction.directlyRegulated": true,
           "jurisdiction.classification": "important"
         },
-        "addRoadmapPacks": ["P1_GOV_REG"]
+        "addRoadmapPacks": [
+          "P1_GOV_REG"
+        ]
       }
     },
     {
       "id": "REG-J3-BESONDERS-VZA",
       "description": "Besonders wichtige Einrichtung wenn VZÄ > 250.",
       "when": [
-        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
-        { "questionId": "THR-01", "op": "gt", "value": 250 }
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "THR-01",
+          "op": "gt",
+          "value": 250
+        }
       ],
       "then": {
         "set": {
           "jurisdiction.directlyRegulated": true,
           "jurisdiction.classification": "especially_important"
         },
-        "addRoadmapPacks": ["P1_GOV_REG"]
+        "addRoadmapPacks": [
+          "P1_GOV_REG"
+        ]
       }
     },
     {
       "id": "REG-J3-WICHTIG-FIN",
       "description": "Wichtige Einrichtung wenn Umsatz >10 Mio UND Bilanzsumme >10 Mio.",
       "when": [
-        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
-        { "questionId": "THR-02", "op": "gt", "value": 10000 },
-        { "questionId": "THR-03", "op": "gt", "value": 10000 }
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "THR-02",
+          "op": "gt",
+          "value": 10000
+        },
+        {
+          "questionId": "THR-03",
+          "op": "gt",
+          "value": 10000
+        }
       ],
       "then": {
         "set": {
           "jurisdiction.directlyRegulated": true,
           "jurisdiction.classification": "important"
         },
-        "addRoadmapPacks": ["P1_GOV_REG"]
+        "addRoadmapPacks": [
+          "P1_GOV_REG"
+        ]
       }
     },
     {
       "id": "REG-J3-BESONDERS-FIN",
       "description": "Besonders wichtige Einrichtung wenn Umsatz >50 Mio UND Bilanzsumme >43 Mio.",
       "when": [
-        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
-        { "questionId": "THR-02", "op": "gt", "value": 50000 },
-        { "questionId": "THR-03", "op": "gt", "value": 43000 }
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "THR-02",
+          "op": "gt",
+          "value": 50000
+        },
+        {
+          "questionId": "THR-03",
+          "op": "gt",
+          "value": 43000
+        }
       ],
       "then": {
         "set": {
           "jurisdiction.directlyRegulated": true,
           "jurisdiction.classification": "especially_important"
         },
-        "addRoadmapPacks": ["P1_GOV_REG"]
+        "addRoadmapPacks": [
+          "P1_GOV_REG"
+        ]
       }
     },
     {
       "id": "REG-J3-NOT",
       "description": "Wenn Schwellenwerte nicht erreicht: nicht direkt reguliert (RD vorhanden).",
       "when": [
-        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
-        { "questionId": "THR-01", "op": "lte", "value": 50 },
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "THR-01",
+          "op": "lte",
+          "value": 50
+        },
         {
           "any": [
-            { "questionId": "THR-02", "op": "lte_or_missing", "value": 10000 },
-            { "questionId": "THR-03", "op": "lte_or_missing", "value": 10000 }
+            {
+              "questionId": "THR-02",
+              "op": "lte_or_missing",
+              "value": 10000
+            },
+            {
+              "questionId": "THR-03",
+              "op": "lte_or_missing",
+              "value": 10000
+            }
           ]
         }
       ],
@@ -578,37 +1189,86 @@
       "id": "REG-T1-SHARED-IDENTITY",
       "description": "Shared Identity zieht technischen Scope hoch.",
       "when": [
-        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
-        { "questionId": "IT-01", "op": "in", "value": ["yes", "partial"] }
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "IT-01",
+          "op": "in",
+          "value": [
+            "yes",
+            "partial"
+          ]
+        }
       ],
       "then": {
-        "set": { "scope.technical.sharedIdentity": true },
-        "addRoadmapPacks": ["P2_IAM_ADMIN"]
+        "set": {
+          "scope.technical.sharedIdentity": true
+        },
+        "addRoadmapPacks": [
+          "P2_IAM_ADMIN"
+        ]
       }
     },
     {
       "id": "REG-T2-SHARED-INFRA",
       "description": "Shared Infrastruktur zieht technischen Scope hoch.",
       "when": [
-        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
         {
           "any": [
-            { "questionId": "IT-02", "op": "in", "value": ["yes", "partial"] },
-            { "questionId": "IT-03", "op": "in", "value": ["yes", "partial"] },
-            { "questionId": "IT-04", "op": "in", "value": ["yes", "partial"] }
+            {
+              "questionId": "IT-02",
+              "op": "in",
+              "value": [
+                "yes",
+                "partial"
+              ]
+            },
+            {
+              "questionId": "IT-03",
+              "op": "in",
+              "value": [
+                "yes",
+                "partial"
+              ]
+            },
+            {
+              "questionId": "IT-04",
+              "op": "in",
+              "value": [
+                "yes",
+                "partial"
+              ]
+            }
           ]
         }
       ],
       "then": {
-        "set": { "scope.technical.sharedInfrastructure": true },
-        "addRoadmapPacks": ["P3_BACKUP_DR", "P4_NETWORK_SEG"]
+        "set": {
+          "scope.technical.sharedInfrastructure": true
+        },
+        "addRoadmapPacks": [
+          "P3_BACKUP_DR",
+          "P4_NETWORK_SEG"
+        ]
       }
     },
     {
       "id": "REG-T3-SEPARATION-CHECK",
       "description": "Harte Trennung nur bei 8/8 Kriterien.",
       "when": [
-        { "questionId": "OPS-01", "op": "eq", "value": "yes" }
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        }
       ],
       "then": {
         "compute": {
@@ -630,22 +1290,37 @@
     {
       "id": "REG-OUTCOME-A",
       "description": "Outcome A: kein RD oder nicht RD-getrieben.",
-      "when": [{ "path": "jurisdiction.isRdProvider", "op": "eq", "value": false }],
+      "when": [
+        {
+          "path": "jurisdiction.isRdProvider",
+          "op": "eq",
+          "value": false
+        }
+      ],
       "then": {
         "set": {
           "outcome.type": "A",
           "outcome.label": "Nicht RD-getrieben betroffen",
           "outcome.summary": "Kein Rettungsdienst angegeben. RD-bezogene NIS-2/BSIG-Betroffenheit wird nicht ausgelöst."
         },
-        "addRoadmapPacks": ["P7_DOC_AUDIT"]
+        "addRoadmapPacks": [
+          "P7_DOC_AUDIT"
+        ]
       }
     },
     {
       "id": "REG-OUTCOME-D",
       "description": "Outcome D: unklare Datenlage (z.B. VZÄ fehlt) -> konservativ.",
       "when": [
-        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
-        { "questionId": "THR-01", "op": "missing" }
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        },
+        {
+          "questionId": "THR-01",
+          "op": "missing"
+        }
       ],
       "then": {
         "set": {
@@ -653,15 +1328,26 @@
           "outcome.label": "Unklar – konservativ behandeln",
           "outcome.summary": "Schwellenwerte sind nicht belastbar angegeben. VZÄ und Finanzdaten sind zu ermitteln."
         },
-        "addRoadmapPacks": ["P1_GOV_REG", "P7_DOC_AUDIT"]
+        "addRoadmapPacks": [
+          "P1_GOV_REG",
+          "P7_DOC_AUDIT"
+        ]
       }
     },
     {
       "id": "REG-OUTCOME-B",
       "description": "Outcome B: direkt betroffen, harte Trennung möglich -> Scope begrenzbar.",
       "when": [
-        { "path": "jurisdiction.directlyRegulated", "op": "eq", "value": true },
-        { "path": "scope.technical.hardSeparationPossible", "op": "eq", "value": true }
+        {
+          "path": "jurisdiction.directlyRegulated",
+          "op": "eq",
+          "value": true
+        },
+        {
+          "path": "scope.technical.hardSeparationPossible",
+          "op": "eq",
+          "value": true
+        }
       ],
       "then": {
         "set": {
@@ -669,19 +1355,39 @@
           "outcome.label": "Direkt betroffen – Scope begrenzbar",
           "outcome.summary": "Rettungsdienst ist direkt betroffen; eine harte technische Trennung ist nachgewiesen/erreichbar."
         },
-        "addRoadmapPacks": ["P4_NETWORK_SEG", "P7_DOC_AUDIT", "P5_INCIDENT_REPORT"]
+        "addRoadmapPacks": [
+          "P4_NETWORK_SEG",
+          "P7_DOC_AUDIT",
+          "P5_INCIDENT_REPORT"
+        ]
       }
     },
     {
       "id": "REG-OUTCOME-C",
       "description": "Outcome C: direkt betroffen + shared IT oder keine harte Trennung -> faktisch gruppenweit.",
       "when": [
-        { "path": "jurisdiction.directlyRegulated", "op": "eq", "value": true },
+        {
+          "path": "jurisdiction.directlyRegulated",
+          "op": "eq",
+          "value": true
+        },
         {
           "any": [
-            { "path": "scope.technical.hardSeparationPossible", "op": "eq", "value": false },
-            { "path": "scope.technical.sharedIdentity", "op": "eq", "value": true },
-            { "path": "scope.technical.sharedInfrastructure", "op": "eq", "value": true }
+            {
+              "path": "scope.technical.hardSeparationPossible",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "path": "scope.technical.sharedIdentity",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "scope.technical.sharedInfrastructure",
+              "op": "eq",
+              "value": true
+            }
           ]
         }
       ],
@@ -691,31 +1397,150 @@
           "outcome.label": "Direkt betroffen – faktisch gruppenweiter technischer Scope",
           "outcome.summary": "Rettungsdienst ist direkt betroffen; aufgrund Shared-IT bzw. fehlender harter Trennung erstreckt sich der technische Scope auf zentrale/weitere IT-Bereiche."
         },
-        "addRoadmapPacks": ["P2_IAM_ADMIN", "P3_BACKUP_DR", "P4_NETWORK_SEG", "P5_INCIDENT_REPORT", "P6_SUPPLY_CHAIN", "P7_DOC_AUDIT"]
+        "addRoadmapPacks": [
+          "P2_IAM_ADMIN",
+          "P3_BACKUP_DR",
+          "P4_NETWORK_SEG",
+          "P5_INCIDENT_REPORT",
+          "P6_SUPPLY_CHAIN",
+          "P7_DOC_AUDIT"
+        ]
       }
     }
   ],
   "scoring": {
     "model": "nis2_12_controls",
     "controls": [
-      { "id": "SEC-01", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-02", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-03", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-04", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-05", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-06", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-07", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-08", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-09", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-10", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-11", "points": { "no": 0, "partial": 1, "yes": 2 } },
-      { "id": "SEC-12", "points": { "no": 0, "partial": 1, "yes": 2 } }
+      {
+        "id": "SEC-01",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-02",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-03",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-04",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-05",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-06",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-07",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-08",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-09",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-10",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-11",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-12",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      }
     ],
     "bands": [
-      { "min": 0, "max": 7, "label": "kritisch" },
-      { "min": 8, "max": 14, "label": "basal" },
-      { "min": 15, "max": 19, "label": "belastbar" },
-      { "min": 20, "max": 24, "label": "fortgeschritten" }
+      {
+        "min": 0,
+        "max": 7,
+        "label": "kritisch"
+      },
+      {
+        "min": 8,
+        "max": 14,
+        "label": "basal"
+      },
+      {
+        "min": 15,
+        "max": 19,
+        "label": "belastbar"
+      },
+      {
+        "min": 20,
+        "max": 24,
+        "label": "fortgeschritten"
+      }
     ]
   },
   "roadmapPacks": [

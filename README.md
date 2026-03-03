@@ -41,7 +41,9 @@ Rettungsdienst wird als potenziell NIS-2-relevante Einrichtungsart behandelt.
 - Getrennte Darstellung von juristischem und technischem Scope
 - Shared-IT-Analyse und harte Trennungslogik (8/8 Kriterien)
 - 12 Sicherheitsreife-Kontrollen mit Reifegrad-Bewertung
-- Priorisierte 90-Tage-Roadmap aus 7 Maßnahmenpaketen
+- Priorisierte 90-Tage-Roadmap aus 7 Maßnahmenpaketen mit Fulfillment-Anzeige
+- „Nicht bekannt"-Option für IT- und Sicherheitsfragen mit automatischer Todo-Liste
+- Offene Punkte im Ergebnis als druckbare Checkliste für Weiterleitung
 - QR-Code auf dem PDF-Ergebnis für Offline-Datenpersistenz
 - Druckoptimierte Ergebnisansicht + JSON-Export
 - Wizard-Fortschritt in localStorage
@@ -117,7 +119,8 @@ NIS2-Audit/
 │       ├── ScopeCards.tsx       # Juristischer + technischer Scope
 │       ├── MaturityBadge.tsx    # Reifegrad-Anzeige
 │       ├── TriggeredRulesList.tsx # Auslösende Regeln
-│       ├── RoadmapView.tsx      # 90-Tage-Roadmap
+│       ├── RoadmapView.tsx      # 90-Tage-Roadmap + Fulfillment
+│       ├── OpenItems.tsx        # Offene Punkte (Nicht bekannt)
 │       └── ExportActions.tsx    # Drucken/Export + QR-Code
 ├── lib/
 │   ├── types.ts                 # Alle Domain-Typen
@@ -135,6 +138,7 @@ NIS2-Audit/
 │   ├── logo.png                 # DRK-Logo (42×42px)
 │   └── favicon.svg              # DRK Favicon
 ├── CLAUDE.md                    # Konventionen für Claude Code
+├── CHANGELOG.md                 # Änderungsprotokoll
 ├── PROJECT.md                   # Interne Projektdokumentation
 ├── README.md                    # Diese Datei
 ├── Dockerfile                   # Docker-Build
