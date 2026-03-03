@@ -88,7 +88,7 @@ export default function AssessmentWizard() {
     setShowResumePrompt(false);
   }, []);
 
-  const handleGrunddatenChange = useCallback((field: keyof Grunddaten, value: string) => {
+  const handleGrunddatenChange = useCallback((field: keyof Grunddaten, value: string | number | undefined) => {
     setState(prev => ({
       ...prev,
       grunddaten: { ...prev.grunddaten, [field]: value },
@@ -208,7 +208,7 @@ export default function AssessmentWizard() {
   }, [state.currentStep, handleStepChange]);
 
   const handleComplete = useCallback(() => {
-    const result = evaluateAssessment(state.answers);
+    const result = evaluateAssessment(state.answers, state.grunddaten);
     try {
       localStorage.setItem('nis2-audit-result', JSON.stringify(result));
       localStorage.setItem('nis2-audit-answers', JSON.stringify(state.answers));
@@ -335,6 +335,36 @@ export default function AssessmentWizard() {
                   value={state.grunddaten.vorstand}
                   onChange={(e) => handleGrunddatenChange('vorstand', e.target.value)}
                 />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 mt-2 border-t" style={{ borderColor: 'var(--border)' }}>
+                <div>
+                  <label className="drk-label">Gesamt-VZÄ des Verbands</label>
+                  <input
+                    type="number"
+                    className="drk-input"
+                    placeholder="z.B. 350"
+                    min={0}
+                    value={state.grunddaten.gesamtVzae ?? ''}
+                    onChange={(e) => handleGrunddatenChange('gesamtVzae', e.target.value ? Number(e.target.value) : undefined)}
+                  />
+                  <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
+                    Alle VZÄ des gesamten Kreisverbands (alle Bereiche). Bestimmt die Größenklasse (S/M/L).
+                  </p>
+                </div>
+                <div>
+                  <label className="drk-label">Gesamtumsatz des Verbands (TEUR)</label>
+                  <input
+                    type="number"
+                    className="drk-input"
+                    placeholder="z.B. 15000"
+                    min={0}
+                    value={state.grunddaten.gesamtUmsatz ?? ''}
+                    onChange={(e) => handleGrunddatenChange('gesamtUmsatz', e.target.value ? Number(e.target.value) : undefined)}
+                  />
+                  <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
+                    Jahresumsatz in TEUR (z.B. 15 Mio. = 15000).
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -10,6 +10,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ### Added
 - **Grunddaten im QR-Code**: Name, Adresse und Vorstand werden jetzt mit im QR-Code gespeichert und beim Scannen wiederhergestellt. Der bisherige Hinweis, dass Grunddaten nicht enthalten sind, entfällt.
+- **Gesamt-VZÄ und Gesamtumsatz des Verbands**: Neue Felder in den Grunddaten erfassen VZÄ und Umsatz des gesamten Kreisverbands. Die S/L/M-Größenklasse wird darauf basierend abgeleitet.
 - **Roadmap-Fulfillment-Anzeige**: Roadmap-Packs, deren zugrunde liegende Fragen bereits positiv beantwortet wurden, werden mit grünem Haken und „Erfüllt"-Badge dargestellt. Teilerfüllung wird als Fortschrittsanzeige (z. B. „1/2 Kriterien") angezeigt.
 - **Antwortoption „Nicht bekannt"**: IT-Struktur-Fragen (IT-01 bis IT-05), Trennungsfragen (SEP-01 bis SEP-08) und Sicherheitsreife-Fragen (SEC-01 bis SEC-12) können jetzt mit „Nicht bekannt" beantwortet werden. Scoring entspricht „Nein" (0 Punkte), aber die Fragen erscheinen als offene Punkte im Ergebnis.
 - **Offene-Punkte-Sektion im Ergebnis**: Neue Komponente „Offene Punkte – Noch zu klären" auf der Ergebnisseite, die alle mit „Nicht bekannt" beantworteten Fragen als druckbare Todo-Liste darstellt.
@@ -25,6 +26,8 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **Accessibility**: `focus-visible`-Outline für `<details>`/`<summary>` Elemente auf der Hilfe-Seite.
 
 ### Changed
+- **90-Tage-Roadmap deaktiviert**: Die LayeredRoadmapView (90-Tage-Roadmap nach BSI) wird vorübergehend nicht mehr angezeigt (auch nicht im Druck). Wird zu einem späteren Zeitpunkt überarbeitet und ggf. reaktiviert.
+- **S/L/M-Sizing auf Verbands-Gesamtwerte**: Größenklasse basiert jetzt auf Gesamt-VZÄ des Verbands (Grunddaten) statt auf den RD-spezifischen Schwellenwerten.
 - `RoadmapView`-Komponente akzeptiert jetzt optionale `answers`-Prop für Fulfillment-Check.
 - `QuestionCard` zeigt „Nicht bekannt"-Auswahl visuell in Gelb statt Rot an.
 - JSON-Ruleset um `unknown`-Option und Scoring erweitert.
