@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Datenschutz() {
   return (
-    <div className="bg-gray-50 min-h-[calc(100vh-theme(spacing.16))] py-8 px-4">
+    <div style={{ background: 'var(--bg)' }} className="min-h-[calc(100vh-theme(spacing.16))] py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="drk-card">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Datenschutzerklärung</h2>
@@ -32,9 +32,10 @@ export default function Datenschutz() {
                 <strong>Keine Cookies:</strong> Diese Anwendung verwendet keine Cookies.<br />
                 <strong>Keine Tracking-Dienste:</strong> Es werden keine Analytics- oder Tracking-Tools eingesetzt.<br />
                 <strong>Keine externen Dienste:</strong> Es werden keine externen Schriftarten, CDNs oder Dienste geladen.<br />
-                <strong>Lokale Speicherung:</strong> Falls die App Daten zwischenspeichert, geschieht dies
-                ausschließlich im lokalen Browser-Speicher (localStorage) Ihres Geräts. Diese Daten
-                verlassen Ihr Gerät nicht.
+                <strong>Lokale Speicherung:</strong> Der NIS-2 Self-Check speichert Ihren Wizard-Fortschritt
+                und die Auswertungsergebnisse ausschließlich im lokalen Browser-Speicher (localStorage)
+                Ihres Geräts. Diese Daten verlassen Ihr Gerät nicht und können jederzeit über die
+                Browser-Einstellungen oder durch Neustarten des Checks gelöscht werden.
               </p>
             </section>
 

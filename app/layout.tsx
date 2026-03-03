@@ -3,8 +3,8 @@ import Link from 'next/link';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'DRK APP_TITEL',
-  description: 'APP_BESCHREIBUNG – DRK Kreisverband StädteRegion Aachen e.V.',
+  title: 'NIS-2 Audit – DRK Self-Check',
+  description: 'DRK-spezifische NIS-2-Betroffenheitsanalyse mit Ergebnislogik, Scope-Bewertung und 90-Tage-Roadmap.',
   icons: { icon: '/favicon.svg' },
 };
 
@@ -50,8 +50,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Link href="/" className="flex items-center gap-3">
             <img src="/logo.png" alt="DRK Logo" width={42} height={42} />
             <div>
-              <h1 className="text-[1.4rem] font-bold leading-tight">APP_TITEL</h1>
-              <div className="text-[0.8rem] opacity-85">APP_UNTERTITEL</div>
+              <h1 className="text-[1.4rem] font-bold leading-tight">NIS-2 Audit</h1>
+              <div className="text-[0.8rem] opacity-85">Self-Check für Rettungsdienst, Verbundstruktur und Shared IT im DRK</div>
             </div>
           </Link>
 
