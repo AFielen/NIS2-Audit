@@ -65,45 +65,4 @@ export const presets: Preset[] = [
       'IT-05': 'YES',
     },
   },
-  {
-    id: 'lv-ohne-rd',
-    title: {
-      de: 'Landesverband ohne eigenen RD, mit IT-Services',
-      en: 'State Association without own EMS, with IT Services',
-    },
-    description: {
-      de: 'Landesverband ohne eigenen operativen Rettungsdienst, aber mit zentralen IT-Diensten für Kreisverbände.',
-      en: 'State association without own EMS operations, but with central IT services for district associations.',
-    },
-    answers: {
-      'ORG-01': 'LV',
-      'ORG-02': 'NO_RD',
-      'ORG-03': 'ONE',
-      'ORG-06': 'YES',
-      'OPS-01': 'NO',
-      'OPS-07': 'YES',
-    },
-  },
-  {
-    id: 'lv-mit-gesellschaften',
-    title: {
-      de: 'Landesverband mit operativen Gesellschaften',
-      en: 'State Association with Operating Subsidiaries',
-    },
-    description: {
-      de: 'Landesverband mit eigenen operativen Gesellschaften, die Rettungsdienst und weitere Leistungen erbringen.',
-      en: 'State association with own operating subsidiaries providing EMS and other services.',
-    },
-    answers: {
-      'ORG-01': 'LV',
-      'ORG-02': 'GGMBH',
-      'ORG-03': 'FOUR_PLUS',
-      'ORG-04': 'MIXED',
-      'ORG-05': 'CENTRAL_EV',
-      'ORG-06': 'YES',
-      'OPS-01': 'YES',
-      'OPS-04': 'YES',
-      'OPS-07': 'YES',
-    },
-  },
 ];

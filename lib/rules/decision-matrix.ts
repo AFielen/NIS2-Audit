@@ -17,7 +17,6 @@ export interface DecisionRule {
 export const decisionRules: DecisionRule[] = [
   // ── ORG-01: DRK-Typ ──
   { id: 'ORG-01-KV', description: { de: 'Kreisverband prüfen', en: 'Assess district association' }, questionId: 'ORG-01', answerCodes: ['KV'], policyPack: 'all', ruleRef: 'REG-050', effectCode: 'CTX_KV', effectText: { de: 'DRK-Kreisverbands-Flow aktivieren.', en: 'Activate district association flow.' }, roadmapPacks: ['P1'], priority: 'Mittel' },
-  { id: 'ORG-01-LV', description: { de: 'Landesverband prüfen', en: 'Assess state association' }, questionId: 'ORG-01', answerCodes: ['LV'], policyPack: 'all', ruleRef: 'REG-004', effectCode: 'CTX_LV', effectText: { de: 'LV-Flow aktivieren; direkte Betroffenheit nur bei eigener operativer Leistung.', en: 'Activate state association flow; direct affectedness only with own operational services.' }, roadmapPacks: ['P1', 'P11'], priority: 'Mittel' },
   { id: 'ORG-01-TG', description: { de: 'Tochtergesellschaft prüfen', en: 'Assess subsidiary' }, questionId: 'ORG-01', answerCodes: ['TG'], policyPack: 'all', ruleRef: 'REG-002', effectCode: 'CTX_TG', effectText: { de: 'Einzelfall als operative oder Servicegesellschaft prüfen.', en: 'Assess as operational or service company case by case.' }, roadmapPacks: ['P2'], priority: 'Mittel' },
   { id: 'ORG-01-SG', description: { de: 'Servicegesellschaft prüfen', en: 'Assess service company' }, questionId: 'ORG-01', answerCodes: ['SG'], policyPack: 'all', ruleRef: 'REG-004', effectCode: 'CTX_SG', effectText: { de: 'Servicegesellschaft nicht automatisch direkt betroffen; Shared-IT und Lieferkette prüfen.', en: 'Service company not automatically directly affected; check shared IT and supply chain.' }, roadmapPacks: ['P8', 'P11'], priority: 'Mittel' },
 
@@ -68,8 +67,6 @@ export const decisionRules: DecisionRule[] = [
   // ── OPS-06: KatS ──
   { id: 'OPS-06-YES', description: { de: 'KatS mit IT ja', en: 'Disaster relief IT yes' }, questionId: 'OPS-06', answerCodes: ['YES'], policyPack: 'all', ruleRef: 'REG-050', effectCode: 'FLAG_CRISIS_CONTINUITY', effectText: { de: 'Krisenkommunikation/BCM mit betrachten.', en: 'Include crisis communication/BCM.' }, roadmapPacks: ['P6', 'P7'], priority: 'Mittel' },
 
-  // ── OPS-07: LV zentrale IT ──
-  { id: 'OPS-07-YES', description: { de: 'LV betreibt zentrale IT', en: 'State assoc. operates central IT' }, questionId: 'OPS-07', answerCodes: ['YES'], policyPack: 'all', ruleRef: 'REG-004', effectCode: 'LV_TECH_SCOPE_ONLY', effectText: { de: 'Keine automatische direkte Betroffenheit; technischer Scope für unterstützte KVs möglich.', en: 'No automatic direct affectedness; technical scope for supported district associations possible.' }, roadmapPacks: ['P8', 'P11'], priority: 'Hoch' },
 
   // ── THR-01: VZÄ ──
   { id: 'THR-01-LT50', description: { de: 'Unter 50 VZÄ', en: 'Under 50 FTEs' }, questionId: 'THR-01', answerCodes: ['LT50'], policyPack: 'all', ruleRef: 'REG-022', effectCode: 'THRESHOLD_STAFF_BELOW', effectText: { de: 'Unterhalb des Personal-Schwellenwertes.', en: 'Below staff threshold.' }, roadmapPacks: ['P2'], priority: 'Hoch' },

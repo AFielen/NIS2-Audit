@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import type { WizardState, WizardAnswers, PolicyPack, Preset, Locale, QuestionId } from '@/lib/types';
 import { questionBlocks } from '@/lib/questions';
 import { loadWizardState, saveWizardState, createEmptyState, clearWizardState } from '@/lib/storage';
 import { evaluateAssessment } from '@/lib/rules/evaluate';
+import { decodeState } from '@/lib/state-codec';
 import StepNavigation from './StepNavigation';
 import PolicyPackSwitch from './PolicyPackSwitch';
 import PresetSelector from './PresetSelector';
@@ -39,19 +40,40 @@ interface AssessmentWizardProps {
 
 export default function AssessmentWizard({ locale = 'de' }: AssessmentWizardProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [state, setState] = useState<WizardState>(createEmptyState);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [showResumePrompt, setShowResumePrompt] = useState(false);
+  const [qrRestored, setQrRestored] = useState(false);
 
-  // Load saved state on mount
+  // Load saved state on mount OR restore from QR code
   useEffect(() => {
+    const stateParam = searchParams.get('state');
+    if (stateParam) {
+      const decoded = decodeState(stateParam);
+      if (decoded) {
+        setState({
+          answers: decoded.answers,
+          currentStep: 0,
+          policyPack: decoded.policyPack,
+          selectedPreset: null,
+          timestamp: Date.now(),
+        });
+        setQrRestored(true);
+        // Clean URL
+        window.history.replaceState({}, '', '/check');
+        setHasLoaded(true);
+        return;
+      }
+    }
+
     const saved = loadWizardState();
     if (saved && Object.keys(saved.answers).length > 0) {
       setShowResumePrompt(true);
       setState(saved);
     }
     setHasLoaded(true);
-  }, []);
+  }, [searchParams]);
 
   // Auto-save on changes
   useEffect(() => {
@@ -165,6 +187,11 @@ export default function AssessmentWizard({ locale = 'de' }: AssessmentWizardProp
     );
   }
 
+  // QR restore notification
+  const handleDismissQrNotice = useCallback(() => {
+    setQrRestored(false);
+  }, []);
+
   // Current block
   const currentBlockId = STEP_BLOCK_MAP[state.currentStep];
   const currentBlock = currentBlockId
@@ -178,6 +205,32 @@ export default function AssessmentWizard({ locale = 'de' }: AssessmentWizardProp
         currentStep={state.currentStep}
         onStepClick={handleStepChange}
       />
+
+      {/* QR restore success banner */}
+      {qrRestored && (
+        <div
+          className="drk-card drk-fade-in flex items-center justify-between mb-4"
+          style={{ background: '#f0fdf4', borderLeft: '4px solid var(--success)' }}
+        >
+          <div>
+            <div className="font-semibold text-sm" style={{ color: 'var(--success)' }}>
+              {locale === 'de' ? 'Daten aus QR-Code wiederhergestellt' : 'Data restored from QR code'}
+            </div>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-light)' }}>
+              {locale === 'de'
+                ? 'Alle Antworten wurden erfolgreich aus dem QR-Code geladen. Sie können die Eingaben prüfen und anpassen.'
+                : 'All answers were successfully loaded from the QR code. You can review and adjust the entries.'}
+            </p>
+          </div>
+          <button
+            onClick={handleDismissQrNotice}
+            className="shrink-0 ml-3 text-sm font-medium hover:underline"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* Step 0: Policy Pack + Presets */}
       {state.currentStep === 0 && (

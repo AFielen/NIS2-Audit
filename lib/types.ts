@@ -21,7 +21,7 @@ export interface ApiError {
 
 export type PolicyPack = 'public-bsi' | 'verbandslinie-konservativ';
 
-export type DrkType = 'KV' | 'LV' | 'TG' | 'SG';
+export type DrkType = 'KV' | 'TG' | 'SG';
 
 export type RdOrganisation = 'EV_ABT' | 'GGMBH' | 'SPLIT' | 'NO_RD';
 
@@ -73,7 +73,6 @@ export interface WizardAnswers {
   'OPS-04'?: TriState;
   'OPS-05'?: TriState;
   'OPS-06'?: TriState;
-  'OPS-07'?: TriState;
   // Block C – Schwellenwerte
   'THR-01'?: StaffBand;
   'THR-02'?: RevenueBand;
@@ -134,6 +133,7 @@ export interface Question {
   id: QuestionId;
   block: string;
   text: { de: string; en: string };
+  helpText?: { de: string; en: string };
   options: AnswerOption[];
   conditionalOn?: {
     questionId: QuestionId;
