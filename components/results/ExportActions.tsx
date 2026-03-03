@@ -48,7 +48,10 @@ export default function ExportActions({ result, answers }: ExportActionsProps) {
               </h3>
               <p className="text-xs" style={{ color: 'var(--text-light)' }}>
                 Scannen Sie diesen QR-Code, um den NIS-2 Self-Check mit allen Antworten erneut zu öffnen.
-                Alle Daten sind im QR-Code enthalten – es werden keine Daten auf einem Server gespeichert.
+              </p>
+              <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
+                Alle Antworten sind komprimiert im QR-Code gespeichert — es werden keine Daten auf einem Server abgelegt.
+                Grunddaten (Name, Adresse, Vorstand) sind NICHT im QR-Code enthalten.
               </p>
             </div>
           </div>
@@ -65,8 +68,15 @@ export default function ExportActions({ result, answers }: ExportActionsProps) {
                 QR-Code: Audit wiederherstellen
               </h3>
               <p className="text-xs" style={{ color: 'var(--text-light)' }}>
-                Dieser QR-Code enthält alle Ihre Antworten. Scannen Sie ihn, um den Check später fortzusetzen oder auf einem anderen Gerät zu öffnen.
+                Dieser QR-Code enthält alle Ihre Antworten in komprimierter Form. Scannen Sie ihn, um den Check später fortzusetzen oder auf einem anderen Gerät zu öffnen.
               </p>
+              <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
+                Alle Daten sind ausschließlich im QR-Code gespeichert — es werden keine Daten auf einem Server abgelegt.
+                Grunddaten (Name, Adresse, Vorstand) sind NICHT im QR-Code enthalten und müssen ggf. erneut eingegeben werden.
+              </p>
+              <div className="mt-2 p-2 rounded text-xs" style={{ background: 'var(--warning-bg)', color: '#b45309' }}>
+                <strong>Hinweis:</strong> Behandeln Sie diesen QR-Code vertraulich. Wer ihn scannt, kann alle Ihre Audit-Antworten einsehen.
+              </div>
             </div>
           </div>
         </div>

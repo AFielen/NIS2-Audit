@@ -90,26 +90,36 @@ export default function ErgebnisPage() {
             <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{grunddaten.adresse}</p>
           )}
           {grunddaten.vorstand && (
-            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Vorstand/KGF: {grunddaten.vorstand}</p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Verantwortlich: {grunddaten.vorstand}</p>
           )}
         </div>
 
-        {/* Grunddaten summary (on-screen) */}
-        {grunddaten.kreisverband && (
-          <div className="drk-card drk-fade-in no-print">
-            <div className="flex items-center gap-3">
-              <div className="text-sm">
-                <span className="font-bold" style={{ color: 'var(--text)' }}>{grunddaten.kreisverband}</span>
-                {grunddaten.adresse && (
-                  <span style={{ color: 'var(--text-light)' }}> · {grunddaten.adresse}</span>
-                )}
-                {grunddaten.vorstand && (
-                  <span style={{ color: 'var(--text-light)' }}> · {grunddaten.vorstand}</span>
-                )}
+        {/* Report header (on-screen) */}
+        <div className="drk-card drk-fade-in">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="text-lg font-bold" style={{ color: 'var(--text)' }}>
+                {grunddaten.kreisverband || 'DRK Kreisverband'}
+              </h2>
+              {grunddaten.adresse && (
+                <p className="text-sm" style={{ color: 'var(--text-light)' }}>{grunddaten.adresse}</p>
+              )}
+              {grunddaten.vorstand && (
+                <p className="text-sm" style={{ color: 'var(--text-light)' }}>
+                  Verantwortlich: {grunddaten.vorstand}
+                </p>
+              )}
+            </div>
+            <div className="text-right shrink-0">
+              <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
+                {new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+              </div>
+              <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                Regelwerk v1.0
               </div>
             </div>
           </div>
-        )}
+        </div>
 
         <ExecutiveSummary result={result} />
         <RegistrationCallout registration={result.registration} outcomeType={result.outcome.type} />
@@ -119,6 +129,33 @@ export default function ErgebnisPage() {
         <LayeredRoadmapView roadmap={buildRoadmap(result.outcome.type, result.sizingType)} />
         <RoadmapView result={result} answers={answers} />
         <OpenItems answers={answers} />
+
+        {/* Signature line */}
+        <div className="drk-card drk-fade-in" style={{ pageBreakInside: 'avoid' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+              <div className="text-xs font-semibold uppercase mb-1" style={{ color: 'var(--text-muted)' }}>
+                Datum
+              </div>
+              <div className="text-sm mb-6" style={{ color: 'var(--text)' }}>
+                {new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+              </div>
+              <div style={{ borderBottom: '1px solid var(--text-muted)', width: '100%', marginBottom: '4px' }} />
+              <div className="text-xs" style={{ color: 'var(--text-muted)' }}>Ort, Datum</div>
+            </div>
+            <div>
+              <div className="text-xs font-semibold uppercase mb-1" style={{ color: 'var(--text-muted)' }}>
+                Verantwortlich
+              </div>
+              <div className="text-sm mb-6" style={{ color: 'var(--text)' }}>
+                {grunddaten.vorstand || '—'}
+              </div>
+              <div style={{ borderBottom: '1px solid var(--text-muted)', width: '100%', marginBottom: '4px' }} />
+              <div className="text-xs" style={{ color: 'var(--text-muted)' }}>Unterschrift</div>
+            </div>
+          </div>
+        </div>
+
         <ExportActions result={result} answers={answers} />
       </div>
     </div>

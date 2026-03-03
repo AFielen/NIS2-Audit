@@ -13,6 +13,12 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **Antwortoption „Nicht bekannt"**: IT-Struktur-Fragen (IT-01 bis IT-05), Trennungsfragen (SEP-01 bis SEP-08) und Sicherheitsreife-Fragen (SEC-01 bis SEC-12) können jetzt mit „Nicht bekannt" beantwortet werden. Scoring entspricht „Nein" (0 Punkte), aber die Fragen erscheinen als offene Punkte im Ergebnis.
 - **Offene-Punkte-Sektion im Ergebnis**: Neue Komponente „Offene Punkte – Noch zu klären" auf der Ergebnisseite, die alle mit „Nicht bekannt" beantworteten Fragen als druckbare Todo-Liste darstellt.
 - **JSON-Export erweitert**: Export enthält jetzt ein `unknownItems`-Feld mit allen offenen Punkten (Version 1.1.0).
+- **Haftungsausschluss**: Ergebnisseite zeigt jetzt einen Disclaimer mit Sternchen (*) am Ergebnis-Badge. Bei Ergebnis A/B wird ein erweiterter Hinweistext angezeigt, dass die Einschätzung keine Rechtsberatung ersetzt.
+- **Geschäftsführerhaftung-Warnung**: Bei Ergebnis A mit schlechter Sicherheitsreife (kritisch/basal) wird ein Warnhinweis zur Eigenverantwortung und persönlichen Haftung nach § 43 GmbHG / § 93 AktG angezeigt.
+- **Hint-Icons (?) auf Ergebnisfeldern**: Die Felder „Rettungsdienst-Anbieter", „Direkt reguliert" und „Einstufung" in der Executive Summary haben jetzt erklärende Tooltip-Buttons.
+- **Unterschriftenzeile im Ergebnis**: Neue Signatur-Sektion mit Datum, Ort und Unterschriftenfeld für Verantwortliche.
+- **Berichts-Header erweitert**: Ergebnisseite zeigt KV-Name, Adresse, verantwortliche Person und Datum prominent im Header.
+- **QR-Code-Sicherheitshinweise**: QR-Code-Sektion enthält jetzt Hinweise zur Datenspeicherung (nur im QR-Code, nicht auf Servern), Vertraulichkeitswarnung und Hinweis, dass Grunddaten nicht im QR-Code enthalten sind.
 - `CHANGELOG.md` erstellt.
 - CLAUDE.md um Pflicht zur CHANGELOG-Pflege ergänzt.
 
@@ -20,6 +26,11 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - `RoadmapView`-Komponente akzeptiert jetzt optionale `answers`-Prop für Fulfillment-Check.
 - `QuestionCard` zeigt „Nicht bekannt"-Auswahl visuell in Gelb statt Rot an.
 - JSON-Ruleset um `unknown`-Option und Scoring erweitert.
+- **IT-OVERVIEW Terminologie**: Option „geteilt" durch „gemeinsam" ersetzt für klarere Sprache.
+- **IT-OVERVIEW Hilfetext erweitert**: Detaillierte Erklärung der drei Antwortoptionen (gemeinsam / teilweise / getrennt) mit konkreten Beispielen.
+- **SEP-OVERVIEW Hilfetext erweitert**: Hinweis auf Dokumentationspflicht und Notwendigkeit externer Bestätigung ergänzt.
+- **Roadmaps klappbar**: Beide Roadmap-Sektionen (Umsetzungs-Roadmap und 90-Tage-Roadmap) sind jetzt standardmäßig eingeklappt mit Titel „Vorschlag: … Roadmap nach BSI".
+- **Projekt-Links aktualisiert**: DRK Vereinsabstimmung → `https://abstimmung.henryagi.de`, DRK Selbstauskunft → `https://selbstauskunft.henryagi.de/`.
 
 ---
 
