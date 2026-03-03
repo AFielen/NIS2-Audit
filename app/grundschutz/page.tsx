@@ -1,8 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { grundschutz10 } from '@/lib/roadmap/grundschutz10';
+import { grundschutzDetails, getGrundschutzDetail } from '@/lib/content/grundschutz-details';
 import type { RoadmapItem } from '@/lib/roadmap/types';
+import GrundschutzDetailSheet from '@/components/grundschutz/GrundschutzDetailSheet';
 
 const PRIORITY_STYLES: Record<RoadmapItem['priority'], { bg: string; text: string; label: string }> = {
   hoch: { bg: 'var(--drk-bg)', text: 'var(--drk)', label: 'Hoch' },
@@ -11,6 +14,8 @@ const PRIORITY_STYLES: Record<RoadmapItem['priority'], { bg: string; text: strin
 };
 
 export default function GrundschutzPage() {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
   return (
     <div style={{ background: 'var(--bg)' }} className="min-h-[calc(100vh-theme(spacing.16))] py-8 px-4">
       <div className="max-w-4xl mx-auto space-y-6">
@@ -23,6 +28,9 @@ export default function GrundschutzPage() {
             10 Kernmaßnahmen, die jeder NIS-2-betroffene Kreisverband unabhängig von der Größe umsetzen sollte.
             Diese Maßnahmen bilden das Fundament für die NIS-2-Compliance und sollten vor oder parallel zur
             90-Tage-Roadmap angegangen werden.
+          </p>
+          <p className="text-xs mb-4" style={{ color: 'var(--text-muted)' }}>
+            Klicken Sie auf eine Maßnahme für konkrete Handlungsempfehlungen.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link href="/check" className="drk-btn-primary text-sm">
@@ -39,7 +47,15 @@ export default function GrundschutzPage() {
           {grundschutz10.items.map((item, i) => {
             const ps = PRIORITY_STYLES[item.priority];
             return (
-              <div key={i} className="drk-card drk-fade-in" style={{ animationDelay: `${i * 50}ms` }}>
+              <div
+                key={i}
+                className="drk-card drk-fade-in cursor-pointer hover:shadow-xl transition-shadow"
+                style={{ animationDelay: `${i * 50}ms` }}
+                onClick={() => setSelectedIndex(i)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedIndex(i); } }}
+              >
                 <div className="flex items-start gap-4">
                   {/* Number badge */}
                   <div
@@ -54,12 +70,19 @@ export default function GrundschutzPage() {
                       <h3 className="font-semibold" style={{ color: 'var(--text)' }}>
                         {item.title.replace(/^\d+\.\s*/, '')}
                       </h3>
-                      <span
-                        className="shrink-0 text-xs font-bold px-2 py-0.5 rounded"
-                        style={{ background: ps.bg, color: ps.text }}
-                      >
-                        {ps.label}
-                      </span>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span
+                          className="text-xs font-bold px-2 py-0.5 rounded"
+                          style={{ background: ps.bg, color: ps.text }}
+                        >
+                          {ps.label}
+                        </span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                             style={{ color: 'var(--text-muted)' }}>
+                          <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                      </div>
                     </div>
                     <p className="text-sm mb-2" style={{ color: 'var(--text-light)' }}>
                       {item.description}
@@ -86,6 +109,13 @@ export default function GrundschutzPage() {
           </p>
         </div>
       </div>
+
+      <GrundschutzDetailSheet
+        detail={selectedIndex !== null ? getGrundschutzDetail(selectedIndex) ?? null : null}
+        onClose={() => setSelectedIndex(null)}
+        onNext={selectedIndex !== null && selectedIndex < grundschutzDetails.length - 1 ? () => setSelectedIndex(prev => prev !== null ? prev + 1 : null) : undefined}
+        hasNext={selectedIndex !== null && selectedIndex < grundschutzDetails.length - 1}
+      />
     </div>
   );
 }

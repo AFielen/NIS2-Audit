@@ -160,6 +160,25 @@ details summary:focus-visible {
   to { transform: rotate(360deg); }
 }
 
+/* ── Detail Sheet Animationen ── */
+@keyframes sheetSlideUp {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes backdropFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.drk-sheet-enter {
+  animation: sheetSlideUp 300ms ease-out;
+}
+
+.drk-backdrop-enter {
+  animation: backdropFadeIn 200ms ease-out;
+}
+
 /* ── Status-Badges ── */
 .drk-badge-success {
   background: var(--success-bg);
