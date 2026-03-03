@@ -4,7 +4,7 @@ export const presets: Preset[] = [
   {
     id: 'kv-rd-abteilung',
     title: 'Kreisverband mit RD als Abteilung',
-    description: 'Typischer KV e.V. – Rettungsdienst als Abteilung, zentrale IT.',
+    description: 'Typischer Kreisverband – Rettungsdienst als Abteilung, zentrale IT.',
     answers: {
       'ORG-01': 'ev_only',
       'OPS-01': 'yes',
@@ -14,7 +14,7 @@ export const presets: Preset[] = [
   {
     id: 'kv-rd-ggmbh',
     title: 'Kreisverband + Rettungsdienst-gGmbH',
-    description: 'KV e.V. mit separater RD-gGmbH, geteilte IT-Infrastruktur.',
+    description: 'Kreisverband mit separater RD-gGmbH, geteilte IT-Infrastruktur.',
     answers: {
       'ORG-01': 'ev_plus_one_sub',
       'OPS-01': 'yes',

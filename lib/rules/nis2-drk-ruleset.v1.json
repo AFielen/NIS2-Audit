@@ -33,11 +33,12 @@
       "id": "ORG-01",
       "section": "org",
       "label": "Organisationsmodell",
+      "hint": "Wie ist Ihr DRK-Kreisverband rechtlich aufgebaut? Wenn der Rettungsdienst direkt im Kreisverband (e.V.) angesiedelt ist, wählen Sie die erste Option. Bei einer ausgegliederten Tochtergesellschaft (z.B. gGmbH für den Rettungsdienst) wählen Sie die zweite.",
       "type": "single_select",
       "options": [
-        { "value": "ev_only", "label": "Alles im e.V. (Rettungsdienst als Abteilung möglich)" },
-        { "value": "ev_plus_one_sub", "label": "e.V. + 1 Tochter (Rettungsdienst in gGmbH/GmbH)" },
-        { "value": "ev_plus_multi_sub", "label": "e.V. + mehrere Töchter" },
+        { "value": "ev_only", "label": "Alles im Kreisverband (Rettungsdienst als Abteilung möglich)" },
+        { "value": "ev_plus_one_sub", "label": "Kreisverband + 1 Tochter (Rettungsdienst in gGmbH/GmbH)" },
+        { "value": "ev_plus_multi_sub", "label": "Kreisverband + mehrere Töchter" },
         { "value": "mixed_other", "label": "Mischform / Sonstiges" }
       ],
       "required": true
@@ -46,6 +47,7 @@
       "id": "OPS-01",
       "section": "ops",
       "label": "Erbringt der Verbund rettungsdienstliche Leistungen (Notfallrettung / Rettungsdienst)?",
+      "hint": "Gemeint ist der tatsächliche Betrieb von Rettungswagen (RTW), Notarzteinsatzfahrzeugen (NEF) oder Krankentransportwagen (KTW) im Rahmen des öffentlichen Rettungsdienstes. Sanitätsdienste bei Veranstaltungen zählen hier nicht.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -57,9 +59,10 @@
       "id": "ORG-03",
       "section": "org",
       "label": "Wo wird der Rettungsdienst betrieben?",
+      "hint": "In welcher rechtlichen Einheit wird der Rettungsdienst konkret durchgeführt? Direkt im Kreisverband als Abteilung, oder in einer eigenen Gesellschaft (z.B. DRK Rettungsdienst gGmbH)?",
       "type": "single_select",
       "options": [
-        { "value": "ev", "label": "Im e.V. (Abteilung)" },
+        { "value": "ev", "label": "Im Kreisverband (Abteilung)" },
         { "value": "subsidiary", "label": "In einer Beteiligungsgesellschaft (gGmbH/GmbH)" },
         { "value": "multiple", "label": "Auf mehrere Einheiten verteilt" }
       ],
@@ -70,6 +73,7 @@
       "id": "THR-01",
       "section": "thresholds",
       "label": "Vollzeitäquivalente (VZÄ) des relevanten Rechtsträgers",
+      "hint": "Anzahl der Vollzeitstellen des Rechtsträgers, der den Rettungsdienst betreibt. Teilzeitkräfte anteilig rechnen (z.B. zwei 50%-Stellen = 1 VZÄ). Ab 50 VZÄ gelten NIS-2-Schwellenwerte.",
       "type": "number",
       "min": 0,
       "required": true,
@@ -78,7 +82,8 @@
     {
       "id": "THR-02",
       "section": "thresholds",
-      "label": "Jahresumsatz des relevanten Rechtsträgers (EUR)",
+      "label": "Jahresumsatz des relevanten Rechtsträgers (TEUR)",
+      "hint": "Jahresumsatz in Tausend Euro (TEUR). Beispiel: 12 Mio. EUR Umsatz = 12000 eintragen. Der Wert steht im Jahresabschluss oder der Gewinn- und Verlustrechnung. Relevant ist der Rechtsträger, der den Rettungsdienst betreibt.",
       "type": "number",
       "min": 0,
       "required": false,
@@ -87,7 +92,8 @@
     {
       "id": "THR-03",
       "section": "thresholds",
-      "label": "Jahresbilanzsumme des relevanten Rechtsträgers (EUR)",
+      "label": "Jahresbilanzsumme des relevanten Rechtsträgers (TEUR)",
+      "hint": "Bilanzsumme in Tausend Euro (TEUR). Beispiel: 8 Mio. EUR Bilanzsumme = 8000 eintragen. Die Bilanzsumme finden Sie im Jahresabschluss (Summe der Aktiv- oder Passivseite der Bilanz).",
       "type": "number",
       "min": 0,
       "required": false,
@@ -97,6 +103,7 @@
       "id": "IT-01",
       "section": "it",
       "label": "Gemeinsame Identitäten (AD/Entra ID/M365) für mehrere Einheiten?",
+      "hint": "Nutzen mehrere Organisationseinheiten (z.B. Kreisverband und Rettungsdienst-GmbH) dieselben Benutzerkonten? Typische Beispiele: ein gemeinsames Active Directory, ein Microsoft-365-Tenant oder ein Entra-ID-Verzeichnis für alle Mitarbeitenden. Wenn alle das gleiche Login nutzen, ist die Antwort »Ja«.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -109,6 +116,7 @@
       "id": "IT-02",
       "section": "it",
       "label": "Gemeinsame Firewall/VPN/Standortnetz-Infrastruktur?",
+      "hint": "Teilen sich mehrere Einheiten die Netzwerk-Schutzkomponenten? Eine Firewall schützt das Netzwerk vor unerwünschtem Datenverkehr, ein VPN ermöglicht sichere Fernzugriffe. Wenn z.B. Kreisverband und gGmbH über dasselbe Netzwerk und dieselbe Firewall verbunden sind, ist die Antwort »Ja«.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -121,6 +129,7 @@
       "id": "IT-03",
       "section": "it",
       "label": "Gemeinsames Backup-System für mehrere Einheiten?",
+      "hint": "Werden die Datensicherungen (Backups) von Kreisverband und Tochtergesellschaft(en) über dasselbe System erstellt? Beispiel: ein zentraler Backup-Server oder Cloud-Backup-Dienst, der Daten aller Einheiten sichert.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -133,6 +142,7 @@
       "id": "IT-04",
       "section": "it",
       "label": "Gemeinsames Endpoint-/MDM-Management (z. B. Intune) über Einheiten hinweg?",
+      "hint": "Werden Computer, Laptops und Mobilgeräte aller Einheiten zentral verwaltet? Endpoint-Management (z.B. Microsoft Intune, SCCM) ermöglicht die zentrale Steuerung von Sicherheitseinstellungen, Updates und Software auf allen Geräten. MDM steht für Mobile Device Management (Verwaltung von Smartphones/Tablets).",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -145,6 +155,7 @@
       "id": "IT-05",
       "section": "it",
       "label": "Segmentierung Rettungsdienst vs. restlicher Verbund",
+      "hint": "Ist das IT-Netzwerk des Rettungsdienstes vom restlichen Verbandsnetzwerk getrennt? »Keine« bedeutet alles läuft im selben Netzwerk. »Rudimentär« bedeutet z.B. eigene VLANs (virtuelle Netzwerk-Bereiche), aber gemeinsame Administratoren. »Sauber« bedeutet vollständige Trennung mit dokumentierten, kontrollierten Übergangspunkten.",
       "type": "single_select",
       "options": [
         { "value": "none", "label": "Keine" },
@@ -157,6 +168,7 @@
       "id": "SEP-01",
       "section": "separation",
       "label": "Getrennter Tenant/Domain für Rettungsdienst?",
+      "hint": "Hat der Rettungsdienst eine eigene Microsoft-365-Umgebung (Tenant) oder eine eigene Windows-Domäne? Ein Tenant ist eine abgeschlossene Cloud-Umgebung mit eigenen Benutzerkonten. Wenn der RD im selben M365-Tenant wie der restliche Verband arbeitet, ist die Antwort »Nein«.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -169,6 +181,7 @@
       "id": "SEP-02",
       "section": "separation",
       "label": "Getrennte privilegierte Admin-Accounts/Administration?",
+      "hint": "Haben die IT-Administratoren für den Rettungsdienst eigene, separate Admin-Konten, die keinen Zugriff auf die restliche Verbands-IT haben (und umgekehrt)? Wenn derselbe Admin mit demselben Konto sowohl RD-Server als auch Verbands-Server verwaltet, ist die Antwort »Nein«.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -181,6 +194,7 @@
       "id": "SEP-03",
       "section": "separation",
       "label": "Getrennte Netzsegmente mit kontrollierten Übergängen?",
+      "hint": "Ist das Netzwerk des Rettungsdienstes physisch oder logisch vom restlichen Netzwerk getrennt, mit einer Firewall oder ähnlicher Kontrolle an den Übergangspunkten? Das bedeutet: Datenverkehr zwischen RD-Netzwerk und Verbands-Netzwerk wird gefiltert und überwacht.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -193,6 +207,7 @@
       "id": "SEP-04",
       "section": "separation",
       "label": "Getrenntes Backup + Wiederherstellung getestet?",
+      "hint": "Hat der Rettungsdienst ein eigenes Backup-System, das unabhängig vom Verbands-Backup funktioniert? Und wurde getestet, ob die Daten des RD im Ernstfall daraus wiederhergestellt werden können, ohne auf Verbands-Infrastruktur angewiesen zu sein?",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -205,6 +220,7 @@
       "id": "SEP-05",
       "section": "separation",
       "label": "Getrenntes Endpoint-/MDM-Management?",
+      "hint": "Werden die Computer und Mobilgeräte des Rettungsdienstes über ein eigenes Verwaltungssystem gesteuert, getrennt von den Geräten des restlichen Verbands? Wenn alle Geräte über ein einziges System (z.B. Intune) verwaltet werden, ist die Antwort »Nein«.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -217,6 +233,7 @@
       "id": "SEP-06",
       "section": "separation",
       "label": "Getrenntes Logging/Monitoring?",
+      "hint": "Werden Sicherheitsereignisse und Systemprotokolle (Logs) des Rettungsdienstes in einem eigenen System gesammelt und überwacht? Logging erfasst, wer wann was getan hat. Monitoring überwacht Systeme auf Auffälligkeiten. Getrennt bedeutet: RD-Logs sind unabhängig vom Verbands-Logging.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -229,6 +246,7 @@
       "id": "SEP-07",
       "section": "separation",
       "label": "Getrennte Asset-Dokumentation (Inventar) für Rettungsdienst?",
+      "hint": "Gibt es eine eigene, aktuelle Liste aller IT-Geräte und Systeme des Rettungsdienstes (Server, PCs, Drucker, Netzwerkgeräte)? Diese Liste sollte unabhängig vom restlichen Verbandsinventar gepflegt werden, damit im Ernstfall klar ist, welche Geräte zum RD gehören.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -241,6 +259,7 @@
       "id": "SEP-08",
       "section": "separation",
       "label": "Nachweis: Vorfall im restlichen Verband beeinträchtigt Rettungsdienst nicht?",
+      "hint": "Können Sie belegen, dass ein IT-Sicherheitsvorfall (z.B. Ransomware) im restlichen Verband den Rettungsdienst nicht lahmlegt? Dies erfordert technische und organisatorische Nachweise, dass die RD-IT unabhängig weiterlaufen kann.",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -253,6 +272,7 @@
       "id": "SEC-01",
       "section": "security",
       "label": "Governance: Verantwortliche Rolle (CISO/IT-Sicherheitsbeauftragter) benannt und dokumentiert?",
+      "hint": "Ist eine konkrete Person als verantwortlich für IT-Sicherheit benannt? CISO steht für Chief Information Security Officer, ISB für IT-Sicherheitsbeauftragter. »Dokumentiert« bedeutet: Die Benennung ist schriftlich festgehalten und der Geschäftsführung/dem Vorstand bekannt.",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -265,6 +285,7 @@
       "id": "SEC-02",
       "section": "security",
       "label": "Management-Schulung zu NIS-2/BSIG durchgeführt und dokumentiert?",
+      "hint": "Hat die Geschäftsführung/der Vorstand eine Schulung zu den neuen NIS-2-Pflichten erhalten? NIS-2 verpflichtet das Management persönlich, sich mit IT-Sicherheitsrisiken zu befassen. BSIG ist das deutsche Umsetzungsgesetz (BSI-Gesetz). »Teilweise« z.B. wenn nur ein Teil des Vorstands geschult wurde.",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -277,6 +298,7 @@
       "id": "SEC-03",
       "section": "security",
       "label": "Risikoanalyse für kritische Dienste/Systeme vorhanden?",
+      "hint": "Wurde systematisch erfasst, welche IT-Systeme besonders wichtig sind und welche Risiken bestehen? Eine Risikoanalyse bewertet: Was kann ausfallen? Wie wahrscheinlich ist das? Welche Auswirkungen hätte es? Für NIS-2 müssen mindestens die rettungsdienstlich kritischen Systeme betrachtet werden.",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -289,6 +311,7 @@
       "id": "SEC-04",
       "section": "security",
       "label": "IAM/MFA: MFA für privilegierte Konten und Remote-Zugriffe vollständig?",
+      "hint": "MFA (Multi-Faktor-Authentifizierung) bedeutet: Neben dem Passwort wird ein zweiter Faktor benötigt (z.B. App auf dem Handy, SMS-Code). Privilegierte Konten sind Admin-Accounts mit erweiterten Rechten. Remote-Zugriff ist der Zugang von außerhalb (Homeoffice, VPN). Alle diese Zugänge sollten MFA-geschützt sein.",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -301,6 +324,7 @@
       "id": "SEC-05",
       "section": "security",
       "label": "Privileged Access: Rollen-/Berechtigungskonzept (Admin-Trennung, Least Privilege) dokumentiert?",
+      "hint": "Gibt es ein schriftliches Konzept, wer welche Rechte im IT-System hat? »Least Privilege« bedeutet: Jeder bekommt nur die minimal nötigen Berechtigungen. »Admin-Trennung« bedeutet: Admins nutzen für tägliche Arbeit ein normales Konto und nur bei Bedarf das Admin-Konto. Ist das dokumentiert und umgesetzt?",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -313,6 +337,7 @@
       "id": "SEC-06",
       "section": "security",
       "label": "Netzwerksegmentierung vorhanden und dokumentiert?",
+      "hint": "Ist das Netzwerk in verschiedene Bereiche unterteilt, sodass ein Angreifer nicht von einem Bereich in alle anderen gelangen kann? Beispiel: Verwaltung, Rettungsdienst und Gäste-WLAN sind getrennte Netzsegmente mit Firewall-Regeln dazwischen. Ist dies dokumentiert (Netzplan, Firewall-Regeln)?",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -325,6 +350,7 @@
       "id": "SEC-07",
       "section": "security",
       "label": "Backup/Restore: Offline-Backups + Wiederherstellung getestet?",
+      "hint": "Offline-Backups sind Datensicherungen, die nicht dauerhaft mit dem Netzwerk verbunden sind (z.B. externe Festplatten, Bandlaufwerke, Cloud-Backups mit Zugriffsschutz). Diese sind bei Ransomware-Angriffen entscheidend. »Getestet« bedeutet: Es wurde tatsächlich ausprobiert, ob die Daten aus dem Backup wiederhergestellt werden können.",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -337,6 +363,7 @@
       "id": "SEC-08",
       "section": "security",
       "label": "Logging/Monitoring: Zentrale Logs, Alarmierung, Auswertung etabliert?",
+      "hint": "Werden wichtige Ereignisse (Anmeldungen, Fehler, Sicherheitswarnungen) zentral gesammelt und regelmäßig ausgewertet? Gibt es automatische Alarme bei verdächtigen Aktivitäten (z.B. viele fehlgeschlagene Anmeldeversuche)? »Teilweise« z.B. wenn Logs gesammelt, aber nicht regelmäßig ausgewertet werden.",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -349,6 +376,7 @@
       "id": "SEC-09",
       "section": "security",
       "label": "Incident Response: Prozess inkl. 24h/72h-Meldekette dokumentiert?",
+      "hint": "Gibt es einen schriftlichen Notfallplan für IT-Sicherheitsvorfälle? NIS-2 fordert eine Erstmeldung an das BSI innerhalb von 24 Stunden und einen Zwischenbericht innerhalb von 72 Stunden nach einem erheblichen Vorfall. Ist dokumentiert, wer intern wen informiert und wer die BSI-Meldung abgibt?",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -361,6 +389,7 @@
       "id": "SEC-10",
       "section": "security",
       "label": "BCM/Wiederanlauf: RTO/RPO definiert, Notfallbetrieb geplant?",
+      "hint": "BCM = Business Continuity Management (Notfallvorsorge). RTO = Recovery Time Objective: Wie schnell muss ein System nach einem Ausfall wieder laufen? RPO = Recovery Point Objective: Wie viel Datenverlust ist maximal akzeptabel (z.B. max. 4 Stunden)? Ist geplant, wie der Rettungsdienst bei einem IT-Totalausfall weiterbetrieben wird?",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -373,6 +402,7 @@
       "id": "SEC-11",
       "section": "security",
       "label": "Lieferkette: IT-Dienstleister/Cloud bewertet und vertraglich abgesichert?",
+      "hint": "Wurden Ihre IT-Dienstleister (z.B. Systemhaus, Cloud-Anbieter, Software-Hersteller) hinsichtlich ihrer Sicherheit bewertet? Sind Sicherheitsanforderungen vertraglich festgehalten (z.B. Auftragsverarbeitungsvertrag, SLA für Verfügbarkeit, Meldepflichten bei Vorfällen)?",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -385,6 +415,7 @@
       "id": "SEC-12",
       "section": "security",
       "label": "Dokumentation: Richtlinienpaket + Nachweise vollständig auffindbar?",
+      "hint": "Sind alle IT-Sicherheitsrichtlinien (z.B. Passwort-Richtlinie, Backup-Konzept, Notfallplan) aktuell, freigegeben und an einem zentralen Ort abgelegt? Können Nachweise (Schulungsteilnahmen, Testergebnisse, Protokolle) bei einer Prüfung schnell vorgelegt werden?",
       "type": "single_select",
       "options": [
         { "value": "no", "label": "Nein" },
@@ -454,8 +485,8 @@
       "description": "Wichtige Einrichtung wenn Umsatz >10 Mio UND Bilanzsumme >10 Mio.",
       "when": [
         { "questionId": "OPS-01", "op": "eq", "value": "yes" },
-        { "questionId": "THR-02", "op": "gt", "value": 10000000 },
-        { "questionId": "THR-03", "op": "gt", "value": 10000000 }
+        { "questionId": "THR-02", "op": "gt", "value": 10000 },
+        { "questionId": "THR-03", "op": "gt", "value": 10000 }
       ],
       "then": {
         "set": {
@@ -470,8 +501,8 @@
       "description": "Besonders wichtige Einrichtung wenn Umsatz >50 Mio UND Bilanzsumme >43 Mio.",
       "when": [
         { "questionId": "OPS-01", "op": "eq", "value": "yes" },
-        { "questionId": "THR-02", "op": "gt", "value": 50000000 },
-        { "questionId": "THR-03", "op": "gt", "value": 43000000 }
+        { "questionId": "THR-02", "op": "gt", "value": 50000 },
+        { "questionId": "THR-03", "op": "gt", "value": 43000 }
       ],
       "then": {
         "set": {
@@ -489,8 +520,8 @@
         { "questionId": "THR-01", "op": "lte", "value": 50 },
         {
           "any": [
-            { "questionId": "THR-02", "op": "lte_or_missing", "value": 10000000 },
-            { "questionId": "THR-03", "op": "lte_or_missing", "value": 10000000 }
+            { "questionId": "THR-02", "op": "lte_or_missing", "value": 10000 },
+            { "questionId": "THR-03", "op": "lte_or_missing", "value": 10000 }
           ]
         }
       ],
