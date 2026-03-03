@@ -1,0 +1,720 @@
+{
+  "meta": {
+    "id": "nis2-drk-standard-pack",
+    "version": "1.0.0",
+    "status": "active",
+    "title": "NIS-2 Self-Audit – DRK Standard Pack (Single Ruleset)",
+    "effectiveDate": "2026-03-03",
+    "notes": [
+      "Single ruleset: Rettungsdienst wird als potenziell BSIG/NIS-2-relevante Einrichtungsart behandelt, Betroffenheit hängt an Schwellenwerten.",
+      "Keine Policy-Packs, kein Regelstand-Switch, keine Rückwärtskompatibilität erforderlich."
+    ]
+  },
+  "enums": {
+    "yesNoPartial": ["yes", "no", "partial"],
+    "triState": ["no", "partial", "yes"],
+    "segmentationLevel": ["none", "rudimentary", "clean"],
+    "evidenceLevel": ["self", "document", "technical", "external_audit"],
+    "orgModel": ["ev_only", "ev_plus_one_sub", "ev_plus_multi_sub", "mixed_other"],
+    "entityType": ["ev", "ggmbh", "gmbh", "department_unselbst", "other"],
+    "roadmapPack": [
+      "P1_GOV_REG",
+      "P2_IAM_ADMIN",
+      "P3_BACKUP_DR",
+      "P4_NETWORK_SEG",
+      "P5_INCIDENT_REPORT",
+      "P6_SUPPLY_CHAIN",
+      "P7_DOC_AUDIT"
+    ],
+    "outcomeType": ["A", "B", "C", "D"]
+  },
+  "questions": [
+    {
+      "id": "ORG-01",
+      "section": "org",
+      "label": "Organisationsmodell",
+      "type": "single_select",
+      "options": [
+        { "value": "ev_only", "label": "Alles im e.V. (Rettungsdienst als Abteilung möglich)" },
+        { "value": "ev_plus_one_sub", "label": "e.V. + 1 Tochter (Rettungsdienst in gGmbH/GmbH)" },
+        { "value": "ev_plus_multi_sub", "label": "e.V. + mehrere Töchter" },
+        { "value": "mixed_other", "label": "Mischform / Sonstiges" }
+      ],
+      "required": true
+    },
+    {
+      "id": "OPS-01",
+      "section": "ops",
+      "label": "Erbringt der Verbund rettungsdienstliche Leistungen (Notfallrettung / Rettungsdienst)?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" }
+      ],
+      "required": true
+    },
+    {
+      "id": "ORG-03",
+      "section": "org",
+      "label": "Wo wird der Rettungsdienst betrieben?",
+      "type": "single_select",
+      "options": [
+        { "value": "ev", "label": "Im e.V. (Abteilung)" },
+        { "value": "subsidiary", "label": "In einer Beteiligungsgesellschaft (gGmbH/GmbH)" },
+        { "value": "multiple", "label": "Auf mehrere Einheiten verteilt" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "THR-01",
+      "section": "thresholds",
+      "label": "Vollzeitäquivalente (VZÄ) des relevanten Rechtsträgers",
+      "type": "number",
+      "min": 0,
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "THR-02",
+      "section": "thresholds",
+      "label": "Jahresumsatz des relevanten Rechtsträgers (EUR)",
+      "type": "number",
+      "min": 0,
+      "required": false,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "THR-03",
+      "section": "thresholds",
+      "label": "Jahresbilanzsumme des relevanten Rechtsträgers (EUR)",
+      "type": "number",
+      "min": 0,
+      "required": false,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "IT-01",
+      "section": "it",
+      "label": "Gemeinsame Identitäten (AD/Entra ID/M365) für mehrere Einheiten?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" }
+      ],
+      "required": true
+    },
+    {
+      "id": "IT-02",
+      "section": "it",
+      "label": "Gemeinsame Firewall/VPN/Standortnetz-Infrastruktur?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" }
+      ],
+      "required": true
+    },
+    {
+      "id": "IT-03",
+      "section": "it",
+      "label": "Gemeinsames Backup-System für mehrere Einheiten?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" }
+      ],
+      "required": true
+    },
+    {
+      "id": "IT-04",
+      "section": "it",
+      "label": "Gemeinsames Endpoint-/MDM-Management (z. B. Intune) über Einheiten hinweg?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" }
+      ],
+      "required": true
+    },
+    {
+      "id": "IT-05",
+      "section": "it",
+      "label": "Segmentierung Rettungsdienst vs. restlicher Verbund",
+      "type": "single_select",
+      "options": [
+        { "value": "none", "label": "Keine" },
+        { "value": "rudimentary", "label": "Rudimentär (z.B. VLAN ohne harte Admin-/Identity-Trennung)" },
+        { "value": "clean", "label": "Sauber (mit kontrollierten Übergängen und dokumentiert)" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEP-01",
+      "section": "separation",
+      "label": "Getrennter Tenant/Domain für Rettungsdienst?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "SEP-02",
+      "section": "separation",
+      "label": "Getrennte privilegierte Admin-Accounts/Administration?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "SEP-03",
+      "section": "separation",
+      "label": "Getrennte Netzsegmente mit kontrollierten Übergängen?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "SEP-04",
+      "section": "separation",
+      "label": "Getrenntes Backup + Wiederherstellung getestet?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "SEP-05",
+      "section": "separation",
+      "label": "Getrenntes Endpoint-/MDM-Management?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "SEP-06",
+      "section": "separation",
+      "label": "Getrenntes Logging/Monitoring?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "SEP-07",
+      "section": "separation",
+      "label": "Getrennte Asset-Dokumentation (Inventar) für Rettungsdienst?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "SEP-08",
+      "section": "separation",
+      "label": "Nachweis: Vorfall im restlichen Verband beeinträchtigt Rettungsdienst nicht?",
+      "type": "single_select",
+      "options": [
+        { "value": "yes", "label": "Ja" },
+        { "value": "no", "label": "Nein" }
+      ],
+      "required": true,
+      "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
+    },
+    {
+      "id": "SEC-01",
+      "section": "security",
+      "label": "Governance: Verantwortliche Rolle (CISO/IT-Sicherheitsbeauftragter) benannt und dokumentiert?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-02",
+      "section": "security",
+      "label": "Management-Schulung zu NIS-2/BSIG durchgeführt und dokumentiert?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-03",
+      "section": "security",
+      "label": "Risikoanalyse für kritische Dienste/Systeme vorhanden?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-04",
+      "section": "security",
+      "label": "IAM/MFA: MFA für privilegierte Konten und Remote-Zugriffe vollständig?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-05",
+      "section": "security",
+      "label": "Privileged Access: Rollen-/Berechtigungskonzept (Admin-Trennung, Least Privilege) dokumentiert?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-06",
+      "section": "security",
+      "label": "Netzwerksegmentierung vorhanden und dokumentiert?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-07",
+      "section": "security",
+      "label": "Backup/Restore: Offline-Backups + Wiederherstellung getestet?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-08",
+      "section": "security",
+      "label": "Logging/Monitoring: Zentrale Logs, Alarmierung, Auswertung etabliert?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-09",
+      "section": "security",
+      "label": "Incident Response: Prozess inkl. 24h/72h-Meldekette dokumentiert?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-10",
+      "section": "security",
+      "label": "BCM/Wiederanlauf: RTO/RPO definiert, Notfallbetrieb geplant?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-11",
+      "section": "security",
+      "label": "Lieferkette: IT-Dienstleister/Cloud bewertet und vertraglich abgesichert?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    },
+    {
+      "id": "SEC-12",
+      "section": "security",
+      "label": "Dokumentation: Richtlinienpaket + Nachweise vollständig auffindbar?",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" }
+      ],
+      "required": true
+    }
+  ],
+  "rules": [
+    {
+      "id": "REG-J1",
+      "description": "Ohne Rettungsdienst keine RD-getriebene Betroffenheit.",
+      "when": [{ "questionId": "OPS-01", "op": "eq", "value": "no" }],
+      "then": {
+        "set": {
+          "jurisdiction.isRdProvider": false,
+          "jurisdiction.directlyRegulated": false,
+          "jurisdiction.classification": "none",
+          "outcome.type": "A"
+        },
+        "addRoadmapPacks": ["P7_DOC_AUDIT"]
+      }
+    },
+    {
+      "id": "REG-J2",
+      "description": "Mit Rettungsdienst: Rechtsträgerlogik (ev vs subsidiary).",
+      "when": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }],
+      "then": {
+        "set": {
+          "jurisdiction.isRdProvider": true
+        }
+      }
+    },
+    {
+      "id": "REG-J3-WICHTIG-VZA",
+      "description": "Wichtige Einrichtung wenn VZÄ > 50.",
+      "when": [
+        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
+        { "questionId": "THR-01", "op": "gt", "value": 50 }
+      ],
+      "then": {
+        "set": {
+          "jurisdiction.directlyRegulated": true,
+          "jurisdiction.classification": "important"
+        },
+        "addRoadmapPacks": ["P1_GOV_REG"]
+      }
+    },
+    {
+      "id": "REG-J3-BESONDERS-VZA",
+      "description": "Besonders wichtige Einrichtung wenn VZÄ > 250.",
+      "when": [
+        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
+        { "questionId": "THR-01", "op": "gt", "value": 250 }
+      ],
+      "then": {
+        "set": {
+          "jurisdiction.directlyRegulated": true,
+          "jurisdiction.classification": "especially_important"
+        },
+        "addRoadmapPacks": ["P1_GOV_REG"]
+      }
+    },
+    {
+      "id": "REG-J3-WICHTIG-FIN",
+      "description": "Wichtige Einrichtung wenn Umsatz >10 Mio UND Bilanzsumme >10 Mio.",
+      "when": [
+        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
+        { "questionId": "THR-02", "op": "gt", "value": 10000000 },
+        { "questionId": "THR-03", "op": "gt", "value": 10000000 }
+      ],
+      "then": {
+        "set": {
+          "jurisdiction.directlyRegulated": true,
+          "jurisdiction.classification": "important"
+        },
+        "addRoadmapPacks": ["P1_GOV_REG"]
+      }
+    },
+    {
+      "id": "REG-J3-BESONDERS-FIN",
+      "description": "Besonders wichtige Einrichtung wenn Umsatz >50 Mio UND Bilanzsumme >43 Mio.",
+      "when": [
+        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
+        { "questionId": "THR-02", "op": "gt", "value": 50000000 },
+        { "questionId": "THR-03", "op": "gt", "value": 43000000 }
+      ],
+      "then": {
+        "set": {
+          "jurisdiction.directlyRegulated": true,
+          "jurisdiction.classification": "especially_important"
+        },
+        "addRoadmapPacks": ["P1_GOV_REG"]
+      }
+    },
+    {
+      "id": "REG-J3-NOT",
+      "description": "Wenn Schwellenwerte nicht erreicht: nicht direkt reguliert (RD vorhanden).",
+      "when": [
+        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
+        { "questionId": "THR-01", "op": "lte", "value": 50 },
+        {
+          "any": [
+            { "questionId": "THR-02", "op": "lte_or_missing", "value": 10000000 },
+            { "questionId": "THR-03", "op": "lte_or_missing", "value": 10000000 }
+          ]
+        }
+      ],
+      "then": {
+        "set": {
+          "jurisdiction.directlyRegulated": false,
+          "jurisdiction.classification": "none"
+        }
+      }
+    },
+    {
+      "id": "REG-T1-SHARED-IDENTITY",
+      "description": "Shared Identity zieht technischen Scope hoch.",
+      "when": [
+        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
+        { "questionId": "IT-01", "op": "in", "value": ["yes", "partial"] }
+      ],
+      "then": {
+        "set": { "scope.technical.sharedIdentity": true },
+        "addRoadmapPacks": ["P2_IAM_ADMIN"]
+      }
+    },
+    {
+      "id": "REG-T2-SHARED-INFRA",
+      "description": "Shared Infrastruktur zieht technischen Scope hoch.",
+      "when": [
+        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
+        {
+          "any": [
+            { "questionId": "IT-02", "op": "in", "value": ["yes", "partial"] },
+            { "questionId": "IT-03", "op": "in", "value": ["yes", "partial"] },
+            { "questionId": "IT-04", "op": "in", "value": ["yes", "partial"] }
+          ]
+        }
+      ],
+      "then": {
+        "set": { "scope.technical.sharedInfrastructure": true },
+        "addRoadmapPacks": ["P3_BACKUP_DR", "P4_NETWORK_SEG"]
+      }
+    },
+    {
+      "id": "REG-T3-SEPARATION-CHECK",
+      "description": "Harte Trennung nur bei 8/8 Kriterien.",
+      "when": [
+        { "questionId": "OPS-01", "op": "eq", "value": "yes" }
+      ],
+      "then": {
+        "compute": {
+          "name": "scope.technical.hardSeparationPossible",
+          "op": "allYes",
+          "inputs": [
+            "SEP-01",
+            "SEP-02",
+            "SEP-03",
+            "SEP-04",
+            "SEP-05",
+            "SEP-06",
+            "SEP-07",
+            "SEP-08"
+          ]
+        }
+      }
+    },
+    {
+      "id": "REG-OUTCOME-A",
+      "description": "Outcome A: kein RD oder nicht RD-getrieben.",
+      "when": [{ "path": "jurisdiction.isRdProvider", "op": "eq", "value": false }],
+      "then": {
+        "set": {
+          "outcome.type": "A",
+          "outcome.label": "Nicht RD-getrieben betroffen",
+          "outcome.summary": "Kein Rettungsdienst angegeben. RD-bezogene NIS-2/BSIG-Betroffenheit wird nicht ausgelöst."
+        },
+        "addRoadmapPacks": ["P7_DOC_AUDIT"]
+      }
+    },
+    {
+      "id": "REG-OUTCOME-D",
+      "description": "Outcome D: unklare Datenlage (z.B. VZÄ fehlt) -> konservativ.",
+      "when": [
+        { "questionId": "OPS-01", "op": "eq", "value": "yes" },
+        { "questionId": "THR-01", "op": "missing" }
+      ],
+      "then": {
+        "set": {
+          "outcome.type": "D",
+          "outcome.label": "Unklar – konservativ behandeln",
+          "outcome.summary": "Schwellenwerte sind nicht belastbar angegeben. VZÄ und Finanzdaten sind zu ermitteln."
+        },
+        "addRoadmapPacks": ["P1_GOV_REG", "P7_DOC_AUDIT"]
+      }
+    },
+    {
+      "id": "REG-OUTCOME-B",
+      "description": "Outcome B: direkt betroffen, harte Trennung möglich -> Scope begrenzbar.",
+      "when": [
+        { "path": "jurisdiction.directlyRegulated", "op": "eq", "value": true },
+        { "path": "scope.technical.hardSeparationPossible", "op": "eq", "value": true }
+      ],
+      "then": {
+        "set": {
+          "outcome.type": "B",
+          "outcome.label": "Direkt betroffen – Scope begrenzbar",
+          "outcome.summary": "Rettungsdienst ist direkt betroffen; eine harte technische Trennung ist nachgewiesen/erreichbar."
+        },
+        "addRoadmapPacks": ["P4_NETWORK_SEG", "P7_DOC_AUDIT", "P5_INCIDENT_REPORT"]
+      }
+    },
+    {
+      "id": "REG-OUTCOME-C",
+      "description": "Outcome C: direkt betroffen + shared IT oder keine harte Trennung -> faktisch gruppenweit.",
+      "when": [
+        { "path": "jurisdiction.directlyRegulated", "op": "eq", "value": true },
+        {
+          "any": [
+            { "path": "scope.technical.hardSeparationPossible", "op": "eq", "value": false },
+            { "path": "scope.technical.sharedIdentity", "op": "eq", "value": true },
+            { "path": "scope.technical.sharedInfrastructure", "op": "eq", "value": true }
+          ]
+        }
+      ],
+      "then": {
+        "set": {
+          "outcome.type": "C",
+          "outcome.label": "Direkt betroffen – faktisch gruppenweiter technischer Scope",
+          "outcome.summary": "Rettungsdienst ist direkt betroffen; aufgrund Shared-IT bzw. fehlender harter Trennung erstreckt sich der technische Scope auf zentrale/weitere IT-Bereiche."
+        },
+        "addRoadmapPacks": ["P2_IAM_ADMIN", "P3_BACKUP_DR", "P4_NETWORK_SEG", "P5_INCIDENT_REPORT", "P6_SUPPLY_CHAIN", "P7_DOC_AUDIT"]
+      }
+    }
+  ],
+  "scoring": {
+    "model": "nis2_12_controls",
+    "controls": [
+      { "id": "SEC-01", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-02", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-03", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-04", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-05", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-06", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-07", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-08", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-09", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-10", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-11", "points": { "no": 0, "partial": 1, "yes": 2 } },
+      { "id": "SEC-12", "points": { "no": 0, "partial": 1, "yes": 2 } }
+    ],
+    "bands": [
+      { "min": 0, "max": 7, "label": "kritisch" },
+      { "min": 8, "max": 14, "label": "basal" },
+      { "min": 15, "max": 19, "label": "belastbar" },
+      { "min": 20, "max": 24, "label": "fortgeschritten" }
+    ]
+  },
+  "roadmapPacks": [
+    {
+      "id": "P1_GOV_REG",
+      "title": "Governance & Registrierung",
+      "items": [
+        "Projektauftrag und Verantwortlichkeiten (CISO/ISB) dokumentieren",
+        "Management-Briefing/Schulung dokumentieren",
+        "Schwellenwerte (VZÄ, Umsatz, Bilanzsumme) belastbar ermitteln",
+        "Registrierung/Meldeprozess organisatorisch vorbereiten"
+      ]
+    },
+    {
+      "id": "P2_IAM_ADMIN",
+      "title": "Identity & Admin Security",
+      "items": [
+        "MFA für privilegierte Konten verpflichtend",
+        "Admin-Rollen trennen und least-privilege umsetzen",
+        "Notfall-/Break-Glass-Accounts definieren und sichern",
+        "Conditional Access Baseline dokumentieren"
+      ]
+    },
+    {
+      "id": "P3_BACKUP_DR",
+      "title": "Backup & Disaster Recovery",
+      "items": [
+        "Offline-Backups (3-2-1) etablieren",
+        "Restore-Tests durchführen und protokollieren",
+        "RTO/RPO definieren und dokumentieren",
+        "Backup-Zugänge und Backup-Admins härten"
+      ]
+    },
+    {
+      "id": "P4_NETWORK_SEG",
+      "title": "Netzwerk & Segmentierung",
+      "items": [
+        "Netzsegmentierung RD vs Rest definieren",
+        "Kontrollierte Übergänge (FW-Regeln, Jump Hosts) umsetzen",
+        "Remote Access härten",
+        "Netzplan dokumentieren"
+      ]
+    },
+    {
+      "id": "P5_INCIDENT_REPORT",
+      "title": "Incident Response & Meldeprozesse",
+      "items": [
+        "Incident-Response-Playbook erstellen",
+        "24h/72h-Meldekette intern festlegen",
+        "Kontakte Forensik/IT-Dienstleister/Eskalation dokumentieren",
+        "Tabletop-Übung durchführen"
+      ]
+    },
+    {
+      "id": "P6_SUPPLY_CHAIN",
+      "title": "Lieferkette",
+      "items": [
+        "IT-Dienstleister/Cloud bewerten",
+        "Sicherheitsanforderungen vertraglich verankern",
+        "Zugriffsrechte Dienstleister minimieren und protokollieren",
+        "Kritische Abhängigkeiten dokumentieren"
+      ]
+    },
+    {
+      "id": "P7_DOC_AUDIT",
+      "title": "Dokumentation & Mock Audit",
+      "items": [
+        "Richtlinienpaket (IAM, Backup, IR, BCM) freigeben",
+        "Asset-/Systemliste pflegen",
+        "Nachweise zentral ablegen",
+        "Mock Audit gegen Kernanforderungen durchführen"
+      ]
+    }
+  ]
+}

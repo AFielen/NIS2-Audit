@@ -6,7 +6,6 @@ import type { AssessmentResult, WizardAnswers } from '@/lib/types';
 import ExecutiveSummary from '@/components/results/ExecutiveSummary';
 import ScopeCards from '@/components/results/ScopeCards';
 import MaturityBadge from '@/components/results/MaturityBadge';
-import TopRisks from '@/components/results/TopRisks';
 import TriggeredRulesList from '@/components/results/TriggeredRulesList';
 import RoadmapView from '@/components/results/RoadmapView';
 import ExportActions from '@/components/results/ExportActions';
@@ -72,47 +71,20 @@ export default function ErgebnisPage() {
   return (
     <div style={{ background: 'var(--bg)' }} className="min-h-[calc(100vh-theme(spacing.16))] py-8 px-4">
       <div className="max-w-4xl mx-auto space-y-6">
-        {/* Print header (only visible in print) */}
+        {/* Print header */}
         <div className="hidden print:block mb-6">
           <h1 className="text-2xl font-bold" style={{ color: 'var(--drk)' }}>NIS-2 Audit – Ergebnis</h1>
           <p className="text-sm" style={{ color: 'var(--text-light)' }}>
-            DRK Kreisverband StädteRegion Aachen e.V.
+            DRK Kreisverband StädteRegion Aachen e.V. · Regelwerk v1.0
           </p>
         </div>
 
         <ExecutiveSummary result={result} />
         <ScopeCards result={result} />
-        <MaturityBadge maturity={result.maturitySummary} />
-        <TopRisks risks={result.topRisks} />
+        <MaturityBadge scoring={result.scoring} />
         <TriggeredRulesList rules={result.triggeredRules} />
-        <RoadmapView roadmap={result.roadmap} />
+        <RoadmapView result={result} />
         <ExportActions result={result} answers={answers} />
-
-        {/* Review flags */}
-        {result.reviewFlags.length > 0 && (
-          <div className="drk-card drk-fade-in no-print">
-            <h3 className="font-bold mb-3" style={{ color: 'var(--text)' }}>Review-Flags</h3>
-            <div className="space-y-2">
-              {result.reviewFlags.map((flag) => (
-                <div
-                  key={flag.id}
-                  className="p-3 rounded-lg border-l-4"
-                  style={{
-                    borderLeftColor: flag.severity === 'high' ? 'var(--drk)' : flag.severity === 'medium' ? 'var(--warning)' : 'var(--info)',
-                    background: 'var(--bg)',
-                  }}
-                >
-                  <div className="font-semibold text-sm" style={{ color: 'var(--text)' }}>
-                    {flag.title.de}
-                  </div>
-                  <p className="text-sm mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                    {flag.description.de}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

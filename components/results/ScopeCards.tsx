@@ -1,13 +1,48 @@
 'use client';
 
-import type { AssessmentResult, Locale } from '@/lib/types';
+import type { AssessmentResult } from '@/lib/types';
 
 interface ScopeCardsProps {
   result: AssessmentResult;
-  locale?: Locale;
 }
 
-export default function ScopeCards({ result, locale = 'de' }: ScopeCardsProps) {
+export default function ScopeCards({ result }: ScopeCardsProps) {
+  const { jurisdiction, scope } = result;
+
+  // Derive legal scope text
+  let legalSummary: string;
+  let legalDetails: string;
+  if (!jurisdiction.isRdProvider) {
+    legalSummary = 'Kein rettungsdienstlicher Trigger';
+    legalDetails = 'Da kein Rettungsdienst betrieben wird, ergibt sich aus diesem Tool kein sektoraler Trigger.';
+  } else if (jurisdiction.directlyRegulated) {
+    legalSummary = jurisdiction.classification === 'especially_important'
+      ? 'Besonders wichtige Einrichtung'
+      : 'Wichtige Einrichtung';
+    legalDetails = 'Der relevante Rechtsträger überschreitet die NIS-2-Schwellenwerte und wird direkt reguliert.';
+  } else {
+    legalSummary = 'Schwellenwerte nicht erreicht';
+    legalDetails = 'Der Rettungsdienst wird betrieben, aber die Schwellenwerte (VZÄ, Umsatz, Bilanzsumme) werden nicht überschritten.';
+  }
+
+  // Derive technical scope text
+  const techFactors: string[] = [];
+  if (scope.technical.sharedIdentity) techFactors.push('Gemeinsame Identitäten (AD/Entra ID/M365)');
+  if (scope.technical.sharedInfrastructure) techFactors.push('Gemeinsame Infrastruktur (Netz/Backup/MDM)');
+
+  let techSummary: string;
+  let techDetails: string;
+  if (techFactors.length === 0 && scope.technical.hardSeparationPossible) {
+    techSummary = 'Technischer Scope begrenzbar';
+    techDetails = 'Eine harte Trennung ist nachgewiesen. Der Scope lässt sich auf den Rettungsdienst begrenzen.';
+  } else if (techFactors.length > 0) {
+    techSummary = `Erweiterter Scope (${techFactors.length} Shared-IT-Faktoren)`;
+    techDetails = 'Aufgrund gemeinsamer IT-Infrastruktur erstreckt sich der technische Scope über den Rettungsdienst hinaus.';
+  } else {
+    techSummary = 'Keine Shared-IT-Faktoren erkannt';
+    techDetails = 'Es wurden keine gemeinsamen IT-Abhängigkeiten angegeben.';
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* Legal Scope */}
@@ -19,25 +54,15 @@ export default function ScopeCards({ result, locale = 'de' }: ScopeCardsProps) {
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
           <h3 className="font-bold" style={{ color: 'var(--text)' }}>
-            {locale === 'de' ? 'Juristischer Scope' : 'Legal Scope'}
+            Juristischer Scope
           </h3>
         </div>
         <div className="font-semibold mb-2" style={{ color: 'var(--text)' }}>
-          {result.legalScope.summary[locale]}
+          {legalSummary}
         </div>
-        <p className="text-sm mb-3" style={{ color: 'var(--text-light)' }}>
-          {result.legalScope.details[locale]}
+        <p className="text-sm" style={{ color: 'var(--text-light)' }}>
+          {legalDetails}
         </p>
-        {result.legalScope.factors.length > 0 && (
-          <ul className="text-sm space-y-1">
-            {result.legalScope.factors.map((f, i) => (
-              <li key={i} className="flex items-start gap-2" style={{ color: 'var(--text-muted)' }}>
-                <span style={{ color: 'var(--drk)' }}>•</span>
-                {f[locale]}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
 
       {/* Technical Scope */}
@@ -51,25 +76,32 @@ export default function ScopeCards({ result, locale = 'de' }: ScopeCardsProps) {
             <line x1="12" y1="17" x2="12" y2="21" />
           </svg>
           <h3 className="font-bold" style={{ color: 'var(--text)' }}>
-            {locale === 'de' ? 'Technischer Scope' : 'Technical Scope'}
+            Technischer Scope
           </h3>
         </div>
         <div className="font-semibold mb-2" style={{ color: 'var(--text)' }}>
-          {result.technicalScope.summary[locale]}
+          {techSummary}
         </div>
         <p className="text-sm mb-3" style={{ color: 'var(--text-light)' }}>
-          {result.technicalScope.details[locale]}
+          {techDetails}
         </p>
-        {result.technicalScope.factors.length > 0 && (
+        {techFactors.length > 0 && (
           <ul className="text-sm space-y-1">
-            {result.technicalScope.factors.map((f, i) => (
+            {techFactors.map((f, i) => (
               <li key={i} className="flex items-start gap-2" style={{ color: 'var(--text-muted)' }}>
                 <span style={{ color: 'var(--info)' }}>•</span>
-                {f[locale]}
+                {f}
               </li>
             ))}
           </ul>
         )}
+        {/* Hard separation status */}
+        <div className="mt-3 p-2 rounded-lg text-sm" style={{
+          background: scope.technical.hardSeparationPossible ? 'var(--success-bg)' : 'var(--warning-bg)',
+          color: scope.technical.hardSeparationPossible ? 'var(--success)' : '#b45309',
+        }}>
+          Harte Trennung: {scope.technical.hardSeparationPossible ? '8/8 Kriterien erfüllt' : 'Nicht vollständig nachgewiesen'}
+        </div>
       </div>
     </div>
   );

@@ -134,7 +134,7 @@ export default function Home() {
               Alle Daten verbleiben in Ihrem Browser. Kein Server, keine Cookies, keine externen Dienste.
             </div>
             <p className="text-sm" style={{ color: 'var(--text-light)' }}>
-              Zwei Regelstände wählbar: <strong>BSI (öffentlich)</strong> und <strong>Verbandslinie (konservativ)</strong>.
+              Regelwerk: <strong>DRK Standard Pack v1.0</strong> — Rettungsdienst wird als potenziell NIS-2-relevante Einrichtungsart behandelt.
             </p>
           </div>
         </div>

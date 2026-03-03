@@ -14,18 +14,34 @@ Der NIS-2 Self-Check hilft DRK-Kreisverbänden (KV), in 10–15 Minuten ihre wah
 
 ---
 
+## Regelwerk
+
+Die App verwendet ein **einzelnes Regelwerk** (`DRK Standard Pack v1.0`), definiert in einer zentralen JSON-Datei:
+
+```
+lib/rules/nis2-drk-ruleset.v1.json
+```
+
+Diese Datei ist die **Single Source of Truth** für:
+- Alle Fragen (Texte, Antwortoptionen, Sichtbarkeitsbedingungen)
+- Alle Entscheidungsregeln (WHEN/THEN-Muster)
+- Scoring-Konfiguration (Sicherheitsreife-Bewertung)
+- Roadmap-Pakete (Maßnahmen)
+
+Rettungsdienst wird als potenziell NIS-2-relevante Einrichtungsart behandelt.
+
+---
+
 ## Features
 
 ### Web-App
-- 8-Schritte-Wizard mit ~40 Fragen in 6 Blöcken
-- Zwei umschaltbare Regelstände (BSI-öffentlich, Verbandslinie konservativ)
+- 7-Schritte-Wizard mit ~32 Fragen in 6 Bereichen
 - 3 Presets für typische KV-Verbundstrukturen
 - Ergebnis A/B/C/D mit regelbasierter Ableitung
 - Getrennte Darstellung von juristischem und technischem Scope
-- Shared-IT-Analyse und harte Trennungslogik
+- Shared-IT-Analyse und harte Trennungslogik (8/8 Kriterien)
 - 12 Sicherheitsreife-Kontrollen mit Reifegrad-Bewertung
-- Priorisierte 90-Tage-Roadmap aus 12 Maßnahmenpaketen
-- Hilfe-Tooltips (?) bei jeder Frage mit Kontexterklärung
+- Priorisierte 90-Tage-Roadmap aus 7 Maßnahmenpaketen
 - QR-Code auf dem PDF-Ergebnis für Offline-Datenpersistenz
 - Druckoptimierte Ergebnisansicht + JSON-Export
 - Wizard-Fortschritt in localStorage
@@ -69,7 +85,6 @@ docker compose up -d --build
 | React | 19 | UI-Library |
 | TypeScript | strict | Typisierung |
 | Tailwind CSS | 4 | Styling |
-| qrcode | 1.x | QR-Code-Generierung |
 | lz-string | 1.x | Datenkompression für QR-Codes |
 
 Keine externen Fonts, keine Cookies, kein Tracking, keine Datenbank.
@@ -95,21 +110,17 @@ NIS2-Audit/
 │   ├── assessment/
 │   │   ├── AssessmentWizard.tsx  # Wizard-Container + QR-Restore
 │   │   ├── StepNavigation.tsx   # Fortschrittsanzeige
-│   │   ├── QuestionCard.tsx     # Fragenkarte mit Hilfe-Tooltip
-│   │   ├── PolicyPackSwitch.tsx # Regelstand-Auswahl
+│   │   ├── QuestionCard.tsx     # Fragenkarte (select + number)
 │   │   └── PresetSelector.tsx   # Preset-Auswahl
 │   └── results/
 │       ├── ExecutiveSummary.tsx  # Ergebnis-Badge + Zusammenfassung
 │       ├── ScopeCards.tsx       # Juristischer + technischer Scope
 │       ├── MaturityBadge.tsx    # Reifegrad-Anzeige
-│       ├── TopRisks.tsx         # Top-5-Risiken
 │       ├── TriggeredRulesList.tsx # Auslösende Regeln
 │       ├── RoadmapView.tsx      # 90-Tage-Roadmap
 │       └── ExportActions.tsx    # Drucken/Export + QR-Code
 ├── lib/
 │   ├── types.ts                 # Alle Domain-Typen
-│   ├── questions.ts             # Fragenkatalog mit Hilfe-Texten (DE/EN)
-│   ├── scoring.ts               # Reifegrad-Berechnung
 │   ├── storage.ts               # localStorage-Helpers
 │   ├── presets.ts               # 3 KV-Presets
 │   ├── report.ts                # Ergebnistexte + JSON-Export
@@ -118,10 +129,8 @@ NIS2-Audit/
 │   ├── i18n.ts                  # Zweisprachigkeit (DE/EN)
 │   ├── version.ts               # Versionsinformationen
 │   └── rules/
-│       ├── policy-packs.ts      # 2 Policy-Packs
-│       ├── decision-matrix.ts   # Entscheidungsmatrix (~60 Regeln)
-│       ├── evaluate.ts          # Evaluations-Engine (10 Schritte)
-│       └── roadmap.ts           # 12 Roadmap-Packs (P1–P12)
+│       ├── nis2-drk-ruleset.v1.json  # Single Source of Truth (Regelwerk)
+│       └── evaluate.ts              # Generische Evaluations-Engine
 ├── public/
 │   ├── logo.png                 # DRK-Logo (42×42px)
 │   └── favicon.svg              # DRK Favicon
@@ -130,7 +139,7 @@ NIS2-Audit/
 ├── README.md                    # Diese Datei
 ├── Dockerfile                   # Docker-Build
 ├── docker-compose.yml           # Docker Compose
-└── next.config.ts               # Standalone Output
+└── next.config.ts               # Static Export
 ```
 
 ---

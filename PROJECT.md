@@ -24,78 +24,63 @@ Bewusste Entscheidung: Die Sensibilität der erhobenen Daten (Organisationsstruk
 
 ---
 
-## Policy-Packs
+## Regelwerk (Single Ruleset)
 
-Policy-Packs werden in `lib/rules/policy-packs.ts` gepflegt.
+Das gesamte Fachregelwerk ist in einer einzigen JSON-Datei definiert:
 
-### public-bsi
-- Bildet den öffentlich auffindbaren BSI-Regelstand ab
-- Rettungsdienst ist kein automatischer Sektor-Trigger
-- Relevante Regel: REG-010
+```
+lib/rules/nis2-drk-ruleset.v1.json
+```
 
-### verbandslinie-konservativ (Default)
-- Konservative Auslegung für DRK-Verbände
-- Rettungsdienst wird als sektoraler Trigger behandelt
-- Relevante Regel: REG-011
-
-### Neue Policy-Packs hinzufügen
-1. Typ in `lib/types.ts` erweitern
-2. Konfiguration in `lib/rules/policy-packs.ts` ergänzen
-3. Ggf. spezifische Regeln in `lib/rules/decision-matrix.ts` ergänzen
-4. UI in `PolicyPackSwitch.tsx` erweitert sich automatisch
-
----
-
-## Regelpflege
-
-### Entscheidungsmatrix
-Alle Regeln (REG-001 bis REG-060) sind in `lib/rules/decision-matrix.ts` als typisierte Datenstruktur definiert. Jede Regel referenziert:
-- Frage-ID und Antwortcode
-- Policy-Pack-Zuordnung
-- Ergebniswirkung
-- Roadmap-Packs
+Diese Datei ist die **Single Source of Truth** und enthält:
+- **meta**: Version, Name, Beschreibung
+- **enums**: Wiederverwendbare Wertemengen (z.B. Rechtsform, Outcome-Typen)
+- **questions**: Alle ~32 Fragen mit Texten, Antwortoptionen und `visibleIf`-Bedingungen
+- **rules**: Entscheidungsregeln im WHEN/THEN-Format
+- **scoring**: 12 Sicherheitskontrollen + 4 Reifegrad-Bänder
+- **roadmapPacks**: 7 Maßnahmenpakete (P1–P7)
 
 ### Evaluations-Engine
-Die Kernlogik in `lib/rules/evaluate.ts` arbeitet in 10 Schritten:
-1. Policy-Pack lesen
-2. Relevanten Rechtsträger bestimmen
-3. Sektor-Trigger prüfen
-4. Schwellenwerte prüfen
-5. Komplexe Verbundstruktur prüfen
-6. Shared IT prüfen
-7. Trennungsnachweis prüfen
-8. Nachweisniveau prüfen
-9. Reifegradlücken in Roadmap-Packs übersetzen
-10. Ergebnis A/B/C/D ableiten
+
+Die generische Engine in `lib/rules/evaluate.ts`:
+1. Lädt das JSON-Regelwerk
+2. Iteriert über alle Regeln in Reihenfolge
+3. Prüft WHEN-Bedingungen (questionId-basiert oder path-basiert)
+4. Führt THEN-Aktionen aus (set, addRoadmapPacks, compute)
+5. Berechnet Scoring aus SEC-01..SEC-12 Antworten
+6. Gibt ein typisiertes `AssessmentResult` zurück
+
+Unterstützte Bedingungstypen: `eq`, `gt`, `lte`, `in`, `missing`, `lte_or_missing`, `any`, `all`
+Unterstützte Aktionen: `set` (Pfad-basiert), `addRoadmapPacks`, `compute` (z.B. `allYes`)
 
 ### Harte Trennungslogik
-Ergebnis B erfordert den Vollnachweis aller 8 Kriterien (siehe Briefing §12). Die Prüfung erfolgt in `evaluate.ts` → `checkHardSeparation()`.
+Ergebnis B erfordert den Vollnachweis aller 8 Trennungskriterien (SEP-01 bis SEP-08). Die Prüfung erfolgt über eine `compute: allYes`-Regel im JSON.
+
+### Regelwerk erweitern
+1. JSON-Datei `nis2-drk-ruleset.v1.json` bearbeiten
+2. Neue Fragen, Regeln oder Roadmap-Packs hinzufügen
+3. Die Engine verarbeitet sie automatisch — kein Code-Änderung nötig
 
 ---
 
 ## Roadmap-Packs
 
-12 Maßnahmenpakete (P1–P12) in `lib/rules/roadmap.ts`:
-- P1: Governance & Haftung (0–30 Tage)
-- P2: Rechtsträger- & Schwellenwertprüfung (0–15 Tage)
-- P3: Registrierung & Meldeprozess (0–30 Tage)
-- P4: Identity & Access (0–45 Tage)
-- P5: Netzwerk & Segmentierung (0–60 Tage)
-- P6: Backup / BCM / Wiederanlauf (0–60 Tage)
-- P7: Incident Response & Logging (0–60 Tage)
-- P8: Lieferkette & Verträge (30–90 Tage)
-- P9: Dokumentation & Mock Audit (60–90 Tage)
-- P10: Harter Trennungsnachweis (30–90 Tage)
-- P11: Komplexe Verbundstruktur / juristische Review (0–30 Tage)
-- P12: Datenqualität & Nachweislage (0–30 Tage)
+7 Maßnahmenpakete (P1–P7) im JSON-Regelwerk:
+- P1: Governance, Rollen & Haftung
+- P2: IAM & Admin-Konten
+- P3: Netz-Segmentierung & Firewall
+- P4: Backup, BCM & Wiederanlauf
+- P5: Incident Response, SIEM & Logging
+- P6: Lieferketten-Sicherheit & Verträge
+- P7: Dokumentation & Audit-Readiness
 
 ---
 
 ## Bekannte fachliche Grenzen (v1)
 
 - Das Tool ersetzt keine juristische Beratung
-- Krankentransport wird nicht als automatischer Trigger gewertet (nur Review-Flag)
-- Pflegeleistungen werden für Shared-IT-Scope gemappt, aber nicht als eigenständiger NIS-2-Trigger
+- Krankentransport wird nicht als automatischer Trigger gewertet
+- Pflegeleistungen werden für Shared-IT-Scope betrachtet, aber nicht als eigenständiger NIS-2-Trigger
 - Die Schwellenwertlogik bildet die EU-KMU-Definition vereinfacht ab
 - Katastrophenschutz wird nur auf BCM/IT-Aspekte geprüft
 
@@ -109,5 +94,5 @@ Ergebnis B erfordert den Vollnachweis aller 8 Kriterien (siehe Briefing §12). D
 - [ ] Vergleichsfunktion: eigenes Ergebnis vs. Benchmark
 - [ ] PDF-Export mit Layout (clientseitig via jsPDF o.ä.)
 - [ ] Multi-Entity-Prüfung in einem Durchlauf (mehrere Rechtsträger eines Verbunds)
-- [ ] Versionierung der Policy-Packs mit Changelog
+- [ ] Versionierung des Regelwerks mit Changelog
 - [ ] Optionale Anbindung an DRK-interne Systeme
