@@ -100,10 +100,21 @@ export default function AssessmentWizard() {
   }, []);
 
   const handleAnswerChange = useCallback((questionId: string, value: string | number) => {
-    setState(prev => ({
-      ...prev,
-      answers: { ...prev.answers, [questionId]: value },
-    }));
+    setState(prev => {
+      const newAnswers = { ...prev.answers, [questionId]: value };
+
+      // When ORG-03 = 'ev' and ORG-09 (Gesamtverband VZÄ) is filled in,
+      // auto-copy to THR-01 so the rule engine uses the correct threshold
+      if (questionId === 'ORG-09' && prev.answers['ORG-03'] === 'ev') {
+        newAnswers['THR-01'] = value;
+      }
+      // When ORG-03 changes to 'ev', copy existing ORG-09 to THR-01
+      if (questionId === 'ORG-03' && value === 'ev' && typeof prev.answers['ORG-09'] === 'number') {
+        newAnswers['THR-01'] = prev.answers['ORG-09'];
+      }
+
+      return { ...prev, answers: newAnswers };
+    });
     setValidationErrors(prev => {
       const next = new Set(prev);
       next.delete(questionId);

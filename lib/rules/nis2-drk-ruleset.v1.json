@@ -70,6 +70,16 @@
       "visibleIf": [{ "questionId": "OPS-01", "op": "eq", "value": "yes" }]
     },
     {
+      "id": "ORG-09",
+      "section": "org",
+      "label": "Gesamtverband VZÄ (alle Bereiche des e.V.)",
+      "hint": "Da der Rettungsdienst direkt im Kreisverband als Abteilung betrieben wird, ist der relevante Rechtsträger der gesamte e.V. Geben Sie hier die Gesamt-VZÄ des Kreisverbands an (alle Abteilungen, nicht nur Rettungsdienst). Dieser Wert wird für die NIS-2-Schwellenwertprüfung verwendet.",
+      "type": "number",
+      "min": 0,
+      "required": true,
+      "visibleIf": [{ "questionId": "ORG-03", "op": "eq", "value": "ev" }]
+    },
+    {
       "id": "THR-01",
       "section": "thresholds",
       "label": "Vollzeitäquivalente (VZÄ) des relevanten Rechtsträgers",
