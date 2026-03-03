@@ -202,17 +202,17 @@
     {
       "id": "IT-OVERVIEW",
       "section": "it",
-      "label": "Teilen sich Rettungsdienst und restlicher Verband IT-Infrastruktur?",
-      "hint": "Gemeinsame IT-Infrastruktur bedeutet z.B. dasselbe Active Directory, denselben M365-Tenant, gemeinsame Firewalls, Backup-Systeme oder Geräteverwaltung. Wenn alles geteilt wird oder alles getrennt ist, können Sie hier direkt antworten. Bei gemischter Situation wählen Sie »Teilweise« für die Detailfragen.",
+      "label": "Nutzen Rettungsdienst und restlicher Verband gemeinsame IT-Infrastruktur?",
+      "hint": "Gemeinsame IT-Infrastruktur bedeutet: Rettungsdienst und restlicher Verband nutzen dieselben IT-Systeme — z.B. dasselbe Active Directory / Entra ID, denselben M365-Tenant, gemeinsame Firewalls, gemeinsame Backup-Systeme oder eine zentrale Geräteverwaltung (MDM/Intune).\n\n»Ja, gemeinsam«: Alle wesentlichen IT-Systeme werden von RD und Verband gemeinsam genutzt. Es gibt kein eigenes RD-Netzwerk, keine eigenen Server, keine eigenen Benutzerkonten.\n\n»Teilweise«: Manche Systeme sind gemeinsam (z.B. selber M365-Tenant), andere getrennt (z.B. eigene Fachsoftware). In diesem Fall werden Ihnen Detailfragen gestellt.\n\n»Nein, komplett getrennt«: Rettungsdienst betreibt eine eigenständige IT-Umgebung mit eigenen Konten, eigenem Netzwerk, eigener Verwaltung. Es gibt keine technische Abhängigkeit vom Verband.",
       "type": "single_select",
       "options": [
         {
           "value": "all_shared",
-          "label": "Ja, alles geteilt (ein AD, ein Tenant, gemeinsame Infrastruktur)"
+          "label": "Ja, gemeinsam (ein AD, ein Tenant, gemeinsame Infrastruktur)"
         },
         {
           "value": "partial",
-          "label": "Teilweise (einige Systeme geteilt, andere getrennt)"
+          "label": "Teilweise (einige Systeme gemeinsam, andere getrennt)"
         },
         {
           "value": "all_separate",
@@ -390,7 +390,7 @@
       "id": "SEP-OVERVIEW",
       "section": "separation",
       "label": "Ist eine harte technische Trennung zwischen RD und restlichem Verband nachweisbar?",
-      "hint": "Harte Trennung bedeutet: eigener Tenant/Domain, getrennte Admins, eigene Netzsegmente, getrenntes Backup, getrenntes Endpoint-Management, getrenntes Logging, eigenes Inventar und Nachweis, dass ein Vorfall im Verband den RD nicht beeinträchtigt. Wenn alle 8 Kriterien erfüllt sind, wählen Sie »Ja, vollständig«. Wenn keines erfüllt ist, wählen Sie »Nein«. Bei teilweiser Erfüllung wählen Sie »Teilweise« für die Detailfragen.",
+      "hint": "Harte Trennung bedeutet: eigener Tenant/Domain, getrennte Admins, eigene Netzsegmente, getrenntes Backup, getrenntes Endpoint-Management, getrenntes Logging, eigenes Inventar und Nachweis, dass ein Vorfall im Verband den RD nicht beeinträchtigt.\n\nWICHTIG: Eine harte Trennung muss dokumentiert und von einer externen Stelle bestätigt werden können. Mündliche Absprachen oder informelle Regelungen reichen nicht aus. Es werden technische Nachweise (z.B. Netzwerkdiagramme, Konfigurationsprotokolle, Audit-Berichte) erwartet.\n\n»Ja, vollständig«: Alle 8 Kriterien sind erfüllt UND dokumentiert.\n»Teilweise«: Einige Kriterien erfüllt — Detailfragen werden gestellt.\n»Nein«: Keine harte Trennung vorhanden oder nicht dokumentiert.",
       "type": "single_select",
       "options": [
         {

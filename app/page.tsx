@@ -149,7 +149,7 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <a
-              href="https://github.com/AFielen/drk"
+              href="https://abstimmung.henryagi.de"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"
@@ -174,7 +174,7 @@ export default function Home() {
             </a>
 
             <a
-              href="https://github.com/AFielen/auskunft"
+              href="https://selbstauskunft.henryagi.de/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import type { AssessmentResult, WizardAnswers } from '@/lib/types';
 
 interface RoadmapViewProps {
@@ -64,6 +65,7 @@ function checkFulfillment(packId: string, answers: WizardAnswers): { fulfilled: 
 }
 
 export default function RoadmapView({ result, answers }: RoadmapViewProps) {
+  const [expanded, setExpanded] = useState(false);
   const { registration } = result;
   const hasRoadmapItems = result.roadmapItems.length > 0;
   const showSchritt0 = registration.required || registration.recommended;
@@ -72,10 +74,25 @@ export default function RoadmapView({ result, answers }: RoadmapViewProps) {
 
   return (
     <div className="drk-card drk-fade-in">
-      <h3 className="font-bold mb-4" style={{ color: 'var(--text)' }}>
-        90-Tage-Roadmap
-      </h3>
-      <p className="text-sm mb-4" style={{ color: 'var(--text-light)' }}>
+      <button
+        type="button"
+        onClick={() => setExpanded(!expanded)}
+        className="w-full flex items-center justify-between text-left"
+      >
+        <h3 className="font-bold" style={{ color: 'var(--text)' }}>
+          Vorschlag: 90-Tage-Roadmap nach BSI
+        </h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          className="shrink-0 transition-transform"
+          style={{ color: 'var(--text-muted)', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      {expanded && <>
+      <p className="text-sm mb-4 mt-4" style={{ color: 'var(--text-light)' }}>
         {showSchritt0 && 'Beginnen Sie mit Schritt 0 (BSI-Registrierung) vor Tag 1. '}
         {hasRoadmapItems && `${result.roadmapPacks.length} Maßnahmenpakete basierend auf Ihrem Ergebnis und Reifegrad.`}
       </p>
@@ -195,6 +212,7 @@ export default function RoadmapView({ result, answers }: RoadmapViewProps) {
           );
         })}
       </div>
+      </>}
     </div>
   );
 }
