@@ -93,6 +93,6 @@ Ergebnis B erfordert den Vollnachweis aller 8 Trennungskriterien (SEP-01 bis SEP
 - [ ] Detailliertere Reifegrad-Analyse pro Kontrollbereich
 - [ ] Vergleichsfunktion: eigenes Ergebnis vs. Benchmark
 - [ ] PDF-Export mit Layout (clientseitig via jsPDF o.ä.)
-- [ ] Multi-Entity-Prüfung in einem Durchlauf (mehrere Rechtsträger eines Verbunds)
+- [ ] Multi-Entity-Prüfung in einem Durchlauf (mehrere Rechtsträger eines Verbands)
 - [ ] Versionierung des Regelwerks mit Changelog
 - [ ] Optionale Anbindung an DRK-interne Systeme

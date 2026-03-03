@@ -99,9 +99,17 @@ export interface Ruleset {
 /** All wizard answers — dynamic record keyed by question ID */
 export type WizardAnswers = Record<string, string | number | undefined>;
 
+/** Grunddaten des Kreisverbands für den Bericht */
+export interface Grunddaten {
+  kreisverband: string;
+  adresse: string;
+  vorstand: string;
+}
+
 /** Wizard state for localStorage */
 export interface WizardState {
   answers: WizardAnswers;
+  grunddaten: Grunddaten;
   currentStep: number;
   selectedPreset: string | null;
   timestamp: number;

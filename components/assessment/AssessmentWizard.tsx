@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import type { WizardState, WizardAnswers, Preset, RulesetQuestion } from '@/lib/types';
+import type { WizardState, WizardAnswers, Preset, RulesetQuestion, Grunddaten } from '@/lib/types';
 import { loadWizardState, saveWizardState, createEmptyState, clearWizardState } from '@/lib/storage';
 import { evaluateAssessment, getRulesetQuestions, getRulesetSections } from '@/lib/rules/evaluate';
 import { decodeState } from '@/lib/state-codec';
@@ -20,11 +20,11 @@ const SECTION_LABELS: Record<string, string> = {
 };
 
 const SECTION_DESCRIPTIONS: Record<string, string> = {
-  org: 'Organisationsmodell und Verbundstruktur Ihres DRK-Kreisverbands.',
+  org: 'Organisationsmodell und Verbandsstruktur Ihres DRK-Kreisverbands.',
   ops: 'Rettungsdienstliche Leistungen und sektorale Zuordnung.',
   thresholds: 'Schwellenwerte des relevanten Rechtsträgers (VZÄ, Umsatz, Bilanzsumme).',
   it: 'Gemeinsame IT-Infrastruktur zwischen Einheiten.',
-  separation: 'Harte technische Trennung zwischen Rettungsdienst und restlichem Verbund.',
+  separation: 'Harte technische Trennung zwischen Rettungsdienst und restlichem Verband.',
   security: 'Sicherheitsreife: 12 Kernkontrollen nach NIS-2/BSIG.',
 };
 
@@ -51,6 +51,7 @@ export default function AssessmentWizard() {
       if (decoded) {
         setState({
           answers: decoded.answers,
+          grunddaten: { kreisverband: '', adresse: '', vorstand: '' },
           currentStep: 0,
           selectedPreset: null,
           timestamp: Date.now(),
@@ -87,6 +88,13 @@ export default function AssessmentWizard() {
     setShowResumePrompt(false);
   }, []);
 
+  const handleGrunddatenChange = useCallback((field: keyof Grunddaten, value: string) => {
+    setState(prev => ({
+      ...prev,
+      grunddaten: { ...prev.grunddaten, [field]: value },
+    }));
+  }, []);
+
   const handlePresetChange = useCallback((preset: Preset | null) => {
     if (preset) {
       setState(prev => ({
@@ -111,6 +119,30 @@ export default function AssessmentWizard() {
       // When ORG-03 changes to 'ev', copy existing ORG-09 to THR-01
       if (questionId === 'ORG-03' && value === 'ev' && typeof prev.answers['ORG-09'] === 'number') {
         newAnswers['THR-01'] = prev.answers['ORG-09'];
+      }
+
+      // Auto-fill IT detail questions based on aggregate IT-OVERVIEW answer
+      if (questionId === 'IT-OVERVIEW') {
+        if (value === 'all_shared') {
+          ['IT-01', 'IT-02', 'IT-03', 'IT-04'].forEach(id => { newAnswers[id] = 'yes'; });
+          newAnswers['IT-05'] = 'none';
+        } else if (value === 'all_separate') {
+          ['IT-01', 'IT-02', 'IT-03', 'IT-04'].forEach(id => { newAnswers[id] = 'no'; });
+          newAnswers['IT-05'] = 'clean';
+        }
+      }
+
+      // Auto-fill separation detail questions based on aggregate SEP-OVERVIEW answer
+      if (questionId === 'SEP-OVERVIEW') {
+        if (value === 'full') {
+          ['SEP-01', 'SEP-02', 'SEP-03', 'SEP-04', 'SEP-05', 'SEP-06', 'SEP-07', 'SEP-08'].forEach(id => {
+            newAnswers[id] = 'yes';
+          });
+        } else if (value === 'none') {
+          ['SEP-01', 'SEP-02', 'SEP-03', 'SEP-04', 'SEP-05', 'SEP-06', 'SEP-07', 'SEP-08'].forEach(id => {
+            newAnswers[id] = 'no';
+          });
+        }
       }
 
       return { ...prev, answers: newAnswers };
@@ -180,6 +212,7 @@ export default function AssessmentWizard() {
     try {
       localStorage.setItem('nis2-audit-result', JSON.stringify(result));
       localStorage.setItem('nis2-audit-answers', JSON.stringify(state.answers));
+      localStorage.setItem('nis2-audit-grunddaten', JSON.stringify(state.grunddaten));
     } catch {
       // silently fail
     }
@@ -257,15 +290,57 @@ export default function AssessmentWizard() {
         </div>
       )}
 
-      {/* Step 0: Presets */}
+      {/* Step 0: Grunddaten + Presets */}
       {state.currentStep === 0 && (
         <div className="space-y-4 drk-fade-in">
+          {/* Grunddaten für den Bericht */}
+          <div className="drk-card">
+            <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text)' }}>
+              Grunddaten des Kreisverbands
+            </h3>
+            <p className="text-sm mb-4" style={{ color: 'var(--text-light)' }}>
+              Diese Angaben erscheinen auf dem Ausdruck / PDF-Bericht.
+            </p>
+            <div className="space-y-3">
+              <div>
+                <label className="drk-label">Kreisverband / Gliederung</label>
+                <input
+                  type="text"
+                  className="drk-input"
+                  placeholder="z.B. DRK Kreisverband StädteRegion Aachen e.V."
+                  value={state.grunddaten.kreisverband}
+                  onChange={(e) => handleGrunddatenChange('kreisverband', e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="drk-label">Adresse</label>
+                <input
+                  type="text"
+                  className="drk-input"
+                  placeholder="z.B. Henry-Dunant-Platz 1, 52146 Würselen"
+                  value={state.grunddaten.adresse}
+                  onChange={(e) => handleGrunddatenChange('adresse', e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="drk-label">Vorstand / Kreisgeschäftsführer</label>
+                <input
+                  type="text"
+                  className="drk-input"
+                  placeholder="z.B. Max Mustermann"
+                  value={state.grunddaten.vorstand}
+                  onChange={(e) => handleGrunddatenChange('vorstand', e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+
           <div className="drk-card">
             <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text)' }}>
               Willkommen zum NIS-2 Self-Check
             </h2>
             <p className="text-sm" style={{ color: 'var(--text-light)' }}>
-              Wählen Sie optional ein Preset für Ihre typische Verbundstruktur oder starten Sie direkt.
+              Wählen Sie optional ein Preset für Ihre typische Verbandsstruktur oder starten Sie direkt.
               Regelwerk: <strong>DRK Standard Pack v1.0</strong> — Rettungsdienst wird als potenziell NIS-2-relevante Einrichtungsart behandelt.
             </p>
           </div>

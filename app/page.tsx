@@ -138,6 +138,113 @@ export default function Home() {
             </p>
           </div>
         </div>
+
+        {/* Weitere Angebote */}
+        <div className="drk-card">
+          <h3 className="font-bold text-lg mb-1" style={{ color: 'var(--text)' }}>
+            Was wir sonst noch entwickeln
+          </h3>
+          <p className="text-sm mb-4" style={{ color: 'var(--text-light)' }}>
+            Datensparsame, Open-Source-Werkzeuge für die Vereins- und Verbandsarbeit.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <a
+              href="https://github.com/AFielen/drk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"
+              style={{ borderColor: 'var(--border)' }}
+            >
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-lg"
+                   style={{ background: '#fce4ec', color: 'var(--drk)' }}>
+                🗳️
+              </div>
+              <div>
+                <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
+                  DRK Vereinsabstimmung
+                  <span className="ml-2 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded-full"
+                        style={{ background: '#e8f5e9', color: '#2e7d32' }}>
+                    Live
+                  </span>
+                </div>
+                <p className="text-xs mt-1" style={{ color: 'var(--text-light)' }}>
+                  Digitales Abstimmungssystem für Mitgliederversammlungen — live, anonym und DSGVO-konform.
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://github.com/AFielen/auskunft"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"
+              style={{ borderColor: 'var(--border)' }}
+            >
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-lg"
+                   style={{ background: '#e8f5e9', color: '#2e7d32' }}>
+                📝
+              </div>
+              <div>
+                <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
+                  DRK Selbstauskunft
+                  <span className="ml-2 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded-full"
+                        style={{ background: '#e8f5e9', color: '#2e7d32' }}>
+                    Live
+                  </span>
+                </div>
+                <p className="text-xs mt-1" style={{ color: 'var(--text-light)' }}>
+                  Digitale Selbstauskunft für Ehrenamtliche — serverlos, datenschutzkonform, direkt im Browser.
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="#"
+              className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"
+              style={{ borderColor: 'var(--border)' }}
+            >
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-lg"
+                   style={{ background: '#e3f2fd', color: '#1976d2' }}>
+                🤖
+              </div>
+              <div>
+                <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
+                  HenryGPT
+                  <span className="ml-2 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded-full"
+                        style={{ background: '#fff3e0', color: '#e65100' }}>
+                    In Entwicklung
+                  </span>
+                </div>
+                <p className="text-xs mt-1" style={{ color: 'var(--text-light)' }}>
+                  Intelligenter KI-Assistent speziell für das DRK — DSGVO-konform in eigener Umgebung.
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="#"
+              className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"
+              style={{ borderColor: 'var(--border)' }}
+            >
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-lg"
+                   style={{ background: '#f3e5f5', color: '#7b1fa2' }}>
+                📋
+              </div>
+              <div>
+                <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>
+                  Digitale Gremienarbeit
+                  <span className="ml-2 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded-full"
+                        style={{ background: '#fff3e0', color: '#e65100' }}>
+                    In Entwicklung
+                  </span>
+                </div>
+                <p className="text-xs mt-1" style={{ color: 'var(--text-light)' }}>
+                  Sitzungsmanagement, Beschlussdokumentation und Protokollführung — datenschutzkonform.
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
