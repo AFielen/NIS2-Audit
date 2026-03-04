@@ -9,7 +9,7 @@ export const presets: Preset[] = [
       'ORG-01': 'ev_only',
       'OPS-01': 'yes',
       'ORG-03': 'ev',
-      'ORG-09': 120,
+      'THR-01': 120,
     },
   },
   {
