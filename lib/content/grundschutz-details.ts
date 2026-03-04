@@ -162,35 +162,6 @@ export const grundschutzDetails: GrundschutzDetail[] = [
   },
   {
     id: 6,
-    slug: 'netzwerk-segmentierung',
-    title: 'Netzwerk-Segmentierung prüfen',
-    priority: 'mittel',
-    owner: 'IT-Administration / Dienstleister',
-    whyItMatters:
-      'Wenn alle Systeme in einem gemeinsamen Netz hängen, kann sich ein Vorfall leichter ausbreiten. Eine einfache Trennung reduziert den Schaden und verbessert die Abgrenzung zwischen Rettungsdienst und übriger Verbands-IT.',
-    managementAction:
-      'Lassen Sie sich einen einfachen Netzplan geben und beantworten Sie drei Fragen: Sind Rettungsdienst und Verwaltung technisch getrennt? Gibt es getrennte WLANs oder VLANs? Sind Zugriffe zwischen Segmenten über Regeln steuerbar?',
-    practicalSteps: [
-      'Mindestens Rettungsdienst, Verwaltung, Server und Gästezugänge trennen.',
-      'Zwischen Segmenten nur notwendige Verbindungen zulassen.',
-      'Die wichtigsten Firewall-Regeln und Netzsegmente kurz dokumentieren.',
-    ],
-    simpleImplementation:
-      'Für kleine und mittlere Verbände reicht zunächst oft eine saubere VLAN-Trennung mit dokumentierten Firewall-Regeln. Es braucht nicht sofort eine vollständige Neuarchitektur.',
-    doneWhen:
-      'Es gibt einen einfachen Netzplan und nachvollziehbare technische Trennungen zwischen kritischen Bereichen.',
-    evidence: [
-      'Netzplan oder Architektur-Skizze',
-      'Kurzübersicht der Segmente',
-      'Dokumentierte Übergänge/Firewall-Regeln',
-    ],
-    commonMistake:
-      'Es gibt nur unterschiedliche IP-Bereiche, aber in Wahrheit kann trotzdem jedes Segment auf alles zugreifen.',
-    managementEffort:
-      'Ca. 20 Minuten Sichtung des Netzplans und 20 Minuten Abstimmung mit IT oder Dienstleister.',
-  },
-  {
-    id: 7,
     slug: 'incident-response-kontakte',
     title: 'Incident-Response-Kontakte dokumentieren',
     priority: 'hoch',
@@ -217,6 +188,35 @@ export const grundschutzDetails: GrundschutzDetail[] = [
       'Kontaktdaten liegen nur in E-Mail-Postfächern oder bei einer einzigen Person und sind im Störungsfall nicht zugänglich.',
     managementEffort:
       'Ca. 30 Minuten Abstimmung und Freigabe.',
+  },
+  {
+    id: 7,
+    slug: 'netzwerk-segmentierung',
+    title: 'Netzwerk-Segmentierung prüfen',
+    priority: 'mittel',
+    owner: 'IT-Administration / Dienstleister',
+    whyItMatters:
+      'Wenn alle Systeme in einem gemeinsamen Netz hängen, kann sich ein Vorfall leichter ausbreiten. Eine einfache Trennung reduziert den Schaden und verbessert die Abgrenzung zwischen Rettungsdienst und übriger Verbands-IT.',
+    managementAction:
+      'Lassen Sie sich einen einfachen Netzplan geben und beantworten Sie drei Fragen: Sind Rettungsdienst und Verwaltung technisch getrennt? Gibt es getrennte WLANs oder VLANs? Sind Zugriffe zwischen Segmenten über Regeln steuerbar?',
+    practicalSteps: [
+      'Mindestens Rettungsdienst, Verwaltung, Server und Gästezugänge trennen.',
+      'Zwischen Segmenten nur notwendige Verbindungen zulassen.',
+      'Die wichtigsten Firewall-Regeln und Netzsegmente kurz dokumentieren.',
+    ],
+    simpleImplementation:
+      'Für kleine und mittlere Verbände reicht zunächst oft eine saubere VLAN-Trennung mit dokumentierten Firewall-Regeln. Es braucht nicht sofort eine vollständige Neuarchitektur.',
+    doneWhen:
+      'Es gibt einen einfachen Netzplan und nachvollziehbare technische Trennungen zwischen kritischen Bereichen.',
+    evidence: [
+      'Netzplan oder Architektur-Skizze',
+      'Kurzübersicht der Segmente',
+      'Dokumentierte Übergänge/Firewall-Regeln',
+    ],
+    commonMistake:
+      'Es gibt nur unterschiedliche IP-Bereiche, aber in Wahrheit kann trotzdem jedes Segment auf alles zugreifen.',
+    managementEffort:
+      'Ca. 20 Minuten Sichtung des Netzplans und 20 Minuten Abstimmung mit IT oder Dienstleister.',
   },
   {
     id: 8,

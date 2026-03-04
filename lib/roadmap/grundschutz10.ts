@@ -36,16 +36,16 @@ export const grundschutz10: RoadmapLayer = {
       priority: 'hoch',
     },
     {
-      title: '6. Netzwerk-Segmentierung prüfen',
-      description: 'Rettungsdienst-IT und Verbands-IT mindestens auf VLAN-Ebene trennen. Firewall-Regeln zwischen Segmenten dokumentieren.',
-      owner: 'IT-Administration / Dienstleister',
-      priority: 'mittel',
-    },
-    {
-      title: '7. Incident-Response-Kontakte dokumentieren',
+      title: '6. Incident-Response-Kontakte dokumentieren',
       description: 'Wer wird bei einem IT-Sicherheitsvorfall intern informiert? Wer meldet ans BSI (24h/72h)? Kontaktliste erstellen und zugänglich machen.',
       owner: 'IT-Leitung / Geschäftsführung',
       priority: 'hoch',
+    },
+    {
+      title: '7. Netzwerk-Segmentierung prüfen',
+      description: 'Rettungsdienst-IT und Verbands-IT mindestens auf VLAN-Ebene trennen. Firewall-Regeln zwischen Segmenten dokumentieren.',
+      owner: 'IT-Administration / Dienstleister',
+      priority: 'mittel',
     },
     {
       title: '8. Passwort-Richtlinie umsetzen',
