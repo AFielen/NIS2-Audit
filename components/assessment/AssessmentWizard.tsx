@@ -327,6 +327,7 @@ export default function AssessmentWizard() {
                   type="text"
                   className="drk-input"
                   placeholder="z.B. DRK Kreisverband StädteRegion Aachen e.V."
+                  maxLength={200}
                   value={state.grunddaten.kreisverband}
                   onChange={(e) => handleGrunddatenChange('kreisverband', e.target.value)}
                 />
@@ -337,6 +338,7 @@ export default function AssessmentWizard() {
                   type="text"
                   className="drk-input"
                   placeholder="z.B. Henry-Dunant-Platz 1, 52146 Würselen"
+                  maxLength={200}
                   value={state.grunddaten.adresse}
                   onChange={(e) => handleGrunddatenChange('adresse', e.target.value)}
                 />
@@ -347,6 +349,7 @@ export default function AssessmentWizard() {
                   type="text"
                   className="drk-input"
                   placeholder="z.B. Max Mustermann"
+                  maxLength={200}
                   value={state.grunddaten.vorstand}
                   onChange={(e) => handleGrunddatenChange('vorstand', e.target.value)}
                 />

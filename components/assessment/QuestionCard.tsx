@@ -61,7 +61,9 @@ export default function QuestionCard({ question, value, onChange, hasError }: Qu
               if (val === '') {
                 onChange(question.id, '');
               } else {
-                onChange(question.id, parseFloat(val));
+                const num = parseFloat(val);
+                if (!isFinite(num) || num < 0 || num > 999999) return;
+                onChange(question.id, num);
               }
             }}
             className="drk-input mt-3 w-full"

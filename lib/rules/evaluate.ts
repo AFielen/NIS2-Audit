@@ -12,11 +12,14 @@ import ruleset from './nis2-drk-ruleset.v1.json';
 
 // ── Helpers ──
 
+const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
 /** Get a nested value from an object by dot-separated path */
 function getPath(obj: Record<string, unknown>, path: string): unknown {
   const parts = path.split('.');
   let current: unknown = obj;
   for (const part of parts) {
+    if (UNSAFE_KEYS.has(part)) return undefined;
     if (current == null || typeof current !== 'object') return undefined;
     current = (current as Record<string, unknown>)[part];
   }
@@ -26,6 +29,7 @@ function getPath(obj: Record<string, unknown>, path: string): unknown {
 /** Set a nested value on an object by dot-separated path */
 function setPath(obj: Record<string, unknown>, path: string, value: unknown): void {
   const parts = path.split('.');
+  if (parts.some(p => UNSAFE_KEYS.has(p))) return;
   let current: Record<string, unknown> = obj;
   for (let i = 0; i < parts.length - 1; i++) {
     const part = parts[i];
