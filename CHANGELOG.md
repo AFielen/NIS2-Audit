@@ -10,6 +10,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ### Changed
 - **Ergebnis C/D: Klarstellung gesamter KV-Scope**: Bei Ergebnis C und D wird jetzt deutlich kommuniziert, dass durch fehlende harte Trennung der gesamte DRK-Kreisverband unter NIS-2 fällt — nicht nur der Rettungsdienst. Neuer prominenter Warnhinweis in der Executive Summary, aktualisierte Outcome-Texte im Ruleset, überarbeitete ScopeCards und i18n-Labels.
+- **Gesamt-VZÄ/Umsatz auf Schwellenwerte-Seite verschoben**: Die Felder für Gesamt-VZÄ und Gesamtumsatz des Verbands befinden sich jetzt auf der Schwellenwerte-Seite (Step 4) statt auf der Startseite. Bei ORG-01 „Alles im Kreisverband" werden die Werte automatisch aus den Rechtsträger-Feldern (THR-01/THR-02) übernommen.
 
 ### Added
 - **Grundschutz-10 Handlungsempfehlungen**: Jede der 10 Grundschutz-Karten ist jetzt klickbar und öffnet eine Detailansicht mit GF-orientierten Handlungsempfehlungen (Bottom Sheet mobil / Modal desktop). Content-Datei `lib/content/grundschutz-details.ts` als Single Source of Truth. Wiederverwendbar auf `/grundschutz`-Seite und in der Ergebnis-Roadmap.

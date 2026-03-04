@@ -145,7 +145,22 @@ export default function AssessmentWizard() {
         }
       }
 
-      return { ...prev, answers: newAnswers };
+      // Auto-sync Gesamt-VZÄ/Umsatz when ORG-01 = 'ev_only'
+      // (Kreisverband = Rechtsträger, also gleiche Werte)
+      let newGrunddaten = prev.grunddaten;
+      const orgModel = questionId === 'ORG-01' ? value : newAnswers['ORG-01'];
+      if (orgModel === 'ev_only') {
+        if (questionId === 'THR-01' || questionId === 'ORG-01') {
+          const vzae = typeof newAnswers['THR-01'] === 'number' ? newAnswers['THR-01'] as number : undefined;
+          newGrunddaten = { ...newGrunddaten, gesamtVzae: vzae };
+        }
+        if (questionId === 'THR-02' || questionId === 'ORG-01') {
+          const umsatz = typeof newAnswers['THR-02'] === 'number' ? newAnswers['THR-02'] as number : undefined;
+          newGrunddaten = { ...newGrunddaten, gesamtUmsatz: umsatz };
+        }
+      }
+
+      return { ...prev, answers: newAnswers, grunddaten: newGrunddaten };
     });
     setValidationErrors(prev => {
       const next = new Set(prev);
@@ -336,36 +351,6 @@ export default function AssessmentWizard() {
                   onChange={(e) => handleGrunddatenChange('vorstand', e.target.value)}
                 />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 mt-2 border-t" style={{ borderColor: 'var(--border)' }}>
-                <div>
-                  <label className="drk-label">Gesamt-VZÄ des Verbands</label>
-                  <input
-                    type="number"
-                    className="drk-input"
-                    placeholder="z.B. 350"
-                    min={0}
-                    value={state.grunddaten.gesamtVzae ?? ''}
-                    onChange={(e) => handleGrunddatenChange('gesamtVzae', e.target.value ? Number(e.target.value) : undefined)}
-                  />
-                  <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
-                    Alle VZÄ des gesamten Kreisverbands (alle Bereiche). Bestimmt die Größenklasse (S/M/L).
-                  </p>
-                </div>
-                <div>
-                  <label className="drk-label">Gesamtumsatz des Verbands (TEUR)</label>
-                  <input
-                    type="number"
-                    className="drk-input"
-                    placeholder="z.B. 15000"
-                    min={0}
-                    value={state.grunddaten.gesamtUmsatz ?? ''}
-                    onChange={(e) => handleGrunddatenChange('gesamtUmsatz', e.target.value ? Number(e.target.value) : undefined)}
-                  />
-                  <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
-                    Jahresumsatz in TEUR (z.B. 15 Mio. = 15000).
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -405,6 +390,54 @@ export default function AssessmentWizard() {
               hasError={validationErrors.has(question.id)}
             />
           ))}
+
+          {/* Gesamt-VZÄ und Gesamt-Umsatz auf der Schwellenwerte-Seite */}
+          {currentSection === 'thresholds' && (
+            <div className="drk-card">
+              <h3 className="font-bold mb-1" style={{ color: 'var(--text)' }}>
+                Gesamtverband — Größenklasse
+              </h3>
+              <p className="text-sm mb-4" style={{ color: 'var(--text-light)' }}>
+                VZÄ und Umsatz des gesamten Kreisverbands (alle Bereiche). Bestimmt die Größenklasse (S/M/L) der Roadmap.
+              </p>
+              {state.answers['ORG-01'] === 'ev_only' && (
+                <div
+                  className="text-xs p-2 rounded-lg mb-3"
+                  style={{ background: 'var(--info-bg)', color: 'var(--info)' }}
+                >
+                  Da alles im Kreisverband liegt, entsprechen die Gesamtwerte den Werten des Rechtsträgers.
+                </div>
+              )}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="drk-label">Gesamt-VZÄ des Verbands</label>
+                  <input
+                    type="number"
+                    className="drk-input"
+                    placeholder="z.B. 350"
+                    min={0}
+                    readOnly={state.answers['ORG-01'] === 'ev_only'}
+                    style={state.answers['ORG-01'] === 'ev_only' ? { background: '#f3f4f6', cursor: 'not-allowed' } : undefined}
+                    value={state.grunddaten.gesamtVzae ?? ''}
+                    onChange={(e) => handleGrunddatenChange('gesamtVzae', e.target.value ? Number(e.target.value) : undefined)}
+                  />
+                </div>
+                <div>
+                  <label className="drk-label">Gesamtumsatz des Verbands (TEUR)</label>
+                  <input
+                    type="number"
+                    className="drk-input"
+                    placeholder="z.B. 15000"
+                    min={0}
+                    readOnly={state.answers['ORG-01'] === 'ev_only'}
+                    style={state.answers['ORG-01'] === 'ev_only' ? { background: '#f3f4f6', cursor: 'not-allowed' } : undefined}
+                    value={state.grunddaten.gesamtUmsatz ?? ''}
+                    onChange={(e) => handleGrunddatenChange('gesamtUmsatz', e.target.value ? Number(e.target.value) : undefined)}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
