@@ -139,6 +139,30 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Grundschutz-10 Schnelleinstieg */}
+        <div className="drk-card drk-fade-in">
+          <div className="flex items-start gap-4">
+            <div className="p-3 rounded-xl shrink-0" style={{ background: '#eff6ff', color: 'var(--info)' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold mb-1" style={{ color: 'var(--text)' }}>
+                Grundschutz-10
+              </h3>
+              <p className="text-sm mb-3" style={{ color: 'var(--text-light)' }}>
+                Die 10 wichtigsten Sicherheits-Basismaßnahmen für DRK-Verbände — unabhängig von NIS-2.
+                Konkrete Handlungsempfehlungen mit Schritt-für-Schritt-Anleitungen für die Geschäftsführung.
+              </p>
+              <Link href="/grundschutz" className="drk-btn-secondary">
+                Grundschutz-10 ansehen
+              </Link>
+            </div>
+          </div>
+        </div>
+
         {/* Weitere Angebote */}
         <div className="drk-card">
           <h3 className="font-bold text-lg mb-1" style={{ color: 'var(--text)' }}>

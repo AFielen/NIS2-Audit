@@ -153,11 +153,11 @@ export default function Hilfe() {
 
         {/* Kontakt */}
         <div className="drk-card border-l-4" style={{ borderLeftColor: 'var(--drk)' }}>
-          <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text)' }}>Fragen oder Feedback?</h3>
+          <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text)' }}>Fragen, Feedback oder Fehler gefunden?</h3>
           <p className="text-sm" style={{ color: 'var(--text-light)' }}>
-            Wenden Sie sich an den DRK Kreisverband StädteRegion Aachen e.V.:<br />
-            <a href="mailto:Info@DRK-Aachen.de" style={{ color: 'var(--drk)' }} className="hover:underline">
-              Info@DRK-Aachen.de
+            Wenden Sie sich an den DRK Kreisverband StädteRegion Aachen e.V. — auch bei technischen Fehlern, Bugs oder inhaltlichen Unklarheiten:<br />
+            <a href="mailto:digitalisierung@drk-aachen.de" style={{ color: 'var(--drk)' }} className="hover:underline">
+              digitalisierung@drk-aachen.de
             </a>
           </p>
         </div>
