@@ -286,6 +286,10 @@ export function evaluateAssessment(answers: WizardAnswers, grunddaten?: Grunddat
     'SEC-10': ['P3_BACKUP_DR'],
     'SEC-11': ['P6_SUPPLY_CHAIN'],
     'SEC-12': ['P7_DOC_AUDIT'],
+    'SEC-13': ['P7_DOC_AUDIT'],
+    'SEC-14': ['P2_IAM_ADMIN'],
+    'SEC-15': ['P2_IAM_ADMIN'],
+    'SEC-16': ['P1_GOV_REG'],
   };
   for (const gap of scoring.gaps) {
     const packs = secGapToRoadmap[gap];

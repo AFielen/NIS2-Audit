@@ -305,6 +305,216 @@ export const grundschutzDetails: GrundschutzDetail[] = [
     managementEffort:
       'Ca. 15 Minuten Freigabe und 10 Minuten Sichtung des Nachweises.',
   },
+  {
+    id: 11,
+    slug: 'management-schulung-nis2',
+    title: 'Management-Schulung zu NIS-2/BSIG',
+    priority: 'hoch',
+    owner: 'Geschäftsführung',
+    whyItMatters:
+      '§38 BSIG verpflichtet Geschäftsleitungen ausdrücklich zur regelmäßigen Teilnahme an Schulungen zu IT-Sicherheitsrisiken. Das ist keine Empfehlung, sondern Gesetzespflicht – und gehört damit zu den wenigen NIS-2-Pflichten, die direkt die Führungsebene treffen.',
+    managementAction:
+      'Buchen Sie für alle Mitglieder der Geschäftsleitung eine dokumentierte Schulung zu NIS-2 und IT-Sicherheitsmanagement. IHK-Angebote, BSI-Webinare und Verbandsschulungen (z.B. DRK-Landesverband) sind anrechenbar. Wichtig: Teilnahme und Inhalt müssen nachweisbar sein.',
+    practicalSteps: [
+      'Schulungsangebot auswählen (IHK, BSI-Webinar, DRK-internes Angebot).',
+      'Alle Mitglieder der Geschäftsleitung verbindlich einplanen.',
+      'Teilnahme schriftlich dokumentieren (Zertifikat, Einladung + Anwesenheitsliste).',
+      'Jährliche Wiederholung im Kalender fixieren.',
+    ],
+    simpleImplementation:
+      'Ein 2-stündiges BSI-Webinar mit Teilnahmebestätigung reicht als Einstieg. Wichtig ist der Nachweis, nicht die Stundenanzahl.',
+    doneWhen:
+      'Alle Geschäftsleitungsmitglieder haben eine dokumentierte Schulung absolviert und es gibt einen Folgetermin im Kalender.',
+    evidence: [
+      'Teilnahmebestätigung oder Zertifikat',
+      'Schulungsdatum und -thema',
+      'Einladungsnachweis für alle GL-Mitglieder',
+    ],
+    commonMistake:
+      'Nur die IT oder der ISB wird geschult, die Geschäftsleitung nimmt nicht teil – obwohl §38 BSIG explizit die Leitungsebene adressiert.',
+    managementEffort:
+      'Ca. 2–4 Stunden je Teilnehmer pro Jahr.',
+  },
+  {
+    id: 12,
+    slug: 'risikoanalyse-kritische-dienste',
+    title: 'Risikoanalyse für kritische Dienste und Systeme',
+    priority: 'hoch',
+    owner: 'IT-Leitung / ISB',
+    whyItMatters:
+      '§30 Nr.1 BSIG fordert ausdrücklich Konzepte zur Risikoanalyse. Ohne eine strukturierte Bewertung, welche Systeme bei einem Ausfall den Rettungsdienst-Betrieb gefährden, fehlt die Grundlage für alle weiteren Schutzmaßnahmen.',
+    managementAction:
+      'Beauftragen Sie die IT-Leitung oder den ISB, eine einfache Risikoübersicht für die kritischsten Systeme zu erstellen: Was passiert, wenn System X ausfällt? Wie lange verträgt der Betrieb den Ausfall? Welche Maßnahmen reduzieren das Risiko?',
+    practicalSteps: [
+      'Die 5–10 kritischsten Systeme identifizieren (Hausnotruf, Leitstellen-Anbindung, Dienstplanung, E-Mail, AD/Entra).',
+      'Je System bewerten: Eintrittswahrscheinlichkeit eines Ausfalls, maximale tolerierbare Ausfallzeit, aktuelle Schutzmaßnahmen.',
+      'Ergebnis in einer einfachen Matrix dokumentieren (Excel genügt).',
+      'Mindestens jährlich aktualisieren.',
+    ],
+    simpleImplementation:
+      'Eine einfache Excel-Tabelle mit den Spalten System, Ausfallrisiko (hoch/mittel/niedrig), maximale Ausfallzeit, aktuelle Maßnahmen, offene Lücken genügt als valider Einstieg.',
+    doneWhen:
+      'Eine dokumentierte Risikoübersicht für die kritischsten Systeme liegt vor und ist auffindbar abgelegt.',
+    evidence: [
+      'Risikoübersicht/-matrix',
+      'Datum der Erstellung und letzten Aktualisierung',
+      'Benennung des Erstellers',
+    ],
+    commonMistake:
+      'Es wird auf eine spätere, "richtige" Risikoanalyse gewartet. Eine einfache strukturierte Übersicht ist besser als keine.',
+    managementEffort:
+      'Ca. 30 Minuten Beauftragung, 1 Stunde Review der Erstversion.',
+  },
+  {
+    id: 13,
+    slug: 'berechtigungskonzept-admin-trennung',
+    title: 'Berechtigungskonzept und Admin-Trennung',
+    priority: 'hoch',
+    owner: 'IT-Administration',
+    whyItMatters:
+      'Überprivilegierte Konten sind einer der häufigsten Einfallstore. Wenn jeder Mitarbeitende Admin-Rechte hat oder Admins ihr privilegiertes Konto auch für E-Mail nutzen, reicht ein einzelner Phishing-Angriff für eine vollständige Kompromittierung.',
+    managementAction:
+      'Fordern Sie von der IT eine kurze Übersicht: Wer hat welche Admin-Rechte? Gibt es separate Admin-Konten? Wer hat Zugriff auf Backup-Systeme? Diese Liste ist die Grundlage für das Berechtigungskonzept.',
+    practicalSteps: [
+      'Admin-Konten von normalen Benutzerkonten trennen (kein Admin-Konto für E-Mail und Surfen).',
+      'Prinzip der minimalen Rechtevergabe (Least Privilege) anwenden.',
+      'Regelmäßige Überprüfung: Wer ist noch im Unternehmen? Wer hat noch welche Rechte?',
+      'Offboarding-Prozess dokumentieren: Konten sofort sperren beim Ausscheiden.',
+    ],
+    simpleImplementation:
+      'Als Einstieg genügt eine Liste aller privilegierten Konten mit Begründung, warum diese Person Admin-Rechte benötigt, und ein einfacher Offboarding-Ablauf.',
+    doneWhen:
+      'Alle Admin-Konten sind separat, mit MFA gesichert und dokumentiert. Es gibt einen nachweisbaren Offboarding-Prozess.',
+    evidence: [
+      'Liste privilegierter Konten',
+      'Nachweis getrennter Admin-Accounts',
+      'Offboarding-Checkliste oder -Prozess',
+    ],
+    commonMistake:
+      'Admin-Rechte werden einmal vergeben und nie wieder entzogen, auch wenn jemand die Stelle wechselt oder das Unternehmen verlässt.',
+    managementEffort:
+      'Ca. 20 Minuten Beauftragung und 20 Minuten Review der Liste.',
+  },
+  {
+    id: 14,
+    slug: 'logging-monitoring',
+    title: 'Logging und Monitoring etablieren',
+    priority: 'mittel',
+    owner: 'IT-Administration',
+    whyItMatters:
+      'Ohne zentrale Logs merkt man einen Angriff oft erst Tage oder Wochen nach dem Einbruch. Für die BSI-Meldepflicht (24h-Frist) ist es entscheidend, wann Kenntnis von einem Vorfall erlangt wurde – und das lässt sich nur mit Logs belegen.',
+    managementAction:
+      'Fragen Sie die IT: Wo werden Logs gespeichert? Wie lange? Wer schaut sie an? Gibt es automatische Alarmierung bei auffälligen Ereignissen? Wenn niemand diese Fragen beantworten kann, ist Handlungsbedarf.',
+    practicalSteps: [
+      'Logging für kritische Systeme aktivieren (AD/Entra, Firewall, VPN, Server).',
+      'Logs zentral sammeln (SIEM-Einstieg oder zumindest zentraler Log-Server).',
+      'Aufbewahrungsdauer festlegen (Empfehlung: mindestens 3 Monate).',
+      'Alarmierung für kritische Ereignisse einrichten (fehlgeschlagene Anmeldeversuche, ungewöhnliche Zugriffe).',
+    ],
+    simpleImplementation:
+      'Für kleine Verbände reicht es zunächst, Windows-Event-Logs zentral zu sammeln und Firewall-Logs aufzubewahren. Microsoft Sentinel bietet einen kostengünstigen Einstieg für M365-Umgebungen.',
+    doneWhen:
+      'Logs für kritische Systeme werden gesammelt, mindestens 3 Monate aufbewahrt und es gibt eine dokumentierte Zuständigkeit für die Auswertung.',
+    evidence: [
+      'Log-Konfiguration der kritischen Systeme',
+      'Aufbewahrungsnachweis',
+      'Benennung der verantwortlichen Person',
+    ],
+    commonMistake:
+      'Logs werden zwar erzeugt, aber nie ausgewertet und nach wenigen Tagen überschrieben.',
+    managementEffort:
+      'Ca. 15 Minuten Beauftragung und monatlich 15 Minuten Review des Monitoring-Status.',
+  },
+  {
+    id: 15,
+    slug: 'bcm-wiederanlauf',
+    title: 'BCM und Notfallbetrieb planen (RTO/RPO)',
+    priority: 'hoch',
+    owner: 'Geschäftsführung / IT-Leitung',
+    whyItMatters:
+      '§30 Nr.3 BSIG fordert Backup-Management und Krisenmanagement als Einheit. Die entscheidende Frage ist nicht nur "Haben wir ein Backup?", sondern "Wie lange darf der Rettungsdienst ohne IT-Systeme funktionieren, und haben wir das geprobt?" Business Continuity Management (BCM) ist der strukturelle Rahmen dafür.',
+    managementAction:
+      'Beantworten Sie zwei Fragen schriftlich: (1) Wie lange darf welcher IT-Dienst maximal ausfallen, bevor der Betrieb kritisch wird (RTO)? (2) Wie viele Stunden/Tage an Daten dürfen im schlimmsten Fall verloren gehen (RPO)? Diese Antworten sind der Kern eines BCM.',
+    practicalSteps: [
+      'RTO und RPO für die 5 kritischsten Systeme definieren.',
+      'Notfallbetrieb beschreiben: Was passiert, wenn das Dienstplanungssystem 24h ausfällt? Welche analogen Prozesse greifen?',
+      'Notfall-Kontaktliste für alle Szenarien erstellen (intern + externe Dienstleister).',
+      'Einmal jährlich einen Papier-Notfalltest (Tabletop-Exercise) durchführen.',
+    ],
+    simpleImplementation:
+      'Ein 2-seitiges Dokument mit RTO/RPO-Tabelle und Notfallkontakten ist ein valider BCM-Einstieg. Kein ISO-22301-Projekt notwendig.',
+    doneWhen:
+      'RTO/RPO für kritische Systeme sind definiert, ein Notfallablauf ist dokumentiert und mindestens einmal besprochen worden.',
+    evidence: [
+      'RTO/RPO-Tabelle',
+      'Notfallkontaktliste',
+      'Protokoll eines Notfalltests oder -gesprächs',
+    ],
+    commonMistake:
+      'BCM wird als großes Projekt aufgeschoben. Eine kurze, pragmatische Übersicht schafft bereits deutlich mehr Resilienz als gar nichts.',
+    managementEffort:
+      'Ca. 1 Stunde Erststellung, 30 Minuten jährlicher Review.',
+  },
+  {
+    id: 16,
+    slug: 'lieferkette-it-dienstleister',
+    title: 'IT-Lieferkette bewerten und vertraglich absichern',
+    priority: 'mittel',
+    owner: 'IT-Leitung / Geschäftsführung',
+    whyItMatters:
+      '§30 Nr.4 BSIG fordert die Sicherheit der Lieferkette. Wenn ein Cloud-Anbieter oder IT-Dienstleister kompromittiert wird, kann das direkt den Rettungsdienst-Betrieb treffen. Besonders bei Software-as-a-Service (Hausnotruf-Systeme, Dienstplanung) muss die Verfügbarkeit vertraglich garantiert sein.',
+    managementAction:
+      'Erstellen Sie eine kurze Liste Ihrer wichtigsten IT-Dienstleister und Cloud-Dienste. Prüfen Sie je Dienstleister: Gibt es SLAs zur Verfügbarkeit? Gibt es Ausfallabsicherung (Redundanz)? Sind Datenschutz und Informationssicherheit vertraglich geregelt?',
+    practicalSteps: [
+      'Liste der kritischen IT-Dienstleister und Cloud-Dienste erstellen (Hausnotruf, Dienstplanung, M365, Backup-Cloud etc.).',
+      'Je Dienstleister prüfen: SLA vorhanden? Welche garantierte Verfügbarkeit? Was passiert bei Ausfall?',
+      'Für kritische Dienste: Vertraglich Ausfallszenario und Reaktionszeit festlegen.',
+      'Redundante Alternativen oder Offline-Fallback für systemkritische Dienste definieren.',
+    ],
+    simpleImplementation:
+      'Eine einfache Tabelle mit Dienstleister, Dienst, SLA-Status und offenem Handlungsbedarf genügt als Einstieg.',
+    doneWhen:
+      'Alle kritischen IT-Dienstleister sind dokumentiert, SLA-Status ist bekannt und für Dienste ohne SLA gibt es einen Plan.',
+    evidence: [
+      'Dienstleister-Übersicht',
+      'SLA-Dokumente oder Vertragsnachweise',
+      'Dokumentierter Fallback-Plan für kritische Dienste',
+    ],
+    commonMistake:
+      'Der Dienstleister wird als "vertrauenswürdig" angesehen, ohne dass SLAs oder Ausfall-Szenarien je schriftlich definiert wurden.',
+    managementEffort:
+      'Ca. 30 Minuten Beauftragung, 1 Stunde Erstprüfung der Verträge.',
+  },
+  {
+    id: 17,
+    slug: 'dokumentation-richtlinienpaket',
+    title: 'Dokumentation und Richtlinienpaket aufbauen',
+    priority: 'mittel',
+    owner: 'ISB / IT-Leitung',
+    whyItMatters:
+      '§30 BSIG schreibt vor, dass die Einhaltung der Risikomanagementmaßnahmen von Einrichtungen dokumentiert werden muss. Ohne Nachweise kann im Schadensfall oder bei einer BSI-Prüfung nicht belegt werden, dass gehandelt wurde. Dokumentation ist kein Selbstzweck, sondern Haftungsschutz.',
+    managementAction:
+      'Legen Sie einen zentralen Ablageort für IT-Sicherheitsdokumente fest. Beginnen Sie mit den einfachsten Nachweisen: Wer ist ISB? Wann wurde das letzte Backup getestet? Welche Schulungen wurden durchgeführt? Diese drei Dokumente sind der Einstieg.',
+    practicalSteps: [
+      'Zentralen Ablageort für IT-Sicherheitsdokumente definieren (SharePoint, Netzlaufwerk, Confluence).',
+      'Mindest-Dokumentenset anlegen: ISB-Benennung, Backup-Testprotokoll, Schulungsnachweise, Incident-Response-Kontakte.',
+      'Dokumentenverantwortung benennen: Wer pflegt welche Unterlage?',
+      'Jährliche Prüfung: Sind alle Dokumente aktuell?',
+    ],
+    simpleImplementation:
+      'Ein freigegebener SharePoint-Ordner mit klar benannten Dateien und Datum im Dateinamen ist ein vollständig ausreichender Einstieg.',
+    doneWhen:
+      'Ein zentraler Ablageort existiert, das Mindest-Dokumentenset liegt vor und eine verantwortliche Person ist benannt.',
+    evidence: [
+      'Ablageort-Nachweis',
+      'Liste der vorhandenen Dokumente mit Datum',
+      'Benennung des Dokumenten-Verantwortlichen',
+    ],
+    commonMistake:
+      'Maßnahmen werden umgesetzt, aber nicht dokumentiert. Im Prüfungsfall oder nach einem Vorfall kann nichts nachgewiesen werden.',
+    managementEffort:
+      'Ca. 30 Minuten Erstaufbau, 15 Minuten quartalsweise Pflege.',
+  },
 ];
 
 export function getGrundschutzDetail(index: number): GrundschutzDetail | undefined {

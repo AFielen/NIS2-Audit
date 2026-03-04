@@ -769,7 +769,7 @@
       "id": "SEC-04",
       "section": "security",
       "label": "IAM/MFA: MFA für privilegierte Konten und Remote-Zugriffe vollständig?",
-      "hint": "MFA (Multi-Faktor-Authentifizierung) bedeutet: Neben dem Passwort wird ein zweiter Faktor benötigt (z.B. App auf dem Handy, SMS-Code). Privilegierte Konten sind Admin-Accounts mit erweiterten Rechten. Remote-Zugriff ist der Zugang von außerhalb (Homeoffice, VPN). Alle diese Zugänge sollten MFA-geschützt sein.",
+      "hint": "MFA (Multi-Faktor-Authentifizierung) bedeutet: Neben dem Passwort wird ein zweiter Faktor benötigt (z.B. App auf dem Handy, SMS-Code). Privilegierte Konten sind Admin-Accounts mit erweiterten Rechten. Remote-Zugriff ist der Zugang von außerhalb (Homeoffice, VPN). Alle diese Zugänge sollten MFA-geschützt sein. §30 Nr.8 BSIG fordert zudem den Einsatz von Kryptografie und Verschlüsselung – z.B. verschlüsselte Festplatten auf Laptops (BitLocker/FileVault), verschlüsselte Verbindungen (TLS) und sichere E-Mail wo nötig.",
       "type": "single_select",
       "options": [
         {
@@ -795,7 +795,7 @@
       "id": "SEC-05",
       "section": "security",
       "label": "Privileged Access: Rollen-/Berechtigungskonzept (Admin-Trennung, Least Privilege) dokumentiert?",
-      "hint": "Gibt es ein schriftliches Konzept, wer welche Rechte im IT-System hat? »Least Privilege« bedeutet: Jeder bekommt nur die minimal nötigen Berechtigungen. »Admin-Trennung« bedeutet: Admins nutzen für tägliche Arbeit ein normales Konto und nur bei Bedarf das Admin-Konto. Ist das dokumentiert und umgesetzt?",
+      "hint": "Gibt es ein schriftliches Konzept, wer welche Rechte im IT-System hat? »Least Privilege« bedeutet: Jeder bekommt nur die minimal nötigen Berechtigungen. »Admin-Trennung« bedeutet: Admins nutzen für tägliche Arbeit ein normales Konto und nur bei Bedarf das Admin-Konto. Ist das dokumentiert und umgesetzt? §30 Nr.9 BSIG umfasst auch Personalsicherheit: Zugänge von ausscheidenden Mitarbeitenden müssen sofort gesperrt werden (Offboarding-Prozess). Sicherheitsüberprüfungen für Mitarbeitende in sensiblen IT-Rollen sind empfehlenswert.",
       "type": "single_select",
       "options": [
         {
@@ -899,7 +899,7 @@
       "id": "SEC-09",
       "section": "security",
       "label": "Incident Response: Prozess inkl. 24h/72h-Meldekette dokumentiert?",
-      "hint": "Gibt es einen schriftlichen Notfallplan für IT-Sicherheitsvorfälle? NIS-2 fordert eine Erstmeldung an das BSI innerhalb von 24 Stunden und einen Zwischenbericht innerhalb von 72 Stunden nach einem erheblichen Vorfall. Ist dokumentiert, wer intern wen informiert und wer die BSI-Meldung abgibt?",
+      "hint": "Gibt es einen schriftlichen Notfallplan für IT-Sicherheitsvorfälle? NIS-2 fordert eine Erstmeldung an das BSI innerhalb von 24 Stunden und einen Zwischenbericht innerhalb von 72 Stunden nach einem erheblichen Vorfall. Ist dokumentiert, wer intern wen informiert und wer die BSI-Meldung abgibt? §30 Nr.10 BSIG fordert gesicherte Notfallkommunikationssysteme: Für den Fall, dass E-Mail und Telefonie im Vorfall ausgefallen sind, muss ein alternativer Kommunikationsweg definiert sein (z.B. Messenger-Gruppe, Satellite-Telefon, physische Treffpunkte). §30 Nr.5 BSIG fordert zudem, dass Sicherheitsanforderungen bereits beim Kauf und bei der Wartung neuer IT-Systeme berücksichtigt werden.",
       "type": "single_select",
       "options": [
         {
@@ -998,6 +998,62 @@
         }
       ],
       "required": true
+    },
+    {
+      "id": "SEC-13",
+      "section": "security",
+      "label": "Asset-Inventar: Alle IT-Systeme, Server, Clients und Cloud-Dienste erfasst und aktuell gehalten?",
+      "hint": "Mindestanforderung: Hostname, Standort, Zweck und Verantwortlicher je System. Eine einfache Excel-Liste genügt als Einstieg.",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" },
+        { "value": "unknown", "label": "Nicht bekannt" }
+      ],
+      "required": false
+    },
+    {
+      "id": "SEC-14",
+      "section": "security",
+      "label": "Passwort-Richtlinie: Mindestlänge, Sperr-Policy und Keine-Wiederverwendung dokumentiert und durchgesetzt?",
+      "hint": "Mindestanforderung: 12 Zeichen Länge, Kontosperre nach Fehlversuchen. Sollte schriftlich vorliegen und für alle Mitarbeitenden gelten.",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" },
+        { "value": "unknown", "label": "Nicht bekannt" }
+      ],
+      "required": false
+    },
+    {
+      "id": "SEC-15",
+      "section": "security",
+      "label": "Patch-Management: Kritische Sicherheitsupdates innerhalb von 72h eingespielt, Prozess dokumentiert?",
+      "hint": "Automatische Updates sollten wo möglich aktiviert sein. Für Server und kritische Systeme muss der Patch-Stand regelmäßig geprüft werden.",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" },
+        { "value": "unknown", "label": "Nicht bekannt" }
+      ],
+      "required": false
+    },
+    {
+      "id": "SEC-16",
+      "section": "security",
+      "label": "Awareness: Mindestens eine Sensibilisierungsmaßnahme für Mitarbeitende (Phishing, CEO-Fraud, Social Engineering) dokumentiert durchgeführt?",
+      "hint": "Auch ein kurzer Workshop, ein E-Learning oder ein konkretes Beispiel im Team-Meeting zählt. §30 Nr.7 BSIG fordert ausdrücklich Schulungen für alle Mitarbeitenden.",
+      "type": "single_select",
+      "options": [
+        { "value": "no", "label": "Nein" },
+        { "value": "partial", "label": "Teilweise" },
+        { "value": "yes", "label": "Ja" },
+        { "value": "unknown", "label": "Nicht bekannt" }
+      ],
+      "required": false
     }
   ],
   "rules": [
@@ -1518,27 +1574,63 @@
           "yes": 2,
           "unknown": 0
         }
+      },
+      {
+        "id": "SEC-13",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-14",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-15",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
+      },
+      {
+        "id": "SEC-16",
+        "points": {
+          "no": 0,
+          "partial": 1,
+          "yes": 2,
+          "unknown": 0
+        }
       }
     ],
     "bands": [
       {
         "min": 0,
-        "max": 7,
+        "max": 9,
         "label": "kritisch"
       },
       {
-        "min": 8,
-        "max": 14,
+        "min": 10,
+        "max": 18,
         "label": "basal"
       },
       {
-        "min": 15,
-        "max": 19,
+        "min": 19,
+        "max": 25,
         "label": "belastbar"
       },
       {
-        "min": 20,
-        "max": 24,
+        "min": 26,
+        "max": 32,
         "label": "fortgeschritten"
       }
     ]
