@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import type { GeneratedRoadmap, RoadmapLayer, RoadmapItem } from '@/lib/roadmap/types';
 import { grundschutzDetails, getGrundschutzDetail } from '@/lib/content/grundschutz-details';
+import { getRoadmap90Detail, sizingFromLayerId } from '@/lib/content/roadmap90-details';
 import GrundschutzDetailSheet from '@/components/grundschutz/GrundschutzDetailSheet';
 
 interface LayeredRoadmapViewProps {
@@ -94,6 +95,10 @@ function LayerSection({ layer, index, onItemClick }: { layer: RoadmapLayer; inde
 export default function LayeredRoadmapView({ roadmap }: LayeredRoadmapViewProps) {
   const [expanded, setExpanded] = useState(true);
   const [selectedGsIndex, setSelectedGsIndex] = useState<number | null>(null);
+  const [selectedR90Index, setSelectedR90Index] = useState<number | null>(null);
+
+  const r90Sizing = roadmap.roadmap90 ? sizingFromLayerId(roadmap.roadmap90.id) : undefined;
+  const r90ItemCount = roadmap.roadmap90?.items.length ?? 0;
 
   const layers: RoadmapLayer[] = [];
   if (roadmap.step0) layers.push(roadmap.step0);
@@ -149,7 +154,13 @@ export default function LayeredRoadmapView({ roadmap }: LayeredRoadmapViewProps)
             key={layer.id}
             layer={layer}
             index={i}
-            onItemClick={layer.id === 'grundschutz10' ? (itemIndex) => setSelectedGsIndex(itemIndex) : undefined}
+            onItemClick={
+              layer.id === 'grundschutz10'
+                ? (itemIndex) => setSelectedGsIndex(itemIndex)
+                : (layer.id.startsWith('roadmap90') && r90Sizing)
+                  ? (itemIndex) => setSelectedR90Index(itemIndex)
+                  : undefined
+            }
           />
         ))}
       </div>
@@ -160,6 +171,15 @@ export default function LayeredRoadmapView({ roadmap }: LayeredRoadmapViewProps)
         onNext={selectedGsIndex !== null && selectedGsIndex < grundschutzDetails.length - 1 ? () => setSelectedGsIndex(prev => prev !== null ? prev + 1 : null) : undefined}
         hasNext={selectedGsIndex !== null && selectedGsIndex < grundschutzDetails.length - 1}
       />
+
+      {r90Sizing && (
+        <GrundschutzDetailSheet
+          detail={selectedR90Index !== null ? getRoadmap90Detail(r90Sizing, selectedR90Index) ?? null : null}
+          onClose={() => setSelectedR90Index(null)}
+          onNext={selectedR90Index !== null && selectedR90Index < r90ItemCount - 1 ? () => setSelectedR90Index(prev => prev !== null ? prev + 1 : null) : undefined}
+          hasNext={selectedR90Index !== null && selectedR90Index < r90ItemCount - 1}
+        />
+      )}
     </div>
   );
 }
