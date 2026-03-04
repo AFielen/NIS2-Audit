@@ -24,6 +24,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **Docker non-root**: Container läuft als `nginx`-User statt als root.
 
 ### Added
+- **90-Tage-Roadmap Detailansichten**: Alle 29 Items der 90-Tage-Roadmap (Klein/Mittel/Groß) sind jetzt klickbar und öffnen eine Detailansicht mit GF-orientierten Erklärungstexten — analog zu den Grundschutz-10 Handlungsempfehlungen. Content-Datei `lib/content/roadmap90-details.ts` mit Feldern: Warum wichtig, Management-Aktion, Praktische Schritte, Einfache Umsetzung, Erledigt wenn, Nachweise, Häufiger Fehler, Management-Aufwand.
 - **Grundschutz-10 Handlungsempfehlungen**: Jede der 10 Grundschutz-Karten ist jetzt klickbar und öffnet eine Detailansicht mit GF-orientierten Handlungsempfehlungen (Bottom Sheet mobil / Modal desktop). Content-Datei `lib/content/grundschutz-details.ts` als Single Source of Truth. Wiederverwendbar auf `/grundschutz`-Seite und in der Ergebnis-Roadmap.
 - **Grunddaten im QR-Code**: Name, Adresse und Vorstand werden jetzt mit im QR-Code gespeichert und beim Scannen wiederhergestellt. Der bisherige Hinweis, dass Grunddaten nicht enthalten sind, entfällt.
 - **Gesamt-VZÄ und Gesamtumsatz des Verbands**: Neue Felder in den Grunddaten erfassen VZÄ und Umsatz des gesamten Kreisverbands. Die S/L/M-Größenklasse wird darauf basierend abgeleitet.
