@@ -55,13 +55,13 @@ export default function Spenden() {
                   Online spenden
                 </p>
                 <a
-                  href="https://www.drk-aachen.de/spenden"
+                  href="https://www.drk.ac/jetzt-spenden.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm hover:underline"
                   style={{ color: 'var(--drk)' }}
                 >
-                  www.drk-aachen.de/spenden →
+                  www.drk.ac/jetzt-spenden.html →
                 </a>
               </div>
             </div>
@@ -84,7 +84,7 @@ export default function Spenden() {
                   DRK Kreisverband StädteRegion Aachen e.V.
                 </p>
                 <p className="text-sm italic" style={{ color: 'var(--text-muted)' }}>
-                  Bankverbindung: Siehe www.drk-aachen.de/spenden
+                  Bankverbindung: Siehe www.drk.ac/jetzt-spenden.html
                 </p>
               </div>
             </div>

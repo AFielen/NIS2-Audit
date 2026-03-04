@@ -10,6 +10,15 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ### Changed
 - **Ergebnis C/D: Klarstellung gesamter KV-Scope**: Bei Ergebnis C und D wird jetzt deutlich kommuniziert, dass durch fehlende harte Trennung der gesamte DRK-Kreisverband unter NIS-2 fällt — nicht nur der Rettungsdienst. Neuer prominenter Warnhinweis in der Executive Summary, aktualisierte Outcome-Texte im Ruleset, überarbeitete ScopeCards und i18n-Labels.
+- **Gesamt-VZÄ/Umsatz auf Schwellenwerte-Seite verschoben**: Die Felder für Gesamt-VZÄ und Gesamtumsatz des Verbands befinden sich jetzt auf der Schwellenwerte-Seite (Step 4) statt auf der Startseite. Bei ORG-01 „Alles im Kreisverband" werden die Werte automatisch aus den Rechtsträger-Feldern (THR-01/THR-02) übernommen.
+
+### Security
+- **Input-Validierung**: `maxLength={200}` auf Grunddaten-Textfeldern, `isFinite`-Check und Obergrenze (999.999) bei Number-Inputs.
+- **Schema-Validierung**: localStorage- und QR-Code-Daten werden nach dem Parsen auf gültige Typen und Längenbegrenzungen geprüft (Prototype-Pollution-sichere Keys, nur string/number-Werte).
+- **Prototype-Pollution-Schutz**: `getPath`/`setPath` in der Rule-Engine blockieren `__proto__`, `constructor`, `prototype`.
+- **Content-Security-Policy**: CSP-Header in nginx.conf (`default-src 'self'`; Script/Font/Img eingeschränkt).
+- **Permissions-Policy**: Kamera, Mikrofon, Geolocation, Payment explizit deaktiviert.
+- **Docker non-root**: Container läuft als `nginx`-User statt als root.
 
 ### Added
 - **Grundschutz-10 Handlungsempfehlungen**: Jede der 10 Grundschutz-Karten ist jetzt klickbar und öffnet eine Detailansicht mit GF-orientierten Handlungsempfehlungen (Bottom Sheet mobil / Modal desktop). Content-Datei `lib/content/grundschutz-details.ts` als Single Source of Truth. Wiederverwendbar auf `/grundschutz`-Seite und in der Ergebnis-Roadmap.
