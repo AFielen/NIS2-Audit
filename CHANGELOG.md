@@ -8,6 +8,9 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Removed
+- **ORG-09 aus Organisations-Wizard entfernt**: Die VZÄ-Abfrage im Organisations-Schritt war redundant, da sie im Schwellenwert-Schritt (THR-01) ohnehin gestellt wird. Preset „Kreisverband mit RD als Abteilung" setzt VZÄ jetzt direkt auf THR-01.
+
 ### Changed
 - **Ergebnis C/D: Klarstellung gesamter KV-Scope**: Bei Ergebnis C und D wird jetzt deutlich kommuniziert, dass durch fehlende harte Trennung der gesamte DRK-Kreisverband unter NIS-2 fällt — nicht nur der Rettungsdienst. Neuer prominenter Warnhinweis in der Executive Summary, aktualisierte Outcome-Texte im Ruleset, überarbeitete ScopeCards und i18n-Labels.
 - **Gesamt-VZÄ/Umsatz auf Schwellenwerte-Seite verschoben**: Die Felder für Gesamt-VZÄ und Gesamtumsatz des Verbands befinden sich jetzt auf der Schwellenwerte-Seite (Step 4) statt auf der Startseite. Bei ORG-01 „Alles im Kreisverband" werden die Werte automatisch aus den Rechtsträger-Feldern (THR-01/THR-02) übernommen.
