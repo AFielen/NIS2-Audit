@@ -89,6 +89,65 @@ export default function Home() {
           </div>
         </div>
 
+        {/* 4 Module-Feature-Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 drk-slide-up">
+          <Link href="/check" className="drk-card text-center hover:shadow-xl transition-shadow">
+            <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </div>
+            <h3 className="font-bold mb-1" style={{ color: 'var(--text)' }}>Self-Check</h3>
+            <p className="text-xs" style={{ color: 'var(--text-light)' }}>
+              Bin ich betroffen?<br />10–15 min
+            </p>
+          </Link>
+
+          <Link href="/kosten" className="drk-card text-center hover:shadow-xl transition-shadow">
+            <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23" />
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <h3 className="font-bold mb-1" style={{ color: 'var(--text)' }}>Kostenrechner</h3>
+            <p className="text-xs" style={{ color: 'var(--text-light)' }}>
+              Was kostet NIS-2 meinen KV?<br />Bundesland-spezifisch
+            </p>
+          </Link>
+
+          <Link href="/tracker" className="drk-card text-center hover:shadow-xl transition-shadow">
+            <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 11l3 3L22 4" />
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+              </svg>
+            </div>
+            <h3 className="font-bold mb-1" style={{ color: 'var(--text)' }}>Compliance-Tracker</h3>
+            <p className="text-xs" style={{ color: 'var(--text-light)' }}>
+              Was ist erledigt?<br />21 Aufgaben, 18 Dokumente
+            </p>
+          </Link>
+
+          <Link href="/lieferkette" className="drk-card text-center hover:shadow-xl transition-shadow">
+            <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </div>
+            <h3 className="font-bold mb-1" style={{ color: 'var(--text)' }}>Lieferketten-Check</h3>
+            <p className="text-xs" style={{ color: 'var(--text-light)' }}>
+              Auch ohne Rettungsdienst<br />betroffen?
+            </p>
+          </Link>
+        </div>
+
         {/* 3 Benefit Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 drk-slide-up">
           <div className="drk-card text-center">

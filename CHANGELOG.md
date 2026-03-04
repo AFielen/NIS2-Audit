@@ -8,6 +8,14 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- **Modul 3: Vorstand-Briefing-Generator**: Druckfertiger A4-Einseiter für Vorstandssitzungen unter `/ergebnis/briefing`. Generiert sich automatisch aus Self-Check-Ergebnis mit Betroffenheit, Pflichten, Haftung, Kosten und nächsten Schritten.
+- **Modul 1: Kostenrechner**: Bundesland-spezifische NIS-2-Kostenberechnung unter `/kosten`. 11 Kostenbereiche nach §30 BSIG, Kooperationsrechner (2–15 KV), Refinanzierungspfade für alle 16 Bundesländer, druckbare Haushaltsvorlage.
+- **Modul 4: Lieferketten-Check**: Indirekte NIS-2-Betroffenheitsprüfung unter `/lieferkette`. 6 Ja/Nein-Fragen zur Lieferkettenrelevanz, Anforderungskatalog, Handlungsempfehlung.
+- **Modul 2: Compliance-Tracker**: Langzeit-Begleitung unter `/tracker`. 21 Pflichtaufgaben in 3 Phasen, 18 Pflichtdokumente, Status-Tracking, Verantwortlichkeiten, Fortschrittsbalken, Druckexport.
+- **Navigation**: Neue Navigationsleiste mit Links zu allen Modulen. Startseite um 4 Feature-Cards erweitert.
+- **Ergebnis-Seite**: Lieferketten-Check-Hinweis bei Outcome D. Vorstand-Briefing-Button in Export-Aktionen.
+
 ### Removed
 - **ORG-09 aus Organisations-Wizard entfernt**: Die VZÄ-Abfrage im Organisations-Schritt war redundant, da sie im Schwellenwert-Schritt (THR-01) ohnehin gestellt wird. Preset „Kreisverband mit RD als Abteilung" setzt VZÄ jetzt direkt auf THR-01.
 
