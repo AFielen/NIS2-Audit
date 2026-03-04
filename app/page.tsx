@@ -89,8 +89,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 4 Module-Feature-Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 drk-slide-up">
+        {/* 4 Module-Feature-Cards – temporarily hidden for testing */}
+        <div className="hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 drk-slide-up">
           <div className="drk-card text-center">
             <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
