@@ -16,6 +16,12 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **Navigation**: Neue Navigationsleiste mit Links zu allen Modulen. Startseite um 4 Feature-Cards erweitert.
 - **Ergebnis-Seite**: Lieferketten-Check-Hinweis bei Outcome D. Vorstand-Briefing-Button in Export-Aktionen.
 
+### Changed
+- **Kostenrechner: Antwortbasierte Kostenberechnung**: Kosten werden jetzt anhand der Self-Check-Antworten (SEC-Fragen) reduziert. „Bereits umgesetzt" = 0 EUR, „Teilweise" = Minimalwert, „Nein" = volle Spanne. Gilt für einmalige und jährliche Kosten.
+- **Kostenrechner & Tracker: Self-Check-Pflicht**: Beide Module erfordern jetzt einen abgeschlossenen Self-Check, bevor Inhalte angezeigt werden.
+- **Kooperationsrechner ausgeblendet**: Temporär aus dem Kostenrechner entfernt.
+- **Compliance-Tracker aus Navigation entfernt**: Nur noch über Direktlink `/tracker` erreichbar.
+
 ### Fixed
 - **BSI-Registrierung bei Outcome B**: Bei Ergebnis B (direkt betroffen, Scope begrenzbar) wird die BSI-Registrierung jetzt korrekt als Pflicht angezeigt. Wer direkt unter NIS-2 fällt, muss sich registrieren — auch wenn der Scope durch harte Trennung begrenzt werden kann.
 

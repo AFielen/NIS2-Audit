@@ -10,6 +10,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§30 Nr. 1 BSIG',
     einmalig:  { S: [15000, 40000],  M: [40000, 100000],  L: [80000, 200000] },
     jaehrlich: { S: [5000,  12000],  M: [12000, 30000],   L: [25000, 60000]  },
+    secQuestionIds: ['SEC-03'],
   },
   {
     id: 'netzwerk',
@@ -17,6 +18,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§30 Nr. 5 BSIG',
     einmalig:  { S: [10000, 30000],  M: [40000, 120000],  L: [100000, 250000] },
     jaehrlich: { S: [3000,  8000],   M: [8000,  20000],   L: [15000,  40000]  },
+    secQuestionIds: ['SEC-06'],
   },
   {
     id: 'backup',
@@ -24,6 +26,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§30 Nr. 3 BSIG',
     einmalig:  { S: [5000,  20000],  M: [20000, 70000],   L: [50000, 150000]  },
     jaehrlich: { S: [2000,  6000],   M: [6000,  20000],   L: [15000, 40000]   },
+    secQuestionIds: ['SEC-07'],
   },
   {
     id: 'mfa',
@@ -31,6 +34,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§30 Nr. 10 BSIG',
     einmalig:  { S: [3000,  10000],  M: [10000, 35000],   L: [25000, 80000]   },
     jaehrlich: { S: [1000,  3000],   M: [3000,  10000],   L: [8000,  20000]   },
+    secQuestionIds: ['SEC-04'],
   },
   {
     id: 'verschluesselung',
@@ -38,6 +42,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§30 Nr. 8 BSIG',
     einmalig:  { S: [2000,  8000],   M: [8000,  25000],   L: [20000, 60000]   },
     jaehrlich: { S: [1000,  3000],   M: [3000,  8000],    L: [6000,  15000]   },
+    secQuestionIds: ['SEC-14'],
   },
   {
     id: 'schulung',
@@ -45,6 +50,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§30 Nr. 7 + §38 BSIG',
     einmalig:  { S: [2000,  6000],   M: [6000,  20000],   L: [15000, 40000]   },
     jaehrlich: { S: [2000,  5000],   M: [5000,  15000],   L: [12000, 30000]   },
+    secQuestionIds: ['SEC-16'],
   },
   {
     id: 'incident',
@@ -52,6 +58,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§30 Nr. 2 + §32 BSIG',
     einmalig:  { S: [3000,  8000],   M: [8000,  20000],   L: [15000, 40000]   },
     jaehrlich: { S: [3000,  10000],  M: [10000, 30000],   L: [25000, 60000]   },
+    secQuestionIds: ['SEC-09'],
   },
   {
     id: 'lieferkette',
@@ -59,6 +66,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§30 Nr. 4 BSIG',
     einmalig:  { S: [2000,  6000],   M: [6000,  15000],   L: [10000, 30000]   },
     jaehrlich: { S: [1000,  3000],   M: [3000,  8000],    L: [5000,  15000]   },
+    secQuestionIds: ['SEC-11'],
   },
   {
     id: 'isb',
@@ -66,6 +74,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§38 BSIG',
     einmalig:  { S: [0, 0],          M: [0, 0],           L: [0, 0]           },
     jaehrlich: { S: [15000, 35000],  M: [35000, 80000],   L: [70000, 130000]  },
+    secQuestionIds: ['SEC-01'],
   },
   {
     id: 'audit',
@@ -73,6 +82,7 @@ export const KOSTEN_BEREICHE: KostenBereich[] = [
     paragraph: '§30 Nr. 6 BSIG',
     einmalig:  { S: [3000,  10000],  M: [10000, 25000],   L: [20000, 50000]   },
     jaehrlich: { S: [3000,  10000],  M: [8000,  25000],   L: [15000, 50000]   },
+    secQuestionIds: ['SEC-12'],
   },
   {
     id: 'bsi_reg',

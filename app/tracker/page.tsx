@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import type { TrackerState, AufgabenStatus } from '@/lib/types';
 import { TRACKER_AUFGABEN, PFLICHT_DOKUMENTE } from '@/lib/tracker/tracker-aufgaben';
 
@@ -39,11 +40,14 @@ function createInitialState(): TrackerState {
 export default function TrackerPage() {
   const [state, setState] = useState<TrackerState | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [hasResult, setHasResult] = useState(false);
   const [activeTab, setActiveTab] = useState<'aufgaben' | 'dokumente'>('aufgaben');
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
 
   useEffect(() => {
     try {
+      const resultRaw = localStorage.getItem('nis2-audit-result');
+      setHasResult(!!resultRaw);
       const raw = localStorage.getItem('nis2-tracker-state');
       if (raw) {
         setState(JSON.parse(raw));
@@ -68,6 +72,28 @@ export default function TrackerPage() {
     return (
       <div style={{ background: 'var(--bg)' }} className="min-h-[calc(100vh-theme(spacing.16))] flex items-center justify-center">
         <div style={{ color: 'var(--text-muted)' }}>Laden...</div>
+    </div>
+    );
+  }
+
+  // Gate: Self-Check erforderlich
+  if (!hasResult) {
+    return (
+      <div style={{ background: 'var(--bg)' }} className="min-h-[calc(100vh-theme(spacing.16))] py-8 px-4">
+        <div className="max-w-2xl mx-auto">
+          <div className="drk-card text-center py-12">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="1.5" className="mx-auto mb-4">
+              <path d="M9 7h6m0 10v-3m-3 3h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text)' }}>Self-Check erforderlich</h2>
+            <p className="mb-6" style={{ color: 'var(--text-light)' }}>
+              Bitte führen Sie zuerst den NIS-2 Self-Check durch, bevor Sie den Compliance-Tracker nutzen können.
+            </p>
+            <Link href="/check" className="drk-btn-primary inline-block">
+              Self-Check starten
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

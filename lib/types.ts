@@ -200,6 +200,7 @@ export interface KostenBereich {
   paragraph: string;
   einmalig: Record<KVGroesse, [number, number]>;
   jaehrlich: Record<KVGroesse, [number, number]>;
+  secQuestionIds?: string[];
 }
 
 export interface KostenErgebnis {
@@ -218,9 +219,9 @@ export interface KostenErgebnis {
     jaehrlichMin: number;
     jaehrlichMax: number;
     teilweiseErfuellt: boolean;
+    bereitsUmgesetzt: boolean;
   }>;
   kostenProVzaeJahr: number;
-  kooperationJaehrlichProKV: number;
   vergleiche: {
     bundesregierungSchätzungEinmalig: number;
     bundesregierungSchätzungJaehrlich: number;
