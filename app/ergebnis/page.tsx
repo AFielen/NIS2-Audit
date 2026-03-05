@@ -122,7 +122,7 @@ export default function ErgebnisPage() {
 
         <ExecutiveSummary result={result} />
 
-        {/* Lieferketten-Check Hinweis für Outcome D */}
+        {/* Indirekte Betroffenheit Hinweis für Outcome D */}
         {result.outcome.type === 'D' && (
           <div className="drk-card drk-fade-in border-l-4" style={{ borderLeftColor: 'var(--info)', background: 'var(--info-bg)' }}>
             <h3 className="font-bold text-sm mb-1" style={{ color: 'var(--text)' }}>
@@ -132,7 +132,7 @@ export default function ErgebnisPage() {
               Auch ohne direkten Rettungsdienst kann euer Kreisverband über Geschäftsbeziehungen zu NIS-2-pflichtigen Partnern indirekt betroffen sein.
             </p>
             <Link href="/lieferkette" className="drk-btn-secondary">
-              Lieferketten-Check starten
+              Indirekte Betroffenheit prüfen
             </Link>
           </div>
         )}

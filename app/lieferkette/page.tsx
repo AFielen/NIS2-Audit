@@ -21,6 +21,7 @@ const WAHRSCHEINLICHKEIT_STYLES: Record<string, { bg: string; color: string }> =
 export default function LieferkettePage() {
   const [antworten, setAntworten] = useState<LieferkettenAntworten>({});
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [expandedAnf, setExpandedAnf] = useState<number | null>(null);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -57,12 +58,30 @@ export default function LieferkettePage() {
         {/* Intro */}
         <div className="drk-card drk-fade-in">
           <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text)' }}>
-            Lieferketten-Check
+            Indirekte Betroffenheit
           </h2>
-          <p style={{ color: 'var(--text-light)' }}>
-            Auch ohne eigenen Rettungsdienst könnt ihr betroffen sein — über eure Geschäftspartner.
-            NIS-2-pflichtige Einrichtungen müssen ihre Lieferkette absichern (§30 Nr. 4 BSIG) und werden
-            IT-Sicherheitsanforderungen vertraglich an euch weitergeben.
+          <p className="mb-3" style={{ color: 'var(--text-light)' }}>
+            Auch ohne eigenen Rettungsdienst kann euer Kreisverband von NIS-2 betroffen sein — über eure Geschäftspartner und IT-Dienstleister.
+          </p>
+          <div className="p-3 rounded-lg mb-3" style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}>
+            <h3 className="font-semibold text-sm mb-2" style={{ color: 'var(--text)' }}>Warum ist das wichtig?</h3>
+            <ul className="text-sm space-y-1.5" style={{ color: 'var(--text-light)' }}>
+              <li>
+                <strong>§30 Nr. 4 BSIG</strong> verpflichtet NIS-2-pflichtige Einrichtungen, ihre gesamte Lieferkette abzusichern — das betrifft auch euch als Zulieferer oder Kunde.
+              </li>
+              <li>
+                <strong>IT-Dienstleister im DRK</strong> — häufig bieten Landesverbände oder verbandseigene IT-Gesellschaften zentrale IT-Services an. Fallen diese unter NIS-2, geben sie Sicherheitsvorgaben an euch weiter.
+              </li>
+              <li>
+                <strong>Krankenhäuser, Leitstellen, Rettungsdienst-Träger</strong> sind NIS-2-pflichtig und werden IT-Sicherheitsanforderungen vertraglich an ihre Partner stellen.
+              </li>
+              <li>
+                <strong>Konsequenz:</strong> Verträge mit IT-Sicherheitsklauseln, Sicherheitsfragebögen, MFA-Pflicht, Meldepflichten bei Vorfällen — auch ohne eigene NIS-2-Pflicht.
+              </li>
+            </ul>
+          </div>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+            Beantwortet die folgenden 6 Fragen, um eure indirekte Betroffenheit einzuschätzen.
           </p>
         </div>
 
@@ -151,7 +170,7 @@ export default function LieferkettePage() {
                 </span>
               </div>
 
-              {/* Requirements */}
+              {/* Requirements with GF details */}
               {ergebnis.anforderungen.length > 0 && (
                 <>
                   <h3 className="font-bold text-sm mb-3" style={{ color: 'var(--text)' }}>
@@ -160,6 +179,7 @@ export default function LieferkettePage() {
                   <div className="space-y-2 mb-4">
                     {ergebnis.anforderungen.map((anf, i) => {
                       const ws = WAHRSCHEINLICHKEIT_STYLES[anf.wahrscheinlichkeit];
+                      const isAnfExpanded = expandedAnf === i;
                       return (
                         <div key={i} className="p-3 rounded-lg" style={{ border: '1px solid var(--border)' }}>
                           <div className="flex items-start justify-between gap-2 mb-1">
@@ -175,6 +195,20 @@ export default function LieferkettePage() {
                           </div>
                           <p className="text-xs" style={{ color: 'var(--text-light)' }}>{anf.beschreibung}</p>
                           <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{anf.rechtsgrundlage}</p>
+
+                          {/* GF-Detail Accordion */}
+                          <button
+                            onClick={() => setExpandedAnf(isAnfExpanded ? null : i)}
+                            className="text-xs mt-2 flex items-center gap-1 font-semibold"
+                            style={{ color: 'var(--drk)' }}
+                          >
+                            {isAnfExpanded ? '▾' : '▸'} Was muss die Geschäftsführung tun?
+                          </button>
+                          {isAnfExpanded && (
+                            <div className="mt-2 p-2.5 rounded text-xs" style={{ background: 'var(--drk-bg)', color: 'var(--text)' }}>
+                              {anf.gfHinweis}
+                            </div>
+                          )}
                         </div>
                       );
                     })}

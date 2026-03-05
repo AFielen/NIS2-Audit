@@ -106,9 +106,9 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* 3 Module-Feature-Cards – temporarily hidden for testing */}
-        <div className="hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 drk-slide-up">
-          <div className="drk-card text-center">
+        {/* Module-Feature-Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 drk-slide-up">
+          <Link href="/kosten" className="drk-card text-center hover:shadow-xl transition-shadow">
             <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
                    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -120,9 +120,9 @@ export default function Home() {
             <p className="text-xs" style={{ color: 'var(--text-light)' }}>
               Was kostet NIS-2 meinen KV?<br />Bundesland-spezifisch
             </p>
-          </div>
+          </Link>
 
-          <div className="drk-card text-center">
+          <Link href="/lieferkette" className="drk-card text-center hover:shadow-xl transition-shadow">
             <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
                    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -130,11 +130,11 @@ export default function Home() {
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
               </svg>
             </div>
-            <h3 className="font-bold mb-1" style={{ color: 'var(--text)' }}>Lieferketten-Check</h3>
+            <h3 className="font-bold mb-1" style={{ color: 'var(--text)' }}>Indirekte Betroffenheit</h3>
             <p className="text-xs" style={{ color: 'var(--text-light)' }}>
               Auch ohne Rettungsdienst<br />betroffen?
             </p>
-          </div>
+          </Link>
         </div>
 
         {/* 3 Benefit Cards */}

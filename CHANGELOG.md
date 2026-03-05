@@ -17,6 +17,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **Ergebnis-Seite**: Lieferketten-Check-Hinweis bei Outcome D. Vorstand-Briefing-Button in Export-Aktionen.
 
 ### Changed
+- **Lieferketten-Check → Indirekte Betroffenheit**: Modul umbenannt für bessere Verständlichkeit. Erweiterter Intro-Text erklärt warum indirekte Betroffenheit relevant ist. Anforderungs-Kacheln haben aufklappbare GF-Handlungshinweise. LK-06 Fragetext neutralisiert (ohne SoCura-Referenz). Feature-Cards auf Startseite für Kostenrechner und Indirekte Betroffenheit reaktiviert.
 - **Kostenrechner: Antwortbasierte Kostenberechnung**: Kosten werden jetzt anhand der Self-Check-Antworten (SEC-Fragen) reduziert. „Bereits umgesetzt" = 0 EUR, „Teilweise" = Minimalwert, „Nein" = volle Spanne. Gilt für einmalige und jährliche Kosten.
 - **Kostenrechner & Tracker: Self-Check-Pflicht**: Beide Module erfordern jetzt einen abgeschlossenen Self-Check, bevor Inhalte angezeigt werden.
 - **Kooperationsrechner ausgeblendet**: Temporär aus dem Kostenrechner entfernt.
