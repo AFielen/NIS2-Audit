@@ -33,9 +33,9 @@ export const LIEFERKETTEN_FRAGEN: LieferkettenFrage[] = [
   },
   {
     id: 'LK-06',
-    frage: 'Ist euer Kreisverband SoCura-Kunde (oder Kunde eines vergleichbaren NIS-2-pflichtigen IT-Dienstleisters)?',
-    erklaerung: 'NIS-2-pflichtige IT-Dienstleister (Managed Service Provider) müssen ihre Kunden über Sicherheitsvoraussetzungen informieren.',
-    relevanzWennJa: 'SoCura (und vergleichbare MSPs) werden Sicherheitsvorgaben einfordern: MFA, Passwortrichtlinien, Meldung von Vorfällen innerhalb definierter Fristen.',
+    frage: 'Ist euer Kreisverband Kunde eines NIS-2-pflichtigen IT-Dienstleisters?',
+    erklaerung: 'Im DRK-Kontext bieten häufig Landesverbände oder verbandseigene IT-Gesellschaften IT-Dienstleistungen für Kreisverbände an. Wenn diese als Managed Service Provider (MSP) unter NIS-2 fallen, müssen sie Sicherheitsvorgaben an ihre Kunden weitergeben. Das betrifft auch externe IT-Dienstleister, die Rettungsdienst-IT oder kritische Infrastruktur betreuen.',
+    relevanzWennJa: 'Euer IT-Dienstleister wird Sicherheitsvorgaben einfordern: MFA, Passwortrichtlinien, Meldung von Vorfällen innerhalb definierter Fristen.',
   },
 ];
 
@@ -62,24 +62,28 @@ export function berechneLieferkettenErgebnis(
         beschreibung: 'MFA für alle Konten mit Zugang zu geteilten Systemen oder Schnittstellen',
         wahrscheinlichkeit: 'sehr hoch',
         rechtsgrundlage: '§30 Nr. 10 BSIG (über Lieferkette)',
+        gfHinweis: 'IT beauftragen, MFA für alle relevanten Konten einzurichten (E-Mail, VPN, Admin-Zugänge, Cloud-Dienste). Budget: gering — oft in bestehenden Microsoft 365- oder Google-Lizenzen enthalten. Zeitrahmen: 1–2 Wochen.',
       },
       {
         kategorie: 'Sicherheitsfragebogen',
         beschreibung: 'Nachweis eurer IT-Sicherheitsmaßnahmen auf Anforderung des Partners',
         wahrscheinlichkeit: 'sehr hoch',
         rechtsgrundlage: '§30 Nr. 4 BSIG',
+        gfHinweis: 'Einen Verantwortlichen benennen, der Sicherheitsfragebögen der Partner beantwortet. Vorab: IT-Dokumentation aktualisieren — Netzplan, Backup-Konzept, Zugriffsliste und Notfallplan sollten aktuell und auffindbar sein.',
       },
       {
         kategorie: 'Meldepflicht bei Vorfällen',
         beschreibung: 'Meldung von Sicherheitsvorfällen an den NIS-2-pflichtigen Partner (oft 24h)',
         wahrscheinlichkeit: 'hoch',
         rechtsgrundlage: '§30 Nr. 4 BSIG i.V.m. Vertragsrecht',
+        gfHinweis: 'Internen Meldeprozess definieren: Wer meldet an wen innerhalb von 24 Stunden? Kontaktdaten des Partners für Sicherheitsmeldungen einholen und intern hinterlegen. Verantwortliche Person für Vorfallmeldungen benennen.',
       },
       {
         kategorie: 'Patch-Management',
         beschreibung: 'Nachweis zeitnaher Sicherheitsupdates aller verbundenen Systeme',
         wahrscheinlichkeit: 'hoch',
         rechtsgrundlage: '§30 Nr. 5 BSIG',
+        gfHinweis: 'IT-Leitung beauftragen, einen Patch-Prozess zu dokumentieren: Kritische Sicherheitsupdates innerhalb von 72 Stunden einspielen, regelmäßige Prüfintervalle festlegen. Nachweis über durchgeführte Updates führen.',
       },
     );
 
@@ -89,6 +93,7 @@ export function berechneLieferkettenErgebnis(
         beschreibung: 'Starke Passwörter, keine geteilten Accounts, regelmäßige Zugriffsreviews',
         wahrscheinlichkeit: 'sehr hoch',
         rechtsgrundlage: '§30 Nr. 9 BSIG (über IT-Dienstleister)',
+        gfHinweis: 'Verbandweite Passwortrichtlinie einführen: Mindestens 12 Zeichen, keine geteilten Accounts, regelmäßige Zugriffsüberprüfung. Die IT kann das technisch über Active Directory oder Microsoft 365 erzwingen.',
       });
     }
 
@@ -98,6 +103,7 @@ export function berechneLieferkettenErgebnis(
         beschreibung: 'Euer Netz darf keine Brücke zum Rettungsdienst-Netz bilden – aktive Segmentierung erforderlich',
         wahrscheinlichkeit: 'sehr hoch',
         rechtsgrundlage: '§30 Nr. 5 BSIG + technischer Scope',
+        gfHinweis: 'IT-Leitung mit Netzwerk-Segmentierung beauftragen: Das RD-Netz muss physisch oder logisch vom restlichen Verbandsnetz getrennt sein. Ggf. externen Netzwerk-Dienstleister hinzuziehen. Budget und Zeitrahmen mit IT klären.',
       });
     }
   }

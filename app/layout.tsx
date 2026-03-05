@@ -82,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           <Link href="/check" className="hover:underline whitespace-nowrap">Self-Check</Link>
           <Link href="/kosten" className="hover:underline whitespace-nowrap">Kostenrechner</Link>
-          <Link href="/lieferkette" className="hover:underline whitespace-nowrap">Lieferketten-Check</Link>
+          <Link href="/lieferkette" className="hover:underline whitespace-nowrap">Indirekte Betroffenheit</Link>
         </nav>
 
         {/* ── Main Content ── */}

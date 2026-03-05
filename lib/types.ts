@@ -354,6 +354,7 @@ export interface LieferkettenAnforderung {
   beschreibung: string;
   wahrscheinlichkeit: 'sehr hoch' | 'hoch' | 'mittel';
   rechtsgrundlage: string;
+  gfHinweis: string;
 }
 
 export interface LieferkettenErgebnis {
