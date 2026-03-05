@@ -126,20 +126,6 @@ export default function Home() {
             <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
                    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 11l3 3L22 4" />
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-              </svg>
-            </div>
-            <h3 className="font-bold mb-1" style={{ color: 'var(--text)' }}>Compliance-Tracker</h3>
-            <p className="text-xs" style={{ color: 'var(--text-light)' }}>
-              Was ist erledigt?<br />21 Aufgaben, 18 Dokumente
-            </p>
-          </div>
-
-          <div className="drk-card text-center">
-            <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
               </svg>
