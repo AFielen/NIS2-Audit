@@ -89,23 +89,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Self-Check – aktiv */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 drk-slide-up">
-          <Link href="/check" className="drk-card text-center hover:shadow-xl transition-shadow">
-            <div className="flex justify-center mb-3" style={{ color: 'var(--drk)' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-            </div>
-            <h3 className="font-bold mb-1" style={{ color: 'var(--text)' }}>Self-Check</h3>
-            <p className="text-xs" style={{ color: 'var(--text-light)' }}>
-              Bin ich betroffen?<br />10–15 min
-            </p>
-          </Link>
-        </div>
-
         {/* Module-Feature-Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 drk-slide-up">
           <Link href="/kosten" className="drk-card text-center hover:shadow-xl transition-shadow">
