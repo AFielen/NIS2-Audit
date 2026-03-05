@@ -140,6 +140,42 @@ export default function ErgebnisPage() {
         <RegistrationCallout registration={result.registration} outcomeType={result.outcome.type} />
         <ScopeCards result={result} />
         <MaturityBadge scoring={result.scoring} />
+
+        {/* Kostenrechner-Hinweis */}
+        <Link
+          href="/kosten"
+          className="drk-card drk-fade-in block no-print"
+          style={{ border: '2px solid var(--drk)', background: 'var(--drk-bg)', textDecoration: 'none' }}
+        >
+          <div className="flex items-center gap-4">
+            <div
+              className="shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+              style={{ background: 'var(--drk)', color: '#fff' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" />
+                <line x1="8" y1="6" x2="16" y2="6" />
+                <line x1="16" y1="14" x2="16" y2="18" />
+                <line x1="8" y1="10" x2="8" y2="10.01" />
+                <line x1="12" y1="10" x2="12" y2="10.01" />
+                <line x1="16" y1="10" x2="16" y2="10.01" />
+                <line x1="8" y1="14" x2="8" y2="14.01" />
+                <line x1="12" y1="14" x2="12" y2="14.01" />
+                <line x1="8" y1="18" x2="8" y2="18.01" />
+                <line x1="12" y1="18" x2="12" y2="18.01" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="font-bold" style={{ color: 'var(--drk)' }}>Kostenrechner</div>
+              <div className="text-sm" style={{ color: 'var(--text-light)' }}>
+                Detaillierte Kostenaufschlüsselung nach §30-Maßnahmen — unter Berücksichtigung Ihrer bereits umgesetzten Sicherheitsmaßnahmen.
+              </div>
+            </div>
+            <div className="shrink-0 text-lg" style={{ color: 'var(--drk)' }}>→</div>
+          </div>
+        </Link>
+
         <TriggeredRulesList rules={result.triggeredRules} />
         <LayeredRoadmapView roadmap={buildRoadmap(result.outcome.type, result.sizingType)} />
         <OpenItems answers={answers} />

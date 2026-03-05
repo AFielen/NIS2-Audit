@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import type { WizardState, WizardAnswers, Preset, RulesetQuestion, Grunddaten } from '@/lib/types';
 import { loadWizardState, saveWizardState, createEmptyState, clearWizardState } from '@/lib/storage';
@@ -34,6 +35,7 @@ export default function AssessmentWizard() {
   const [state, setState] = useState<WizardState>(createEmptyState);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [showResumePrompt, setShowResumePrompt] = useState(false);
+  const [hasExistingResult, setHasExistingResult] = useState(false);
   const [qrRestored, setQrRestored] = useState(false);
   const [validationErrors, setValidationErrors] = useState<Set<string>>(new Set());
 
@@ -67,6 +69,11 @@ export default function AssessmentWizard() {
     if (saved && Object.keys(saved.answers).length > 0) {
       setShowResumePrompt(true);
       setState(saved);
+      try {
+        if (localStorage.getItem('nis2-audit-result')) {
+          setHasExistingResult(true);
+        }
+      } catch { /* ignore */ }
     }
     setHasLoaded(true);
   }, [searchParams]);
@@ -252,6 +259,13 @@ export default function AssessmentWizard() {
               Neu beginnen
             </button>
           </div>
+          {hasExistingResult && (
+            <div className="mt-4 pt-4" style={{ borderTop: '1px solid var(--border)' }}>
+              <Link href="/ergebnis" className="text-sm hover:underline" style={{ color: 'var(--drk)' }}>
+                Letzten Bericht anzeigen →
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     );
