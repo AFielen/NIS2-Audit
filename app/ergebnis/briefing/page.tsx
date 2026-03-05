@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { AssessmentResult, WizardAnswers, Grunddaten } from '@/lib/types';
 import { generiereVorstandBriefing } from '@/lib/briefing/vorstand-briefing';
-import { encodeState } from '@/lib/state-codec';
 import { generateQrSvg } from '@/lib/qr-svg';
 import VorstandBriefingView from '@/components/results/VorstandBriefing';
 
@@ -32,15 +31,13 @@ export default function BriefingPage() {
   useEffect(() => {
     if (!result) return;
     try {
-      const encoded = encodeState({ answers, grunddaten });
       const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-      const stateUrl = `${baseUrl}/check?state=${encoded}`;
-      const svg = generateQrSvg(stateUrl, 80);
+      const svg = generateQrSvg(baseUrl, 80);
       setQrSvg(svg);
     } catch {
       // QR generation failed silently
     }
-  }, [result, answers, grunddaten]);
+  }, [result]);
 
   if (!loaded) {
     return (

@@ -18,6 +18,10 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ### Changed
 - **Lieferketten-Check → Indirekte Betroffenheit**: Modul umbenannt für bessere Verständlichkeit. Erweiterter Intro-Text erklärt warum indirekte Betroffenheit relevant ist. Anforderungs-Kacheln haben aufklappbare GF-Handlungshinweise. LK-06 Fragetext neutralisiert (ohne SoCura-Referenz). Feature-Cards auf Startseite für Kostenrechner und Indirekte Betroffenheit reaktiviert.
+- **Vorstandsbriefing: Kostenrechner-Hinweis**: Unter den orientierenden Kosten wird jetzt auf den detaillierten Kostenrechner verwiesen.
+- **Vorstandsbriefing: QR-Code repariert**: QR-Code zeigt jetzt die Basis-URL statt der komprimierten State-URL (die zu lang für zuverlässige QR-Kodierung bei 80px war).
+- **Ergebnis-Seite: Kostenrechner-Badge**: Prominenter Link zum Kostenrechner-Modul auf der Ergebnis-Seite.
+- **Self-Check Resume-Dialog: Bericht-Link**: Bei vorhandenen Ergebnissen zeigt der Wiederaufnahme-Dialog jetzt einen direkten Link zum letzten Bericht.
 - **Kostenrechner: Antwortbasierte Kostenberechnung**: Kosten werden jetzt anhand der Self-Check-Antworten (SEC-Fragen) reduziert. „Bereits umgesetzt" = 0 EUR, „Teilweise" = Minimalwert, „Nein" = volle Spanne. Gilt für einmalige und jährliche Kosten.
 - **Kostenrechner & Tracker: Self-Check-Pflicht**: Beide Module erfordern jetzt einen abgeschlossenen Self-Check, bevor Inhalte angezeigt werden.
 - **Kooperationsrechner ausgeblendet**: Temporär aus dem Kostenrechner entfernt.

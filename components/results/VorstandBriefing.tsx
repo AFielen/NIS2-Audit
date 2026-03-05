@@ -98,6 +98,9 @@ export default function VorstandBriefingView({ briefing, qrSvg }: VorstandBriefi
             <div className="font-bold text-sm" style={{ color: 'var(--drk)' }}>2–23 Mio. EUR</div>
           </div>
         </div>
+        <div className="text-xs mt-2" style={{ color: 'var(--text-muted)' }}>
+          Diese Werte sind eine grobe Orientierung. Eine detaillierte Aufschlüsselung nach §30-Maßnahmen — unter Berücksichtigung bereits umgesetzter Maßnahmen — finden Sie im Kostenrechner unter {briefing.toolUrl}/kosten
+        </div>
       </div>
 
       {/* Nächste Schritte */}
