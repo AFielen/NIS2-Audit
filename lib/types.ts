@@ -189,3 +189,176 @@ export interface Preset {
   description: string;
   answers: WizardAnswers;
 }
+
+// ── Modul 1: Kostenrechner Types ──
+
+export type KVGroesse = 'S' | 'M' | 'L';
+
+export interface KostenBereich {
+  id: string;
+  label: string;
+  paragraph: string;
+  einmalig: Record<KVGroesse, [number, number]>;
+  jaehrlich: Record<KVGroesse, [number, number]>;
+}
+
+export interface KostenErgebnis {
+  groesse: KVGroesse;
+  vzae: number;
+  einmaligMin: number;
+  einmaligMax: number;
+  jaehrlichMin: number;
+  jaehrlichMax: number;
+  bereiche: Array<{
+    id: string;
+    label: string;
+    paragraph: string;
+    einmaligMin: number;
+    einmaligMax: number;
+    jaehrlichMin: number;
+    jaehrlichMax: number;
+    teilweiseErfuellt: boolean;
+  }>;
+  kostenProVzaeJahr: number;
+  kooperationJaehrlichProKV: number;
+  vergleiche: {
+    bundesregierungSchätzungEinmalig: number;
+    bundesregierungSchätzungJaehrlich: number;
+    ransomwareSchadenDurchschnitt: number;
+    ransomwareSchadenMaxCaritas: number;
+    busseldMaxWichtig: number;
+    busseldMaxBesondersWichtig: number;
+    busseldNichtRegistrierung: number;
+  };
+}
+
+export interface RefinanzierungsPfad {
+  id: string;
+  titel: string;
+  rechtsgrundlage: string;
+  maxBetrag?: string;
+  deckungsgrad: 'hoch' | 'mittel' | 'gering' | 'unbekannt';
+  einmalig: boolean;
+  voraussetzungen: string[];
+  hinweis?: string;
+  antragsLink?: string;
+}
+
+export interface BundeslandProfil {
+  code: string;
+  name: string;
+  rdGesetz: string;
+  rdFinanzierungsModell: 'pauschale' | 'kostenerstattung' | 'mischmodell';
+  rdItKostenAnerkannt: boolean;
+  rdHinweis: string;
+  landesfoerderungIt: boolean;
+  landesfoerderungLink?: string;
+  pflegesatzPraxis: 'offen' | 'schwierig' | 'unklar';
+  pflegesatzHinweis: string;
+  pfade: RefinanzierungsPfad[];
+}
+
+// ── Modul 2: Compliance-Tracker Types ──
+
+export type AufgabenStatus = 'offen' | 'in_arbeit' | 'erledigt';
+export type AufgabenPhase = 1 | 2 | 3 | 4;
+
+export interface TrackerAufgabe {
+  id: string;
+  phase: AufgabenPhase;
+  phaseLabel: string;
+  titel: string;
+  beschreibung: string;
+  rechtsgrundlage: string;
+  fristTage: number;
+  prioritaet: 'kritisch' | 'hoch' | 'mittel';
+  verantwortlich?: string;
+  status: AufgabenStatus;
+  notiz?: string;
+  bsiLink?: string;
+}
+
+export interface PflichtDokument {
+  id: string;
+  nummer: number;
+  titel: string;
+  beschreibung: string;
+  rechtsgrundlage: string;
+  verantwortlich?: string;
+  status: AufgabenStatus;
+  vorhandeneVersion?: string;
+  bsiLink?: string;
+}
+
+export interface TrackerState {
+  aufgaben: Record<string, {
+    status: AufgabenStatus;
+    verantwortlich: string;
+    notiz: string;
+    erledigtAm?: string;
+  }>;
+  dokumente: Record<string, {
+    status: AufgabenStatus;
+    verantwortlich: string;
+    version: string;
+  }>;
+  startdatum: string;
+  letzteAktualisierung: string;
+}
+
+// ── Modul 3: Vorstand-Briefing Types ──
+
+export interface VorstandBriefing {
+  datum: string;
+  kvName: string;
+  vorstand: string;
+  betroffenheitLabel: string;
+  betroffenheitGrund: string;
+  einstufung: string;
+  pflichten: Array<{
+    titel: string;
+    status: 'offen' | 'unklar';
+    frist?: string;
+    paragraph: string;
+  }>;
+  haftungText: string;
+  busseldText: string;
+  kostenEinmaligMin: number;
+  kostenEinmaligMax: number;
+  kostenJaehrlichMin: number;
+  kostenJaehrlichMax: number;
+  naechsteSchritte: Array<{
+    schritt: number;
+    aktion: string;
+    frist: string;
+  }>;
+  toolUrl: string;
+}
+
+// ── Modul 4: Lieferketten-Check Types ──
+
+export interface LieferkettenFrage {
+  id: string;
+  frage: string;
+  erklaerung: string;
+  relevanzWennJa: string;
+}
+
+export interface LieferkettenAntworten {
+  [key: string]: boolean | undefined;
+}
+
+export interface LieferkettenAnforderung {
+  kategorie: string;
+  beschreibung: string;
+  wahrscheinlichkeit: 'sehr hoch' | 'hoch' | 'mittel';
+  rechtsgrundlage: string;
+}
+
+export interface LieferkettenErgebnis {
+  indirektBetroffen: boolean;
+  betroffeheitsgrad: 'hoch' | 'mittel' | 'gering' | 'keiner';
+  ausloesendeFragen: string[];
+  anforderungen: LieferkettenAnforderung[];
+  empfehlung: string;
+}

@@ -86,6 +86,9 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
           <button onClick={handlePrint} className="drk-btn-primary flex-1">
             Ergebnis drucken / als PDF speichern
           </button>
+          <Link href="/ergebnis/briefing" className="drk-btn-secondary flex-1 text-center">
+            Vorstand-Briefing
+          </Link>
           <button onClick={handleExportJSON} className="drk-btn-secondary flex-1">
             JSON exportieren
           </button>

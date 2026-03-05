@@ -247,4 +247,24 @@ details summary:focus-visible {
   .print-hide-toggle {
     display: none !important;
   }
+
+  /* Briefing print layout */
+  .briefing-page {
+    font-size: 11pt;
+    line-height: 1.4;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .briefing-page .drk-card {
+    page-break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+  }
+
+  /* Tracker print styles */
+  .tracker-no-print {
+    display: none !important;
+  }
 }

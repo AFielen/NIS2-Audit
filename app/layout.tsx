@@ -75,6 +75,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
+        {/* ── Navigation ── */}
+        <nav
+          className="flex gap-4 px-6 py-2 text-sm no-print overflow-x-auto"
+          style={{ background: '#c5050e', color: 'rgba(255,255,255,0.85)' }}
+        >
+          <Link href="/check" className="hover:underline whitespace-nowrap">Self-Check</Link>
+          <Link href="/kosten" className="hover:underline whitespace-nowrap">Kostenrechner</Link>
+          <Link href="/tracker" className="hover:underline whitespace-nowrap">Compliance-Tracker</Link>
+          <Link href="/lieferkette" className="hover:underline whitespace-nowrap">Lieferketten-Check</Link>
+        </nav>
+
         {/* ── Main Content ── */}
         <main className="flex-1">{children}</main>
 
