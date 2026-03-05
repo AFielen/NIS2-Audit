@@ -223,13 +223,15 @@ function computeRegistration(outcomeType: OutcomeType): RegistrationResult {
       };
     case 'B':
       return {
-        required: false,
+        required: true,
         recommended: false,
         deadline: '2026-03-06',
         url: BSI_REGISTRATION_URL,
         message:
-          'Voraussichtlich keine Registrierung erforderlich — ' +
-          'gilt nur bei belastbarer Schwellenwert- und Rechtsträgerprüfung.',
+          'Die Registrierung beim BSI ist auch bei begrenztem Scope erforderlich, ' +
+          'da Ihr Rettungsdienst direkt unter NIS-2 fällt. ' +
+          'Frist: 06.03.2026. Auch nach diesem Datum ist die Registrierung weiterhin möglich und sinnvoll, ' +
+          'verspätetes Handeln kann jedoch Sanktions- und Haftungsrisiken erhöhen.',
       };
     case 'A':
     default:

@@ -16,6 +16,9 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **Navigation**: Neue Navigationsleiste mit Links zu allen Modulen. Startseite um 4 Feature-Cards erweitert.
 - **Ergebnis-Seite**: Lieferketten-Check-Hinweis bei Outcome D. Vorstand-Briefing-Button in Export-Aktionen.
 
+### Fixed
+- **BSI-Registrierung bei Outcome B**: Bei Ergebnis B (direkt betroffen, Scope begrenzbar) wird die BSI-Registrierung jetzt korrekt als Pflicht angezeigt. Wer direkt unter NIS-2 fällt, muss sich registrieren — auch wenn der Scope durch harte Trennung begrenzt werden kann.
+
 ### Removed
 - **ORG-09 aus Organisations-Wizard entfernt**: Die VZÄ-Abfrage im Organisations-Schritt war redundant, da sie im Schwellenwert-Schritt (THR-01) ohnehin gestellt wird. Preset „Kreisverband mit RD als Abteilung" setzt VZÄ jetzt direkt auf THR-01.
 
