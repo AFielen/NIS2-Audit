@@ -1,7 +1,35 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-https://drk-nis2.de}
+        NEXT_PUBLIC_ABSTIMMUNG_URL: ${NEXT_PUBLIC_ABSTIMMUNG_URL:-https://drk-abstimmung.de}
+        NEXT_PUBLIC_SELBSTAUSKUNFT_URL: ${NEXT_PUBLIC_SELBSTAUSKUNFT_URL:-https://drk-selbstauskunft.de}
     container_name: nis2-audit
+    restart: unless-stopped
+    networks:
+      - caddy-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+
+  # Lokale Entwicklung: docker compose --profile dev up app-dev
+  app-dev:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_APP_URL: http://localhost:3000
+    container_name: nis2-audit-dev
     ports:
       - "3000:3000"
     restart: unless-stopped
+    profiles:
+      - dev
+
+networks:
+  caddy-net:
+    external: true

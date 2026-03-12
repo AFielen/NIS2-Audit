@@ -45,8 +45,7 @@ const nextConfig: NextConfig = {
 };
 ```
 
-**Hosting:** GitHub Pages, Cloudflare Pages, jeder statische Webserver.
-**Kein Docker nötig.**
+**Hosting:** GitHub Pages, jeder statische Webserver, oder per Docker + Reverse Proxy.
 
 ### Variante B: Server (Node.js Backend)
 
@@ -102,6 +101,89 @@ services:
 | Reicht GitHub Pages? | Ja | Nein |
 
 **Wenn unklar:** Erst statisch starten. Server kann nachgerüstet werden.
+
+---
+
+## Architektur: NIS-2 Audit (dieses Projekt)
+
+### Überblick
+
+Die NIS-2 Audit App ist eine **statische App** (`output: 'export'`), die als Docker-Container mit nginx auf einem VPS läuft. SSL-Terminierung und Routing übernimmt ein **externer Caddy Reverse Proxy** (separater Container, nicht Teil dieses Repos).
+
+```
+Internet → Caddy (SSL, drk-nis2.de) → nis2-audit:3000 (nginx, statische Dateien)
+```
+
+### Domain
+
+- **Produktion:** https://drk-nis2.de
+- **Container-Name:** `nis2-audit`
+
+### Docker-Netzwerk
+
+Alle DRK-Apps teilen sich ein gemeinsames Docker-Netzwerk `caddy-net`:
+
+```bash
+# Einmalig auf dem VPS anlegen:
+docker network create caddy-net
+```
+
+Das Netzwerk wird in `docker-compose.yml` als `external: true` referenziert. Der Container exponiert **keine Ports nach außen** — er ist nur intern über `nis2-audit:3000` erreichbar.
+
+### Caddy-Konfiguration (Referenz)
+
+Die Caddy-Konfiguration liegt NICHT in diesem Repo, sondern im zentralen Caddy-Container. Zur Referenz:
+
+```
+drk-nis2.de {
+    reverse_proxy nis2-audit:3000
+}
+```
+
+### Umgebungsvariablen
+
+Alle konfigurierbaren Werte werden über Umgebungsvariablen gesteuert (siehe `.env.example`):
+
+| Variable | Zweck | Default |
+|---|---|---|
+| `NEXT_PUBLIC_APP_URL` | Basis-URL der App | `https://drk-nis2.de` |
+| `NEXT_PUBLIC_ABSTIMMUNG_URL` | Link zur Abstimmungs-App | `https://drk-abstimmung.de` |
+| `NEXT_PUBLIC_SELBSTAUSKUNFT_URL` | Link zur Selbstauskunft-App | `https://drk-selbstauskunft.de` |
+
+**Wichtig:** `NEXT_PUBLIC_`-Variablen werden zur **Build-Zeit** im statischen Export inlined. Daher werden sie im Dockerfile als `ARG` + `ENV` gesetzt und in `docker-compose.yml` als `build.args` übergeben.
+
+### Deployment auf dem VPS
+
+```bash
+# 1. Repository klonen
+git clone https://github.com/AFielen/NIS2-Audit.git
+cd NIS2-Audit
+
+# 2. .env anlegen (optional — Defaults sind gesetzt)
+cp .env.example .env
+# Werte anpassen falls nötig
+
+# 3. Container bauen und starten
+docker compose up -d --build
+
+# 4. Aktualisieren
+git pull
+docker compose up -d --build
+```
+
+### Lokale Entwicklung
+
+**Ohne Docker (empfohlen):**
+```bash
+npm install
+npm run dev
+```
+
+**Mit Docker (dev-Profil, exponiert Port 3000):**
+```bash
+docker network create caddy-net 2>/dev/null || true
+docker compose --profile dev up app-dev --build
+```
 
 ---
 

@@ -62,20 +62,35 @@ npm run dev
 
 Öffne [http://localhost:3000](http://localhost:3000).
 
-### Docker (VPS)
+### Docker (VPS mit Caddy Reverse Proxy)
 
 ```bash
+# Voraussetzung: caddy-net Netzwerk existiert
+docker network create caddy-net 2>/dev/null || true
+
 git clone https://github.com/AFielen/NIS2-Audit.git
 cd NIS2-Audit
+cp .env.example .env   # Optional: Defaults anpassen
 docker compose up -d --build
 ```
 
-Die App läuft auf Port `3000`. Zum Aktualisieren:
+Der Container ist intern über `nis2-audit:3000` erreichbar. SSL-Terminierung übernimmt ein externer Caddy Reverse Proxy.
+
+Zum Aktualisieren:
 
 ```bash
 git pull
 docker compose up -d --build
 ```
+
+### Docker (lokale Entwicklung)
+
+```bash
+docker network create caddy-net 2>/dev/null || true
+docker compose --profile dev up app-dev --build
+```
+
+Die App läuft auf [http://localhost:3000](http://localhost:3000).
 
 ---
 

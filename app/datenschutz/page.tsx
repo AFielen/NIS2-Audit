@@ -62,18 +62,9 @@ export default function Datenschutz() {
             <section>
               <h3 className="font-bold mb-2" style={{ color: 'var(--text)' }}>6. Hosting</h3>
               <p>
-                Diese Anwendung wird über Cloudflare (CDN/DDoS-Schutz) bereitgestellt.
-                Cloudflare kann technisch bedingt Zugriffsdaten (IP-Adresse, Zeitstempel) temporär verarbeiten.
-                Details finden Sie in der{' '}
-                <a
-                  href="https://www.cloudflare.com/privacypolicy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: 'var(--drk)' }}
-                  className="hover:underline"
-                >
-                  Datenschutzerklärung von Cloudflare
-                </a>.
+                Diese Anwendung wird auf einem eigenen Server (VPS) in Deutschland gehostet.
+                Dabei werden ausschließlich technisch notwendige Zugriffsdaten (IP-Adresse, Zeitstempel)
+                in Server-Logdateien temporär gespeichert. Es werden keine Daten an Drittanbieter übermittelt.
               </p>
             </section>
 

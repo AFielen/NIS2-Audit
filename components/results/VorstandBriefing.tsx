@@ -80,7 +80,7 @@ export default function VorstandBriefingView({ briefing, qrSvg }: VorstandBriefi
         <h2 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>
           Kosten (Orientierung)
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <div className="p-3 rounded-lg" style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}>
             <div className="text-xs" style={{ color: 'var(--text-muted)' }}>Einmalig</div>
             <div className="font-bold text-sm" style={{ color: 'var(--text)' }}>
