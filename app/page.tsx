@@ -204,7 +204,7 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <a
-              href="https://abstimmung.henryagi.de"
+              href={process.env.NEXT_PUBLIC_ABSTIMMUNG_URL || 'https://drk-abstimmung.de'}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"
@@ -229,7 +229,7 @@ export default function Home() {
             </a>
 
             <a
-              href="https://selbstauskunft.henryagi.de/"
+              href={process.env.NEXT_PUBLIC_SELBSTAUSKUNFT_URL || 'https://drk-selbstauskunft.de'}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"

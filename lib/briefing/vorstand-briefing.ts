@@ -84,6 +84,6 @@ export function generiereVorstandBriefing(
       },
     ],
 
-    toolUrl: 'https://nis2.henryagi.de',
+    toolUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://drk-nis2.de',
   };
 }

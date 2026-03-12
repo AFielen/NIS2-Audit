@@ -8,6 +8,27 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- **Produktions-Migration**: App von `nis2.henryagi.de` (Cloudflare Tunnel) auf eigene Domain `drk-nis2.de` migriert. Läuft jetzt auf eigenem VPS mit Caddy Reverse Proxy.
+- **Docker-Setup optimiert**: Container läuft im gemeinsamen `caddy-net` Netzwerk (external), keine Ports nach außen exponiert. Health-Check hinzugefügt. Dev-Profil für lokale Entwicklung mit exponierten Ports.
+- **Domain-Referenzen konfigurierbar**: Alle hardcodierten URLs (`henryagi.de`) durch Umgebungsvariablen (`NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_ABSTIMMUNG_URL`, `NEXT_PUBLIC_SELBSTAUSKUNFT_URL`) ersetzt.
+- **Datenschutzerklärung aktualisiert**: Cloudflare-Referenzen entfernt, Hosting-Beschreibung auf eigenen VPS in Deutschland aktualisiert.
+- **CLAUDE.md erweitert**: Neue Architektur-Sektion mit Caddy-Setup, Docker-Netzwerk, Umgebungsvariablen und Deployment-Anleitung.
+- **Dockerfile optimiert**: `NEXT_PUBLIC_`-Variablen als `ARG` + `ENV` für korrektes Build-Time-Inlining. Health-Check im Container.
+- **Tablet-Responsive**: 3-Spalten-Grids in ExecutiveSummary und VorstandBriefing auf `sm:2 / lg:3` angepasst für bessere Lesbarkeit auf Tablets.
+
+### Added
+- **`.env.example`**: Dokumentiert alle Umgebungsvariablen mit Defaults.
+- **Docker dev-Profil**: `docker compose --profile dev up app-dev` für lokale Entwicklung mit Port-Mapping.
+
+### Removed
+- **Cloudflare-Tunnel-Konfiguration**: Alle Cloudflare-Referenzen aus Code und Dokumentation entfernt.
+- **Duplicate `logo.png`**: Redundante Kopie im Root-Verzeichnis entfernt (nur noch `public/logo.png`).
+- **`Claude Code Anweisung v2.md`**: Veraltete Anweisungsdatei entfernt.
+
+### Security
+- **`.dockerignore` erweitert**: `.env`-Dateien werden nicht in den Docker-Build-Kontext kopiert.
+
 ### Added
 - **BSI-Registrierungsstatus**: Neue Frage (REG-01) in Wizard-Schritt 5 fragt ab, ob die BSI-Registrierung bereits erfolgt ist. Ergebnis-Anzeige passt sich dynamisch an (abgeschlossen/in Bearbeitung/ausstehend). Registrierungsfrist-Texte auf Vergangenheitsform aktualisiert (Frist war 06.03.2026). Vorstandsbriefing reflektiert Registrierungsstatus.
 - **Modul 3: Vorstand-Briefing-Generator**: Druckfertiger A4-Einseiter für Vorstandssitzungen unter `/ergebnis/briefing`. Generiert sich automatisch aus Self-Check-Ergebnis mit Betroffenheit, Pflichten, Haftung, Kosten und nächsten Schritten.
