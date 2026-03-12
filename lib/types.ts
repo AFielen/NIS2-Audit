@@ -158,6 +158,7 @@ export interface TriggeredRuleInfo {
 export interface RegistrationResult {
   required: boolean;
   recommended: boolean;
+  alreadyRegistered: boolean;
   deadline: string;
   url: string;
   message: string;
@@ -318,7 +319,7 @@ export interface VorstandBriefing {
   einstufung: string;
   pflichten: Array<{
     titel: string;
-    status: 'offen' | 'unklar';
+    status: 'offen' | 'unklar' | 'erledigt';
     frist?: string;
     paragraph: string;
   }>;
