@@ -25,7 +25,7 @@ const SECTION_DESCRIPTIONS: Record<string, string> = {
   ops: 'Rettungsdienstliche Leistungen und sektorale Zuordnung.',
   thresholds: 'Schwellenwerte des relevanten Rechtsträgers (VZÄ, Umsatz, Bilanzsumme).',
   it: 'Gemeinsame IT-Infrastruktur zwischen Einheiten.',
-  separation: 'Harte technische Trennung zwischen Rettungsdienst und restlichem Verband.',
+  separation: 'Harte technische Trennung zwischen Rettungsdienst und restlichem Verband. Außerdem: BSI-Registrierungsstatus.',
   security: 'Sicherheitsreife: 12 Kernkontrollen nach NIS-2/BSIG.',
 };
 

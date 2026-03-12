@@ -30,8 +30,8 @@ export function generiereVorstandBriefing(
     pflichten: [
       {
         titel: 'Registrierung beim BSI',
-        status: 'offen',
-        frist: '06.03.2026',
+        status: result.registration.alreadyRegistered ? 'erledigt' : 'offen',
+        frist: '06.03.2026 (Frist abgelaufen — weiterhin möglich)',
         paragraph: '§33 BSIG',
       },
       {
@@ -72,8 +72,10 @@ export function generiereVorstandBriefing(
       },
       {
         schritt: 2,
-        aktion: 'BSI-Registrierung abschließen (ELSTER-Zertifikat beantragen, dauert 5+ Werktage)',
-        frist: '06.03.2026',
+        aktion: result.registration.alreadyRegistered
+          ? 'BSI-Registrierung bereits abgeschlossen — Daten aktuell halten'
+          : 'BSI-Registrierung abschließen (ELSTER-Zertifikat beantragen, dauert 5+ Werktage)',
+        frist: result.registration.alreadyRegistered ? 'erledigt' : 'schnellstmöglich (Frist war 06.03.2026)',
       },
       {
         schritt: 3,

@@ -196,50 +196,81 @@ function computeScoring(answers: WizardAnswers): {
 const BSI_REGISTRATION_URL =
   'https://www.bsi.bund.de/DE/Themen/Regulierte-Wirtschaft/NIS-2-regulierte-Unternehmen/NIS-2-Anleitung-Registrierung/Anleitung-Registrierung_node.html';
 
-function computeRegistration(outcomeType: OutcomeType): RegistrationResult {
+function computeRegistration(outcomeType: OutcomeType, answers: WizardAnswers): RegistrationResult {
+  const regStatus = answers['REG-01'] as string | undefined;
+  const alreadyRegistered = regStatus === 'yes';
+
+  // Base result per outcome
+  const base = { deadline: '2026-03-06', url: BSI_REGISTRATION_URL, alreadyRegistered };
+
+  // If already registered, return success message regardless of outcome
+  if (alreadyRegistered) {
+    return {
+      ...base,
+      required: outcomeType !== 'A',
+      recommended: false,
+      message:
+        'Die BSI-Registrierung wurde bereits abgeschlossen. ' +
+        'Stellen Sie sicher, dass die hinterlegten Daten aktuell bleiben und Änderungen zeitnah gemeldet werden.',
+    };
+  }
+
+  // If registration is in progress
+  if (regStatus === 'in_progress') {
+    const urgencyPrefix = outcomeType === 'C' || outcomeType === 'B'
+      ? 'Die BSI-Registrierung ist für Ihre Einrichtung erforderlich und befindet sich in Bearbeitung. '
+      : outcomeType === 'D'
+        ? 'Die BSI-Registrierung wird dringend empfohlen und befindet sich in Bearbeitung. '
+        : 'Die BSI-Registrierung befindet sich in Bearbeitung. ';
+    return {
+      ...base,
+      required: outcomeType === 'C' || outcomeType === 'B',
+      recommended: outcomeType === 'D',
+      message: urgencyPrefix + 'Bitte schließen Sie den Vorgang zeitnah ab — ' +
+        'die Registrierungsfrist war der 06.03.2026, verspätetes Handeln kann Sanktions- und Haftungsrisiken erhöhen.',
+    };
+  }
+
+  // Not registered or unknown
   switch (outcomeType) {
     case 'C':
       return {
+        ...base,
         required: true,
         recommended: false,
-        deadline: '2026-03-06',
-        url: BSI_REGISTRATION_URL,
         message:
           'Die Registrierung beim BSI ist für Ihre Einrichtung erforderlich. ' +
-          'Frist: 06.03.2026. Auch nach diesem Datum ist die Registrierung weiterhin möglich und sinnvoll, ' +
+          'Die Registrierungsfrist war der 06.03.2026. Die Registrierung ist weiterhin möglich und sinnvoll, ' +
           'verspätetes Handeln kann jedoch Sanktions- und Haftungsrisiken erhöhen.',
       };
     case 'D':
       return {
+        ...base,
         required: false,
         recommended: true,
-        deadline: '2026-03-06',
-        url: BSI_REGISTRATION_URL,
         message:
           'Die Registrierung beim BSI wird dringend empfohlen (konservative Einschätzung), ' +
           'sofern Rettungsdienst erbracht wird und Schwellenwerte nicht belastbar geklärt sind. ' +
-          'Frist: 06.03.2026. Auch nach diesem Datum ist die Registrierung weiterhin möglich und sinnvoll, ' +
+          'Die Registrierungsfrist war der 06.03.2026. Die Registrierung ist weiterhin möglich und sinnvoll, ' +
           'verspätetes Handeln kann jedoch Sanktions- und Haftungsrisiken erhöhen.',
       };
     case 'B':
       return {
+        ...base,
         required: true,
         recommended: false,
-        deadline: '2026-03-06',
-        url: BSI_REGISTRATION_URL,
         message:
           'Die Registrierung beim BSI ist auch bei begrenztem Scope erforderlich, ' +
           'da Ihr Rettungsdienst direkt unter NIS-2 fällt. ' +
-          'Frist: 06.03.2026. Auch nach diesem Datum ist die Registrierung weiterhin möglich und sinnvoll, ' +
+          'Die Registrierungsfrist war der 06.03.2026. Die Registrierung ist weiterhin möglich und sinnvoll, ' +
           'verspätetes Handeln kann jedoch Sanktions- und Haftungsrisiken erhöhen.',
       };
     case 'A':
     default:
       return {
+        ...base,
         required: false,
         recommended: false,
-        deadline: '2026-03-06',
-        url: BSI_REGISTRATION_URL,
         message: 'Keine Registrierung beim BSI erforderlich.',
       };
   }
@@ -310,7 +341,7 @@ export function evaluateAssessment(answers: WizardAnswers, grunddaten?: Grunddat
     .filter((x): x is { packId: string; title: string; items: string[] } => x != null);
 
   // Compute BSI registration requirement based on outcome
-  const registration = computeRegistration(outcomeType);
+  const registration = computeRegistration(outcomeType, answers);
 
   // Derive S/M/L sizing from Gesamt-VZÄ des Verbands (Grunddaten)
   const effectiveVZAE = grunddaten?.gesamtVzae != null && grunddaten.gesamtVzae > 0

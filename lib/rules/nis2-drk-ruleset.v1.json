@@ -672,6 +672,39 @@
       ]
     },
     {
+      "id": "REG-01",
+      "section": "separation",
+      "label": "Wurde die BSI-Registrierung bereits durchgeführt?",
+      "hint": "Die Registrierungsfrist war der 06.03.2026. Auch danach ist eine Registrierung weiterhin möglich und dringend empfohlen. Falls Sie sich unsicher sind, prüfen Sie dies über das BSI-Portal.",
+      "type": "single_select",
+      "options": [
+        {
+          "value": "yes",
+          "label": "Ja, Registrierung ist abgeschlossen"
+        },
+        {
+          "value": "in_progress",
+          "label": "In Bearbeitung"
+        },
+        {
+          "value": "no",
+          "label": "Nein, noch nicht begonnen"
+        },
+        {
+          "value": "unknown",
+          "label": "Nicht bekannt"
+        }
+      ],
+      "required": true,
+      "visibleIf": [
+        {
+          "questionId": "OPS-01",
+          "op": "eq",
+          "value": "yes"
+        }
+      ]
+    },
+    {
       "id": "SEC-01",
       "section": "security",
       "label": "Governance: Verantwortliche Rolle (CISO/IT-Sicherheitsbeauftragter) benannt und dokumentiert?",

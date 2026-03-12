@@ -9,6 +9,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **BSI-Registrierungsstatus**: Neue Frage (REG-01) in Wizard-Schritt 5 fragt ab, ob die BSI-Registrierung bereits erfolgt ist. Ergebnis-Anzeige passt sich dynamisch an (abgeschlossen/in Bearbeitung/ausstehend). Registrierungsfrist-Texte auf Vergangenheitsform aktualisiert (Frist war 06.03.2026). Vorstandsbriefing reflektiert Registrierungsstatus.
 - **Modul 3: Vorstand-Briefing-Generator**: Druckfertiger A4-Einseiter für Vorstandssitzungen unter `/ergebnis/briefing`. Generiert sich automatisch aus Self-Check-Ergebnis mit Betroffenheit, Pflichten, Haftung, Kosten und nächsten Schritten.
 - **Modul 1: Kostenrechner**: Bundesland-spezifische NIS-2-Kostenberechnung unter `/kosten`. 11 Kostenbereiche nach §30 BSIG, Kooperationsrechner (2–15 KV), Refinanzierungspfade für alle 16 Bundesländer, druckbare Haushaltsvorlage.
 - **Modul 4: Lieferketten-Check**: Indirekte NIS-2-Betroffenheitsprüfung unter `/lieferkette`. 6 Ja/Nein-Fragen zur Lieferkettenrelevanz, Anforderungskatalog, Handlungsempfehlung.

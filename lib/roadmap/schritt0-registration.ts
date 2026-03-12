@@ -13,7 +13,7 @@ export const schritt0Registration: RoadmapLayer = {
     },
     {
       title: 'BSI-Registrierung vorbereiten und einreichen',
-      description: 'Registrierung über das BSI-Portal vorbereiten. Frist: 06.03.2026 — auch danach noch möglich, aber Verzögerung erhöht Haftungsrisiko.',
+      description: 'Registrierung über das BSI-Portal vorbereiten. Registrierungsfrist war der 06.03.2026 — auch danach weiterhin möglich, aber Verzögerung erhöht Haftungsrisiko.',
       owner: 'IT-Leitung / ISB',
       priority: 'hoch',
     },

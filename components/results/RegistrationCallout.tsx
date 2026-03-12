@@ -40,27 +40,41 @@ function InfoIcon() {
 }
 
 export default function RegistrationCallout({ registration, outcomeType }: RegistrationCalloutProps) {
-  const isUrgent = registration.required || registration.recommended;
+  const isUrgent = (registration.required || registration.recommended) && !registration.alreadyRegistered;
 
-  const borderColor = registration.required
-    ? 'var(--drk)'
-    : registration.recommended
-      ? '#b45309'
-      : 'var(--success)';
+  const borderColor = registration.alreadyRegistered
+    ? 'var(--success)'
+    : registration.required
+      ? 'var(--drk)'
+      : registration.recommended
+        ? '#b45309'
+        : 'var(--success)';
 
-  const bgColor = registration.required
-    ? 'var(--drk-bg)'
-    : registration.recommended
-      ? 'var(--warning-bg)'
-      : 'var(--success-bg)';
+  const bgColor = registration.alreadyRegistered
+    ? 'var(--success-bg)'
+    : registration.required
+      ? 'var(--drk-bg)'
+      : registration.recommended
+        ? 'var(--warning-bg)'
+        : 'var(--success-bg)';
 
-  const statusLabel = registration.required
-    ? 'ERFORDERLICH'
-    : registration.recommended
-      ? 'DRINGEND EMPFOHLEN'
-      : outcomeType === 'B'
-        ? 'VORAUSSICHTLICH NICHT ERFORDERLICH'
-        : 'NICHT ERFORDERLICH';
+  const statusLabel = registration.alreadyRegistered
+    ? 'ABGESCHLOSSEN'
+    : registration.required
+      ? 'ERFORDERLICH'
+      : registration.recommended
+        ? 'DRINGEND EMPFOHLEN'
+        : outcomeType === 'B'
+          ? 'VORAUSSICHTLICH NICHT ERFORDERLICH'
+          : 'NICHT ERFORDERLICH';
+
+  const icon = registration.alreadyRegistered
+    ? <CheckCircleIcon />
+    : isUrgent
+      ? <AlertIcon />
+      : outcomeType === 'A'
+        ? <CheckCircleIcon />
+        : <InfoIcon />;
 
   return (
     <div
@@ -69,7 +83,7 @@ export default function RegistrationCallout({ registration, outcomeType }: Regis
     >
       <div className="flex items-start gap-3 mb-3">
         <div className="shrink-0 mt-0.5" style={{ color: borderColor }}>
-          {isUrgent ? <AlertIcon /> : outcomeType === 'A' ? <CheckCircleIcon /> : <InfoIcon />}
+          {icon}
         </div>
         <div>
           <h3 className="font-bold" style={{ color: 'var(--text)' }}>
@@ -125,7 +139,7 @@ export default function RegistrationCallout({ registration, outcomeType }: Regis
         href={registration.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="drk-btn-primary inline-flex items-center gap-2 text-sm"
+        className={`${registration.alreadyRegistered ? 'drk-btn-secondary' : 'drk-btn-primary'} inline-flex items-center gap-2 text-sm`}
       >
         BSI-Registrierungsanleitung öffnen
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
