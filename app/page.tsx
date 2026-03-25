@@ -254,7 +254,9 @@ export default function Home() {
             </a>
 
             <a
-              href="#"
+              href="https://drk-digital.io"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"
               style={{ borderColor: 'var(--border)' }}
             >
@@ -277,7 +279,9 @@ export default function Home() {
             </a>
 
             <a
-              href="#"
+              href="https://drk-digital.io"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-start gap-3 p-3 rounded-lg border transition-colors hover:border-gray-300"
               style={{ borderColor: 'var(--border)' }}
             >
