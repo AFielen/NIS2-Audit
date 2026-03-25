@@ -28,7 +28,7 @@ export default function LieferkettePage() {
     try {
       const raw = localStorage.getItem('nis2-lieferkette-antworten');
       if (raw) setAntworten(JSON.parse(raw));
-    } catch { /* ignore */ }
+    } catch (e) { console.warn('localStorage read failed:', e); }
     setLoaded(true);
   }, []);
 
@@ -37,7 +37,7 @@ export default function LieferkettePage() {
     setAntworten(updated);
     try {
       localStorage.setItem('nis2-lieferkette-antworten', JSON.stringify(updated));
-    } catch { /* ignore */ }
+    } catch (e) { console.warn('localStorage write failed:', e); }
   };
 
   if (!loaded) {
