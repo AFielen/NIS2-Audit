@@ -482,6 +482,46 @@ Für das exakte Format: READMEs in https://github.com/AFielen/abstimmung und htt
 
 ---
 
+## Claude Code Subagenten & Skills
+
+Dieses Repo enthält im `.claude/`-Ordner Skills und Agents für autonome Claude Code Subagenten.
+
+### Verfügbare Skills
+
+- **Coding Skills** (`coding-workflow`, `commit-push-pr`, `pr-description`, `code-simplifier`, `code-review`): Für Repository-Arbeit, Code schreiben, Git-Operationen, Pull Requests und Code-Qualität
+- **Data Skills** (`data-triage`, `data-analyst`, `data-model-explorer`): Für Datenbank-Queries, Metriken, Datenanalyse und Visualisierungen
+- **Preset Skills** (`coding-presets`): Kontextabhängige Prompt-Vorlagen und Workflow-Steuerung für Bugs, Features, Reviews, Refactoring, Audits
+- **Repo Skills** (`repo-skills`): Nach dem Klonen eines Repos Skills scannen und indexieren
+- **DRK PostgreSQL** (`drk-postgres`): PostgreSQL 16 & Drizzle ORM Best Practices für Variante-B-Apps
+
+Den passenden Skill je nach Aufgabe laden. Bei Aufgaben mit Code und Daten beide laden. Nach dem Klonen eines Repos immer `repo-skills` laden.
+
+### Execution Rules (für Subagenten)
+
+- NICHT stagnieren. Wenn ein Ansatz nicht funktioniert, sofort einen anderen versuchen.
+- NICHT endlos die Codebase erkunden. Schnell orientieren, dann Änderungen machen.
+- Wenn ein Tool fehlt (z.B. `rg`), eine Alternative nutzen (z.B. `grep -r`) und weitermachen.
+- Wenn eine Git-Operation fehlschlägt, einen anderen Ansatz versuchen (z.B. `gh repo clone` statt `git clone`).
+- Fokussiert auf das Ziel bleiben. Keine Tangenten oder unrelatierten Code untersuchen.
+- Nach mehreren Retries abbrechen und berichten, was schiefgelaufen ist.
+
+### Repo Conventions (für Subagenten)
+
+Nach dem Klonen eines Repositories sofort prüfen und lesen:
+- `CLAUDE.md` — Claude Code Anweisungen und Projekt-Konventionen
+- `AGENTS.md` — Agenten-spezifische Anweisungen
+
+Alle Anweisungen und Konventionen aus diesen Dateien befolgen. Bei Konflikten haben die Repo-Dateien Vorrang.
+
+### Core Rules (für Subagenten)
+
+- Alle Änderungen müssen den Coding-Standards des Projekts folgen
+- NIEMALS PRs approven — nur erstellen und kommentieren
+- Aufgabe autonom abschließen und PR(s) erstellen
+- Vor dem Beenden: Komplette finale Antwort nach `/tmp/claude_code_output.md` schreiben
+
+---
+
 ## Kontakt
 
 DRK Kreisverband StädteRegion Aachen e.V.
