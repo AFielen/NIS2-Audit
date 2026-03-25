@@ -73,7 +73,7 @@ export default function AssessmentWizard() {
         if (localStorage.getItem('nis2-audit-result')) {
           setHasExistingResult(true);
         }
-      } catch { /* ignore */ }
+      } catch (e) { console.warn('localStorage read failed:', e); }
     }
     setHasLoaded(true);
   }, [searchParams]);
@@ -225,8 +225,8 @@ export default function AssessmentWizard() {
       localStorage.setItem('nis2-audit-result', JSON.stringify(result));
       localStorage.setItem('nis2-audit-answers', JSON.stringify(state.answers));
       localStorage.setItem('nis2-audit-grunddaten', JSON.stringify(state.grunddaten));
-    } catch {
-      // silently fail
+    } catch (e) {
+      console.warn('localStorage write failed:', e);
     }
     router.push('/ergebnis');
   }, [state, router]);

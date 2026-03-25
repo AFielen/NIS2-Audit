@@ -33,8 +33,8 @@ export default function ErgebnisPage() {
       if (grunddatenRaw) {
         setGrunddaten(JSON.parse(grunddatenRaw));
       }
-    } catch {
-      // ignore
+    } catch (e) {
+      console.warn('localStorage read failed:', e);
     }
     setLoaded(true);
   }, []);

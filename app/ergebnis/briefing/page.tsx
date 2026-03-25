@@ -22,8 +22,8 @@ export default function BriefingPage() {
       if (resultRaw) setResult(JSON.parse(resultRaw));
       if (answersRaw) setAnswers(JSON.parse(answersRaw));
       if (grunddatenRaw) setGrunddaten(JSON.parse(grunddatenRaw));
-    } catch {
-      // ignore
+    } catch (e) {
+      console.warn('localStorage read failed:', e);
     }
     setLoaded(true);
   }, []);
@@ -31,11 +31,11 @@ export default function BriefingPage() {
   useEffect(() => {
     if (!result) return;
     try {
-      const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL || (typeof window !== 'undefined' ? window.location.origin : '');
       const svg = generateQrSvg(baseUrl, 80);
       setQrSvg(svg);
-    } catch {
-      // QR generation failed silently
+    } catch (e) {
+      console.warn('QR code generation failed:', e);
     }
   }, [result]);
 

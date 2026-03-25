@@ -19,12 +19,12 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
   useEffect(() => {
     try {
       const encoded = encodeState({ answers, grunddaten });
-      const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL || (typeof window !== 'undefined' ? window.location.origin : '');
       const stateUrl = `${baseUrl}/check?state=${encoded}`;
       const svg = generateQrSvg(stateUrl, 120);
       setQrSvg(svg);
-    } catch {
-      // QR generation failed silently
+    } catch (e) {
+      console.warn('QR code generation failed:', e);
     }
   }, [answers, grunddaten]);
 
@@ -42,6 +42,7 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
       {qrSvg && (
         <div className="hidden print:block drk-card" style={{ pageBreakInside: 'avoid' }}>
           <div className="flex items-start gap-4">
+            {/* Safe: qrSvg is generated internally by lib/qr-svg.ts, not from user input */}
             <div dangerouslySetInnerHTML={{ __html: qrSvg }} className="shrink-0" />
             <div>
               <h3 className="font-bold text-sm mb-1" style={{ color: 'var(--text)' }}>
@@ -62,6 +63,7 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
       {qrSvg && (
         <div className="drk-card drk-fade-in no-print">
           <div className="flex flex-col sm:flex-row items-start gap-4">
+            {/* Safe: qrSvg is generated internally by lib/qr-svg.ts, not from user input */}
             <div dangerouslySetInnerHTML={{ __html: qrSvg }} className="shrink-0 rounded border mx-auto sm:mx-0" style={{ borderColor: 'var(--border)', padding: '4px' }} />
             <div>
               <h3 className="font-bold text-sm mb-1" style={{ color: 'var(--text)' }}>
@@ -104,7 +106,7 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
                 localStorage.removeItem('nis2-audit-wizard-state');
                 localStorage.removeItem('nis2-audit-result');
                 localStorage.removeItem('nis2-audit-answers');
-              } catch { /* ignore */ }
+              } catch (e) { console.warn('localStorage clear failed:', e); }
               window.location.href = '/check';
             }}
             className="drk-btn-secondary flex-1"

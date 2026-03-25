@@ -131,6 +131,7 @@ export default function VorstandBriefingView({ briefing, qrSvg }: VorstandBriefi
         <div>
           {qrSvg && (
             <div className="flex items-center gap-2">
+              {/* Safe: qrSvg is generated internally by lib/qr-svg.ts, not from user input */}
               <div dangerouslySetInnerHTML={{ __html: qrSvg }} className="shrink-0" />
               <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
                 Detailanalyse:<br />{briefing.toolUrl}

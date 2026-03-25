@@ -34,8 +34,8 @@ export default function KostenPage() {
       if (resultRaw) setResult(JSON.parse(resultRaw));
       if (answersRaw) setAnswers(JSON.parse(answersRaw));
       if (blRaw) setBundesland(blRaw);
-    } catch {
-      // ignore
+    } catch (e) {
+      console.warn('localStorage read failed:', e);
     }
     setLoaded(true);
   }, []);
@@ -44,7 +44,7 @@ export default function KostenPage() {
     setBundesland(code);
     try {
       localStorage.setItem('nis2-kosten-bundesland', code);
-    } catch { /* ignore */ }
+    } catch (e) { console.warn('localStorage write failed:', e); }
   };
 
   if (!loaded) {

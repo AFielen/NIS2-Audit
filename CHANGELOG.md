@@ -9,6 +9,16 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Error Boundary**: `ErrorBoundary`-Komponente in `components/ErrorBoundary.tsx` erstellt und in `app/layout.tsx` integriert. Zeigt benutzerfreundliche Fehlermeldung statt leerer Seite bei unerwarteten Rendering-Fehlern.
+
+### Fixed
+- **Silent Catch Blocks**: Alle stummen `catch { /* ignore */ }` Blöcke durch `console.warn()` mit beschreibenden Meldungen ersetzt (AssessmentWizard, ExportActions, Kosten, Lieferkette, Tracker, Ergebnis, Briefing).
+- **Accessibility**: `aria-hidden="true"` zu allen dekorativen SVG-Icons in `app/page.tsx` und `app/layout.tsx` hinzugefügt, um Screenreader-Verwirrung zu vermeiden.
+- **Hardcodierte Farbe**: `#eff6ff` in `app/page.tsx` durch CSS-Variable `var(--info-bg)` ersetzt.
+- **QR-Code Base-URL**: `window.location.origin` durch `process.env.NEXT_PUBLIC_APP_URL` mit Fallback ersetzt (`ExportActions.tsx`, `briefing/page.tsx`).
+- **dangerouslySetInnerHTML Dokumentation**: Sicherheitskommentare zu allen `dangerouslySetInnerHTML`-Verwendungen hinzugefügt, die erklären, warum das Pattern sicher ist (QR-SVG aus `lib/qr-svg.ts`).
+
+### Added
 - **`.claude/` Ordner**: Skills, Agents und Konfiguration aus dem DRK App Template übernommen (coding-workflow, code-review, code-simplifier, commit-push-pr, pr-description, coding-presets, data-analyst, data-triage, data-workflow, data-model-explorer, repo-skills, drk-postgres mit Referenz-Dateien).
 - **CLAUDE.md erweitert**: Neuer Abschnitt "Claude Code Subagenten & Skills" mit Übersicht der verfügbaren Skills, Execution Rules, Repo Conventions und Core Rules für autonome Subagenten.
 

@@ -54,7 +54,8 @@ export default function TrackerPage() {
       } else {
         setState(createInitialState());
       }
-    } catch {
+    } catch (e) {
+      console.warn('localStorage read failed:', e);
       setState(createInitialState());
     }
     setLoaded(true);
@@ -65,7 +66,7 @@ export default function TrackerPage() {
     setState(withTimestamp);
     try {
       localStorage.setItem('nis2-tracker-state', JSON.stringify(withTimestamp));
-    } catch { /* ignore */ }
+    } catch (e) { console.warn('localStorage write failed:', e); }
   }, []);
 
   if (!loaded || !state) {
