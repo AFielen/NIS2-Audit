@@ -23,6 +23,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - **CLAUDE.md erweitert**: Neuer Abschnitt "Claude Code Subagenten & Skills" mit Übersicht der verfügbaren Skills, Execution Rules, Repo Conventions und Core Rules für autonome Subagenten.
 
 ### Changed
+- **Links aktualisiert**: HenryGPT und Digitale Gremienarbeit verlinken jetzt auf `https://drk-digital.io` statt `#`.
 - **Produktions-Migration**: App von `nis2.henryagi.de` (Cloudflare Tunnel) auf eigene Domain `drk-nis2.de` migriert. Läuft jetzt auf eigenem VPS mit Caddy Reverse Proxy.
 - **Docker-Setup optimiert**: Container läuft im gemeinsamen `caddy-net` Netzwerk (external), keine Ports nach außen exponiert. Health-Check hinzugefügt. Dev-Profil für lokale Entwicklung mit exponierten Ports.
 - **Domain-Referenzen konfigurierbar**: Alle hardcodierten URLs (`henryagi.de`) durch Umgebungsvariablen (`NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_ABSTIMMUNG_URL`, `NEXT_PUBLIC_SELBSTAUSKUNFT_URL`) ersetzt.
