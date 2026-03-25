@@ -8,6 +8,10 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- **`.claude/` Ordner**: Skills, Agents und Konfiguration aus dem DRK App Template übernommen (coding-workflow, code-review, code-simplifier, commit-push-pr, pr-description, coding-presets, data-analyst, data-triage, data-workflow, data-model-explorer, repo-skills, drk-postgres mit Referenz-Dateien).
+- **CLAUDE.md erweitert**: Neuer Abschnitt "Claude Code Subagenten & Skills" mit Übersicht der verfügbaren Skills, Execution Rules, Repo Conventions und Core Rules für autonome Subagenten.
+
 ### Changed
 - **Produktions-Migration**: App von `nis2.henryagi.de` (Cloudflare Tunnel) auf eigene Domain `drk-nis2.de` migriert. Läuft jetzt auf eigenem VPS mit Caddy Reverse Proxy.
 - **Docker-Setup optimiert**: Container läuft im gemeinsamen `caddy-net` Netzwerk (external), keine Ports nach außen exponiert. Health-Check hinzugefügt. Dev-Profil für lokale Entwicklung mit exponierten Ports.
