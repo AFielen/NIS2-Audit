@@ -5,8 +5,8 @@ import type { GrundschutzDetail } from '@/lib/content/grundschutz-details';
 
 const PRIORITY_STYLES: Record<GrundschutzDetail['priority'], { bg: string; text: string; label: string }> = {
   hoch: { bg: 'var(--drk-bg)', text: 'var(--drk)', label: 'Hoch' },
-  mittel: { bg: '#fff7ed', text: '#b45309', label: 'Mittel' },
-  niedrig: { bg: '#f0fdf4', text: 'var(--success)', label: 'Niedrig' },
+  mittel: { bg: 'var(--warning-bg)', text: '#b45309', label: 'Mittel' },
+  niedrig: { bg: 'var(--success-bg)', text: 'var(--success)', label: 'Niedrig' },
 };
 
 interface GrundschutzDetailSheetProps {

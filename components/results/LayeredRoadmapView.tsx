@@ -13,15 +13,15 @@ interface LayeredRoadmapViewProps {
 
 const PRIORITY_STYLES: Record<RoadmapItem['priority'], { bg: string; text: string; label: string }> = {
   hoch: { bg: 'var(--drk-bg)', text: 'var(--drk)', label: 'Hoch' },
-  mittel: { bg: '#fff7ed', text: '#b45309', label: 'Mittel' },
-  niedrig: { bg: '#f0fdf4', text: 'var(--success)', label: 'Niedrig' },
+  mittel: { bg: 'var(--warning-bg)', text: '#b45309', label: 'Mittel' },
+  niedrig: { bg: 'var(--success-bg)', text: 'var(--success)', label: 'Niedrig' },
 };
 
 function LayerSection({ layer, index, onItemClick }: { layer: RoadmapLayer; index: number; onItemClick?: (itemIndex: number) => void }) {
   const layerColors = [
     { border: 'var(--drk)', badge: 'var(--drk)', bg: 'var(--drk-bg)' },
-    { border: 'var(--info)', badge: 'var(--info)', bg: '#eff6ff' },
-    { border: 'var(--success)', badge: 'var(--success)', bg: '#f0fdf4' },
+    { border: 'var(--info)', badge: 'var(--info)', bg: 'var(--info-bg)' },
+    { border: 'var(--success)', badge: 'var(--success)', bg: 'var(--success-bg)' },
   ];
   const color = layerColors[index] || layerColors[0];
 

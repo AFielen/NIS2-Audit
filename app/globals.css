@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ── DRK Design Tokens ── */
 :root {
   /* Primärfarbe */
@@ -35,6 +37,27 @@
   --radius: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.25rem;
+}
+
+/* ── Dark Mode Tokens ── */
+.dark {
+  --drk-bg: #3b1114;
+
+  --text: #e5e7eb;
+  --text-light: #9ca3af;
+  --text-muted: #6b7280;
+
+  --bg: #111827;
+  --bg-card: #1f2937;
+  --border: #374151;
+
+  --success-bg: #052e16;
+  --warning-bg: #422006;
+  --info-bg: #0c1e33;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
 }
 
 /* ── Basis-Styles ── */
@@ -102,6 +125,14 @@ body {
   background-color: #dee2e6;
 }
 
+.dark .drk-btn-secondary {
+  background-color: #374151;
+}
+
+.dark .drk-btn-secondary:hover {
+  background-color: #4b5563;
+}
+
 /* ── DRK Form-Inputs ── */
 .drk-input {
   width: 100%;
@@ -120,6 +151,11 @@ body {
 
 .drk-input::placeholder {
   color: var(--text-muted);
+}
+
+.dark .drk-input {
+  background-color: #1f2937;
+  color: var(--text);
 }
 
 .drk-label {
@@ -209,6 +245,20 @@ details summary:focus-visible {
 
 /* ── Print Styles ── */
 @media print {
+  /* Force light mode in print */
+  :root {
+    --text: #212529 !important;
+    --text-light: #6b7280 !important;
+    --text-muted: #9ca3af !important;
+    --bg: #f8f9fa !important;
+    --bg-card: #ffffff !important;
+    --border: #e5e7eb !important;
+    --drk-bg: #fef2f2 !important;
+    --success-bg: #f0fdf4 !important;
+    --warning-bg: #fffbeb !important;
+    --info-bg: #eff6ff !important;
+  }
+
   header,
   footer,
   .no-print {

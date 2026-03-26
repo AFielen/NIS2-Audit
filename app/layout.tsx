@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import ThemeProvider from '@/components/providers/ThemeProvider';
+import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -41,8 +43,12 @@ function RedCrossIcon({ size = 14 }: { size?: number }) {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de">
+    <html lang="de" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('nis2-audit-theme');var d=t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.classList.add('dark')}catch(e){}})()` }} />
+      </head>
       <body className="min-h-screen flex flex-col">
+        <ThemeProvider>
         {/* ── DRK Header ── */}
         <header
           className="flex items-center justify-between gap-3 px-6 py-4"
@@ -73,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               <HelpIcon />
             </Link>
+            <DarkModeToggle />
           </div>
         </header>
 
@@ -132,6 +139,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <RedCrossIcon />
           </div>
         </footer>
+        </ThemeProvider>
       </body>
     </html>
   );

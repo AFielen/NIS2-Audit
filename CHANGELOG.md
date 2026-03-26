@@ -9,7 +9,11 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Dark Mode**: Toggle-Button im Header (Sonne/Mond-Icons) zum Umschalten zwischen hellem und dunklem Modus. System-Präferenz wird initial respektiert. Auswahl wird in localStorage persistiert. ThemeProvider-Kontext für globales Theme-Management. CSS-Variablen-basierter Ansatz — bestehende Inline-Styles passen sich automatisch an. Druckansicht erzwingt hellen Modus. Flash-Prevention durch Inline-Script im `<head>`.
 - **Error Boundary**: `ErrorBoundary`-Komponente in `components/ErrorBoundary.tsx` erstellt und in `app/layout.tsx` integriert. Zeigt benutzerfreundliche Fehlermeldung statt leerer Seite bei unerwarteten Rendering-Fehlern.
+
+### Changed
+- **Hardcodierte Farben ersetzt**: `#f0f9ff`, `#f0fdf4`, `#fff7ed`, `#eff6ff`, `#f3f4f6` in Komponenten durch CSS-Variablen (`var(--info-bg)`, `var(--success-bg)`, `var(--warning-bg)`, `var(--border)`) ersetzt für Dark-Mode-Kompatibilität.
 
 ### Fixed
 - **Silent Catch Blocks**: Alle stummen `catch { /* ignore */ }` Blöcke durch `console.warn()` mit beschreibenden Meldungen ersetzt (AssessmentWizard, ExportActions, Kosten, Lieferkette, Tracker, Ergebnis, Briefing).

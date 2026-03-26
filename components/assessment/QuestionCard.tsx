@@ -32,7 +32,7 @@ function HintToggle({ hint }: { hint: string }) {
       {open && (
         <p
           className="text-sm mt-2 p-3 rounded-lg leading-relaxed"
-          style={{ background: '#f0f9ff', color: 'var(--text-light)', borderLeft: '3px solid var(--info)' }}
+          style={{ background: 'var(--info-bg)', color: 'var(--text-light)', borderLeft: '3px solid var(--info)' }}
         >
           {hint}
         </p>

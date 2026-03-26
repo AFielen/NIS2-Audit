@@ -289,7 +289,7 @@ export default function AssessmentWizard() {
       {qrRestored && (
         <div
           className="drk-card drk-fade-in flex items-start gap-3 mb-4"
-          style={{ background: '#f0fdf4', borderLeft: '4px solid var(--success)' }}
+          style={{ background: 'var(--success-bg)', borderLeft: '4px solid var(--success)' }}
         >
           <div className="flex-1 min-w-0">
             <div className="font-semibold text-sm" style={{ color: 'var(--success)' }}>
@@ -424,7 +424,7 @@ export default function AssessmentWizard() {
                     placeholder="z.B. 350"
                     min={0}
                     readOnly={state.answers['ORG-01'] === 'ev_only'}
-                    style={state.answers['ORG-01'] === 'ev_only' ? { background: '#f3f4f6', cursor: 'not-allowed' } : undefined}
+                    style={state.answers['ORG-01'] === 'ev_only' ? { background: 'var(--border)', cursor: 'not-allowed' } : undefined}
                     value={state.grunddaten.gesamtVzae ?? ''}
                     onChange={(e) => handleGrunddatenChange('gesamtVzae', e.target.value ? Number(e.target.value) : undefined)}
                   />
@@ -437,7 +437,7 @@ export default function AssessmentWizard() {
                     placeholder="z.B. 15000"
                     min={0}
                     readOnly={state.answers['ORG-01'] === 'ev_only'}
-                    style={state.answers['ORG-01'] === 'ev_only' ? { background: '#f3f4f6', cursor: 'not-allowed' } : undefined}
+                    style={state.answers['ORG-01'] === 'ev_only' ? { background: 'var(--border)', cursor: 'not-allowed' } : undefined}
                     value={state.grunddaten.gesamtUmsatz ?? ''}
                     onChange={(e) => handleGrunddatenChange('gesamtUmsatz', e.target.value ? Number(e.target.value) : undefined)}
                   />
