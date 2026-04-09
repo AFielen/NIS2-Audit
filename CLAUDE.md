@@ -149,6 +149,7 @@ Alle konfigurierbaren Werte werden über Umgebungsvariablen gesteuert (siehe `.e
 | `NEXT_PUBLIC_APP_URL` | Basis-URL der App | `https://drk-nis2.de` |
 | `NEXT_PUBLIC_ABSTIMMUNG_URL` | Link zur Abstimmungs-App | `https://drk-abstimmung.de` |
 | `NEXT_PUBLIC_SELBSTAUSKUNFT_URL` | Link zur Selbstauskunft-App | `https://drk-selbstauskunft.de` |
+| `NEXT_PUBLIC_ISMS_URL` | Link zum ISMS-Dokumentations-Tool | `https://drk-isms.de` |
 
 **Wichtig:** `NEXT_PUBLIC_`-Variablen werden zur **Build-Zeit** im statischen Export inlined. Daher werden sie im Dockerfile als `ARG` + `ENV` gesetzt und in `docker-compose.yml` als `build.args` übergeben.
 

@@ -9,6 +9,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **ISMS-Dokumentation Link**: Prominente Karte auf der Startseite (direkt nach dem Hero) mit Verweis auf das ISMS-Dokumentations-Tool unter drk-isms.de. Neue Umgebungsvariable `NEXT_PUBLIC_ISMS_URL` für konfigurierbare URL.
 - **Error Boundary**: `ErrorBoundary`-Komponente in `components/ErrorBoundary.tsx` erstellt und in `app/layout.tsx` integriert. Zeigt benutzerfreundliche Fehlermeldung statt leerer Seite bei unerwarteten Rendering-Fehlern.
 
 ### Fixed

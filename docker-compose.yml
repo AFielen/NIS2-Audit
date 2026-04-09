@@ -6,6 +6,7 @@ services:
         NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-https://drk-nis2.de}
         NEXT_PUBLIC_ABSTIMMUNG_URL: ${NEXT_PUBLIC_ABSTIMMUNG_URL:-https://drk-abstimmung.de}
         NEXT_PUBLIC_SELBSTAUSKUNFT_URL: ${NEXT_PUBLIC_SELBSTAUSKUNFT_URL:-https://drk-selbstauskunft.de}
+        NEXT_PUBLIC_ISMS_URL: ${NEXT_PUBLIC_ISMS_URL:-https://drk-isms.de}
     container_name: nis2-audit
     restart: unless-stopped
     networks:
