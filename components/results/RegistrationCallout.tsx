@@ -1,10 +1,11 @@
 'use client';
 
-import type { RegistrationResult, OutcomeType } from '@/lib/types';
+import type { RegistrationResult, OutcomeType, RegulationSector } from '@/lib/types';
 
 interface RegistrationCalloutProps {
   registration: RegistrationResult;
   outcomeType: OutcomeType;
+  regulationSector?: RegulationSector;
 }
 
 function AlertIcon() {
@@ -39,8 +40,15 @@ function InfoIcon() {
   );
 }
 
-export default function RegistrationCallout({ registration, outcomeType }: RegistrationCalloutProps) {
+export default function RegistrationCallout({ registration, outcomeType, regulationSector = 'none' }: RegistrationCalloutProps) {
   const isUrgent = (registration.required || registration.recommended) && !registration.alreadyRegistered;
+
+  const leistungsbereich =
+    regulationSector === 'both'
+      ? 'Rettungsdienst + IKT-Dienstleistungsmanagement (Managed Services)'
+      : regulationSector === 'digital_infrastructure'
+        ? 'IKT-Dienstleistungsmanagement (Managed Services nach § 2 Nr. 26 BSIG)'
+        : 'Rettungsdienst';
 
   const borderColor = registration.alreadyRegistered
     ? 'var(--success)'
@@ -122,7 +130,7 @@ export default function RegistrationCallout({ registration, outcomeType }: Regis
             </li>
             <li className="flex items-start gap-2">
               <span style={{ color: borderColor }}>•</span>
-              Angaben zum Leistungsbereich (Rettungsdienst)
+              Angaben zum Leistungsbereich ({leistungsbereich})
             </li>
             <li className="flex items-start gap-2">
               <span style={{ color: borderColor }}>•</span>

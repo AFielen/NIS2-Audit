@@ -6,6 +6,7 @@ import type {
   Rule,
   OutcomeType,
   Grunddaten,
+  RegulationSector,
 } from '../types';
 import { deriveSizingFromVZAE } from '../config';
 import ruleset from './nis2-drk-ruleset.v1.json';
@@ -82,6 +83,26 @@ function evaluateCondition(
       }
       return false;
 
+    case 'gte':
+      if (typeof actual === 'number' && typeof expected === 'number') {
+        return actual >= expected;
+      }
+      if (typeof actual === 'string') {
+        const num = parseFloat(actual);
+        if (!isNaN(num) && typeof expected === 'number') return num >= expected;
+      }
+      return false;
+
+    case 'lt':
+      if (typeof actual === 'number' && typeof expected === 'number') {
+        return actual < expected;
+      }
+      if (typeof actual === 'string') {
+        const num = parseFloat(actual);
+        if (!isNaN(num) && typeof expected === 'number') return num < expected;
+      }
+      return false;
+
     case 'lte':
       if (typeof actual === 'number' && typeof expected === 'number') {
         return actual <= expected;
@@ -109,6 +130,17 @@ function evaluateCondition(
       if (typeof actual === 'string') {
         const num = parseFloat(actual);
         if (!isNaN(num) && typeof expected === 'number') return num <= expected;
+      }
+      return true;
+
+    case 'lt_or_missing':
+      if (actual == null || actual === '' || actual === undefined) return true;
+      if (typeof actual === 'number' && typeof expected === 'number') {
+        return actual < expected;
+      }
+      if (typeof actual === 'string') {
+        const num = parseFloat(actual);
+        if (!isNaN(num) && typeof expected === 'number') return num < expected;
       }
       return true;
 
@@ -196,9 +228,21 @@ function computeScoring(answers: WizardAnswers): {
 const BSI_REGISTRATION_URL =
   'https://www.bsi.bund.de/DE/Themen/Regulierte-Wirtschaft/NIS-2-regulierte-Unternehmen/NIS-2-Anleitung-Registrierung/Anleitung-Registrierung_node.html';
 
-function computeRegistration(outcomeType: OutcomeType, answers: WizardAnswers): RegistrationResult {
+function computeRegistration(
+  outcomeType: OutcomeType,
+  answers: WizardAnswers,
+  regulationSector: RegulationSector,
+): RegistrationResult {
   const regStatus = answers['REG-01'] as string | undefined;
   const alreadyRegistered = regStatus === 'yes';
+
+  // Sector-specific phrasing for the trigger
+  const triggerPhrase =
+    regulationSector === 'both'
+      ? 'Rettungsdienst und zentraler IT-Betrieb für andere juristische Personen'
+      : regulationSector === 'digital_infrastructure'
+        ? 'zentraler IT-Betrieb für andere juristische Personen (Managed Services)'
+        : 'Rettungsdienst';
 
   // Base result per outcome
   const base = { deadline: '2026-03-06', url: BSI_REGISTRATION_URL, alreadyRegistered };
@@ -239,7 +283,7 @@ function computeRegistration(outcomeType: OutcomeType, answers: WizardAnswers): 
         required: true,
         recommended: false,
         message:
-          'Die Registrierung beim BSI ist für Ihre Einrichtung erforderlich. ' +
+          `Die Registrierung beim BSI ist für Ihre Einrichtung erforderlich — Trigger: ${triggerPhrase}. ` +
           'Die Registrierungsfrist war der 06.03.2026. Die Registrierung ist weiterhin möglich und sinnvoll, ' +
           'verspätetes Handeln kann jedoch Sanktions- und Haftungsrisiken erhöhen.',
       };
@@ -249,8 +293,8 @@ function computeRegistration(outcomeType: OutcomeType, answers: WizardAnswers): 
         required: false,
         recommended: true,
         message:
-          'Die Registrierung beim BSI wird dringend empfohlen (konservative Einschätzung), ' +
-          'sofern Rettungsdienst erbracht wird und Schwellenwerte nicht belastbar geklärt sind. ' +
+          `Die Registrierung beim BSI wird dringend empfohlen (konservative Einschätzung), ` +
+          `sofern ${triggerPhrase} erbracht wird und Schwellenwerte nicht belastbar geklärt sind. ` +
           'Die Registrierungsfrist war der 06.03.2026. Die Registrierung ist weiterhin möglich und sinnvoll, ' +
           'verspätetes Handeln kann jedoch Sanktions- und Haftungsrisiken erhöhen.',
       };
@@ -287,8 +331,21 @@ export function evaluateAssessment(answers: WizardAnswers, grunddaten?: Grunddat
     executeRule(rule, answers, result, roadmapPacks, triggeredRules);
   }
 
+  const isRdProvider = (getPath(result, 'jurisdiction.isRdProvider') as boolean) ?? false;
+  const isMspProvider = (getPath(result, 'jurisdiction.isMspProvider') as boolean) ?? false;
+  let regulationSector: RegulationSector = 'none';
+  if (isRdProvider && isMspProvider) {
+    regulationSector = 'both';
+  } else if (isRdProvider) {
+    regulationSector = 'health';
+  } else if (isMspProvider) {
+    regulationSector = 'digital_infrastructure';
+  }
+
   const jurisdiction = {
-    isRdProvider: (getPath(result, 'jurisdiction.isRdProvider') as boolean) ?? false,
+    isRdProvider,
+    isMspProvider,
+    regulationSector,
     directlyRegulated: (getPath(result, 'jurisdiction.directlyRegulated') as boolean) ?? false,
     classification: (getPath(result, 'jurisdiction.classification') as string) ?? 'none',
   };
@@ -340,8 +397,8 @@ export function evaluateAssessment(answers: WizardAnswers, grunddaten?: Grunddat
     })
     .filter((x): x is { packId: string; title: string; items: string[] } => x != null);
 
-  // Compute BSI registration requirement based on outcome
-  const registration = computeRegistration(outcomeType, answers);
+  // Compute BSI registration requirement based on outcome and triggered sector
+  const registration = computeRegistration(outcomeType, answers, regulationSector);
 
   // Derive S/M/L sizing from Gesamt-VZÄ des Verbands (Grunddaten)
   const effectiveVZAE = grunddaten?.gesamtVzae != null && grunddaten.gesamtVzae > 0

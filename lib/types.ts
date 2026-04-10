@@ -8,6 +8,15 @@ export type Locale = 'de' | 'en';
 export type OutcomeType = 'A' | 'B' | 'C' | 'D';
 export type MaturityBand = 'kritisch' | 'basal' | 'belastbar' | 'fortgeschritten';
 
+/** A visibility condition — can be a simple check or an any/all group */
+export interface VisibilityCondition {
+  questionId?: string;
+  op?: string;
+  value?: string | number | boolean;
+  any?: VisibilityCondition[];
+  all?: VisibilityCondition[];
+}
+
 /** A single question from the JSON ruleset */
 export interface RulesetQuestion {
   id: string;
@@ -18,7 +27,7 @@ export interface RulesetQuestion {
   options?: Array<{ value: string; label: string }>;
   min?: number;
   required: boolean;
-  visibleIf?: Array<{ questionId: string; op: string; value: string }>;
+  visibleIf?: VisibilityCondition[];
 }
 
 /** A single condition in a rule's when clause */
@@ -119,9 +128,14 @@ export interface WizardState {
 
 // ── Assessment Result Types ──
 
+/** Sector that triggered NIS-2 applicability */
+export type RegulationSector = 'none' | 'health' | 'digital_infrastructure' | 'both';
+
 /** Jurisdiction determination */
 export interface JurisdictionResult {
   isRdProvider: boolean;
+  isMspProvider: boolean;
+  regulationSector: RegulationSector;
   directlyRegulated: boolean;
   classification: string;
 }
