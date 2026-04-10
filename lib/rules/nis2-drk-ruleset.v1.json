@@ -139,7 +139,7 @@
       "id": "MSP-01",
       "section": "msp",
       "label": "Erbringt die Einheit operative IT-Betriebsleistungen für andere juristische Personen (andere DRK-Kreisverbände, Tochter-gGmbHs, Landesverband, externe Dritte)?",
-      "hint": "Gemeint ist der operative Betrieb von IT-Systemen — also Installation, Verwaltung, Wartung, aktive Administration: z.B. Betrieb von Active Directory/Entra ID, Firewalls/VPN, Backup-Systemen, Endpoint-/MDM-Management, Hosting/Rechenzentrum, Patch- und Systembetrieb.\n\nNICHT gemeint sind reine Beratung, Schulung, einmaliger Helpdesk oder Projektarbeit ohne dauerhaften Betriebs-/Administrationszugriff.\n\nIT ausschließlich für die eigene juristische Person (Inhouse) begründet keinen MSP-Status. Sobald Sie IT für ANDERE juristische Personen betreiben (auch Tochter-gGmbHs sind eigene jur. Personen), kommen Sie als Managed Service Provider nach § 2 Nr. 26 BSIG in Betracht — Sektor »Digitale Infrastruktur« (Anlage 1 BSIG).",
+      "hint": "WICHTIG: »MSP« ist kein formaler Titel, sondern ein rechtlicher Begriff nach § 2 Nr. 26 BSIG. Bereits der faktische Betrieb zentraler IT für andere juristische Personen kann ausreichen — unabhängig davon, ob Sie sich selbst als »IT-Dienstleister« verstehen.\n\nGEMEINT sind operative IT-Betriebsleistungen: Installation, Verwaltung, Wartung, aktive Administration mit Zugriff auf die Systeme. Typische Beispiele: Betrieb von Active Directory / Entra ID / M365-Tenant, Firewalls/VPN, Backup-Systemen, Endpoint-/MDM-Management (Intune), Hosting/Rechenzentrum, Patch- und Systembetrieb, Helpdesk-Second-/Third-Level mit Admin-Rechten.\n\nNICHT gemeint sind (laut BSI-FAQ): reine strategische IT-Beratung, Schulung, einmaliger First-Level-Helpdesk ohne Admin-Rechte, Projektarbeit ohne dauerhaften Betriebsauftrag.\n\nKernfrage: »Haben wir Admin-Zugriff auf IT-Systeme, die nicht unserer eigenen juristischen Person gehören?« — Wenn ja, kommen Sie als Managed Service Provider in Betracht.\n\nWICHTIG: Eine Ja-Antwort bedeutet NICHT automatisch »reguliert«. Die Betroffenheit hängt zusätzlich an den Schwellenwerten nach § 28 BSIG — und bei konzerninterner Zentral-IT ggf. an der Zurechnung verbundener Unternehmen (§ 28 Abs. 4 BSIG, siehe folgende Fragen und Hilfe-Seite).",
       "type": "single_select",
       "options": [
         { "value": "yes", "label": "Ja" },
@@ -151,7 +151,7 @@
       "id": "MSP-02",
       "section": "msp",
       "label": "Welche IT-Betriebsleistung steht im Vordergrund?",
-      "hint": "Wählen Sie die für Ihren Betrieb wesentliche Kategorie. Mehrere Bereiche gleichzeitig sind möglich — wählen Sie dann die umfangreichste/geschäftskritischste Leistung.",
+      "hint": "Wählen Sie die für Ihren Betrieb wesentliche Kategorie. Je tiefer der Eingriff in die Systeme (Identitäts-/Tenant-Verwaltung, Netzwerk-Kontrolle, Rechenzentrum), desto klarer ist der MSP-Charakter. Mehrere Bereiche gleichzeitig sind möglich — wählen Sie dann die umfangreichste/geschäftskritischste Leistung. Reine Anwendungsnutzung (SaaS) ohne Betrieb fällt NICHT unter MSP.",
       "type": "single_select",
       "options": [
         { "value": "identity", "label": "Identitäts-/Tenant-Management (AD, Entra ID, M365)" },
@@ -171,7 +171,7 @@
       "id": "MSP-03",
       "section": "msp",
       "label": "Für wen erbringen Sie diese IT-Leistungen überwiegend?",
-      "hint": "Entscheidend ist die Abgrenzung Inhouse vs. MSP:\n\n»Nur eigene juristische Person«: IT-Betrieb ausschließlich für die eigene Rechtspersönlichkeit (z.B. e.V. für den e.V. selbst, inkl. unselbständiger Abteilungen). Das ist Inhouse-IT nach Recital 35 NIS-2 und begründet KEINEN MSP-Status.\n\n»Tochter-gGmbHs / Beteiligungsgesellschaften«: Sie betreiben IT für verbundene Gesellschaften, die eigene juristische Personen sind. Laut Gesetzesbegründung fällt dies in der Regel unter den MSP-Begriff — auch ohne externe Kunden.\n\n»Andere DRK-Kreisverbände / Landesverband«: IT-Betrieb für andere DRK-Gliederungen außerhalb der eigenen jur. Person.\n\n»Externe Dritte«: Klassische B2B-MSP-Leistung an Dritte außerhalb des DRK-Verbundes.",
+      "hint": "Entscheidend ist die Abgrenzung Inhouse vs. MSP — NICHT, ob die Kunden »außerhalb« oder »innerhalb« des DRK-Verbundes sind. Rechtlich zählt die Frage, ob die IT-empfangende Seite dieselbe juristische Person ist.\n\n»Nur eigene juristische Person«: IT-Betrieb ausschließlich für die eigene Rechtspersönlichkeit (z.B. e.V. für den e.V. selbst, inklusive unselbständiger Abteilungen wie einer Rettungsdienst-Abteilung ohne eigene Rechtsform). Das ist Inhouse-IT nach Recital 35 NIS-2 und begründet KEINEN MSP-Status.\n\n»Tochter-gGmbHs / Beteiligungsgesellschaften«: Sie betreiben IT für verbundene Gesellschaften, die EIGENE juristische Personen sind (z.B. DRK-Rettungsdienst gGmbH, DRK-Pflegezentrum GmbH). Laut Gesetzesbegründung fällt dies in der Regel unter den MSP-Begriff — auch ohne externe Kunden und auch ohne Mindestanzahl an Kunden.\n\n»Andere DRK-Kreisverbände / Landesverband«: IT-Betrieb für andere DRK-Gliederungen außerhalb der eigenen juristischen Person.\n\n»Externe Dritte«: Klassische B2B-MSP-Leistung an Dritte außerhalb des DRK-Verbundes.\n\nHINWEIS zur EU-KMU-Logik (relevant für Schwellenwerte, siehe MSP-06): Eine juristische Person ist »autonom« im Sinne der Empfehlung 2003/361/EG, wenn sie weder 25%+ an anderen hält noch andere 25%+ an ihr halten. Bei 25–50% spricht man von Partnerunternehmen, bei über 50% von verbundenen Unternehmen. Eine Zentral-IT-Tochter in einem KV-Verbund ist rechtlich fast immer ein »verbundenes Unternehmen«.",
       "type": "single_select",
       "options": [
         { "value": "only_own", "label": "Nur für die eigene juristische Person (Inhouse)" },
@@ -205,13 +205,29 @@
       "id": "MSP-05",
       "section": "msp",
       "label": "Wer ist der Rechtsträger, der den IT-Betrieb für Dritte durchführt?",
-      "hint": "Wichtig für die Schwellenwert-Berechnung: Maßgeblich sind VZÄ/Umsatz/Bilanz des Rechtsträgers, der die MSP-Leistung erbringt. Bei verbundenen Unternehmen sind nach KMU-Empfehlung 2003/361/EG ggf. Partner- und verbundene Unternehmen hinzuzurechnen — bei nachweislicher IT-Unabhängigkeit kann eine Nicht-Zurechnung begründet werden (§ 28 BSIG i.V.m. Anhang KMU-Empfehlung).",
+      "hint": "Wichtig für die Schwellenwert-Berechnung: Die Schwellen nach § 28 BSIG (mindestens 50 Mitarbeitende oder > 10 Mio € Umsatz UND > 10 Mio € Bilanz) werden auf EBENE DES RECHTSTRÄGERS geprüft, der die MSP-Leistung erbringt — nicht auf Ebene der gesamten DRK-Gliederung.\n\nACHTUNG: Diese isolierte Prüfung ist nur die halbe Wahrheit. § 28 Abs. 4 BSIG verlangt zusätzlich die Zurechnung verbundener Unternehmen nach KMU-Empfehlung 2003/361/EG — es sei denn, der Rechtsträger ist nachweislich auch IT-seitig unabhängig (siehe nächste Frage MSP-06).",
       "type": "single_select",
       "options": [
         { "value": "same_as_rd", "label": "Derselbe Rechtsträger wie der Rettungsdienst" },
         { "value": "kv_ev", "label": "Kreisverband (e.V.) selbst" },
         { "value": "own_gmbh", "label": "Eigene IT-GmbH / Service-Gesellschaft" },
         { "value": "other", "label": "Andere Konstellation" }
+      ],
+      "required": true,
+      "visibleIf": [
+        { "questionId": "MSP-01", "op": "eq", "value": "yes" }
+      ]
+    },
+    {
+      "id": "MSP-06",
+      "section": "msp",
+      "label": "Ist der IT-erbringende Rechtsträger in seinem IT-Betrieb vom Verbund unabhängig (§ 28 Abs. 4 BSIG)?",
+      "hint": "DIES IST DIE ENTSCHEIDENDE FRAGE für die Schwellenwert-Berechnung im MSP-Pfad. § 28 Abs. 4 BSIG knüpft die Nicht-Zurechnung verbundener Unternehmen nicht an die gesellschaftsrechtliche Unabhängigkeit, sondern an eine IT-spezifische Unabhängigkeit: »unter Berücksichtigung der rechtlichen, wirtschaftlichen und tatsächlichen Umstände mit Blick auf die Beschaffenheit und den Betrieb der informationstechnischen Systeme, Komponenten und Prozesse«.\n\nPraktisch bedeutet das: Nicht entscheidend ist allein, dass die IT-Gesellschaft eine eigene GmbH ist. Entscheidend ist, ob sie in Bezug auf ihre IT-Systeme und deren Betrieb TATSÄCHLICH eigenständig ist.\n\n»Ja, vollständig unabhängig«: Eigener Tenant, eigene Domains, eigene Admins ohne Zugriff auf Verbundsysteme, eigene Netze, getrennte Backup- und Logging-Systeme, keine geteilten Identitäten. Dokumentierbar. → In diesem Fall zählen die Schwellenwerte isoliert auf Ebene des IT-Rechtsträgers.\n\n»Nein, enge IT-Verflechtung mit dem Verbund«: Typischer Zentral-IT-Fall — geteilte AD/Entra, geteilter M365-Tenant, gemeinsame Admins, gemeinsame Firewall, zentrales Backup, zentrales Endpoint-Management. Bei diesem Szenario spricht sehr viel dafür, dass die IT-Gesellschaft KEINE Unabhängigkeit nach § 28 Abs. 4 BSIG aufweist. → Dann sind die Kennzahlen der verbundenen Unternehmen mitzurechnen (bei verbundenen Unternehmen voll, bei Partnerunternehmen anteilig).\n\n»Teilweise / unklar«: Mischfall oder unklare Struktur. Konservativ sollten die Verbund-Kennzahlen mitgeprüft werden. Im Zweifel juristisch klären lassen.\n\nWICHTIG: Wer zentral AD/Entra, M365, Firewall, Backup, Hosting, Endpoint-Management oder Administrationsrechte für andere Töchter oder Schwesterunternehmen betreibt, ist regelmäßig gerade NICHT IT-unabhängig vom Verbund. Die Ausnahme ist eng auszulegen.",
+      "type": "single_select",
+      "options": [
+        { "value": "yes_independent", "label": "Ja, vollständig unabhängig (eigene Systeme, eigene Admins, dokumentiert)" },
+        { "value": "no_shared", "label": "Nein, enge IT-Verflechtung mit dem Verbund" },
+        { "value": "partial_unclear", "label": "Teilweise / unklar" }
       ],
       "required": true,
       "visibleIf": [
@@ -1418,6 +1434,96 @@
         "set": {
           "jurisdiction.directlyRegulated": true,
           "jurisdiction.classification": "especially_important"
+        },
+        "addRoadmapPacks": [
+          "P1_GOV_REG"
+        ]
+      }
+    },
+    {
+      "id": "REG-M4-AGGREGATION-WARNING",
+      "description": "MSP-Pfad: Bei IT-Verflechtung (MSP-06 != yes_independent) sind verbundene Unternehmen nach § 28 Abs. 4 BSIG mitzurechnen. Setzt einen Hinweisflag f\u00fcr die Ergebnisanzeige.",
+      "when": [
+        { "path": "jurisdiction.isMspProvider", "op": "eq", "value": true },
+        {
+          "any": [
+            { "questionId": "MSP-06", "op": "eq", "value": "no_shared" },
+            { "questionId": "MSP-06", "op": "eq", "value": "partial_unclear" }
+          ]
+        }
+      ],
+      "then": {
+        "set": {
+          "jurisdiction.mspAggregationWarning": true
+        }
+      }
+    },
+    {
+      "id": "REG-M5-KONSOLIDIERT-WICHTIG-VZA",
+      "description": "MSP-Pfad konsolidiert nach \u00a7 28 Abs. 4 BSIG: Wichtige Einrichtung wenn Verbund-Gesamt-VZ\u00c4 mindestens 50 UND IT-Verflechtung besteht (MSP-06 != yes_independent).",
+      "when": [
+        { "path": "jurisdiction.isMspProvider", "op": "eq", "value": true },
+        {
+          "any": [
+            { "questionId": "MSP-06", "op": "eq", "value": "no_shared" },
+            { "questionId": "MSP-06", "op": "eq", "value": "partial_unclear" }
+          ]
+        },
+        { "path": "grunddaten.gesamtVzae", "op": "gte", "value": 50 }
+      ],
+      "then": {
+        "set": {
+          "jurisdiction.directlyRegulated": true,
+          "jurisdiction.classification": "important",
+          "jurisdiction.mspAggregationApplied": true
+        },
+        "addRoadmapPacks": [
+          "P1_GOV_REG"
+        ]
+      }
+    },
+    {
+      "id": "REG-M5-KONSOLIDIERT-BESONDERS-VZA",
+      "description": "MSP-Pfad konsolidiert nach \u00a7 28 Abs. 4 BSIG: Besonders wichtige Einrichtung wenn Verbund-Gesamt-VZ\u00c4 mindestens 250 UND IT-Verflechtung besteht.",
+      "when": [
+        { "path": "jurisdiction.isMspProvider", "op": "eq", "value": true },
+        {
+          "any": [
+            { "questionId": "MSP-06", "op": "eq", "value": "no_shared" },
+            { "questionId": "MSP-06", "op": "eq", "value": "partial_unclear" }
+          ]
+        },
+        { "path": "grunddaten.gesamtVzae", "op": "gte", "value": 250 }
+      ],
+      "then": {
+        "set": {
+          "jurisdiction.directlyRegulated": true,
+          "jurisdiction.classification": "especially_important",
+          "jurisdiction.mspAggregationApplied": true
+        },
+        "addRoadmapPacks": [
+          "P1_GOV_REG"
+        ]
+      }
+    },
+    {
+      "id": "REG-M5-KONSOLIDIERT-WICHTIG-FIN",
+      "description": "MSP-Pfad konsolidiert: Wichtige Einrichtung wenn Verbund-Gesamtumsatz > 10 Mio UND IT-Verflechtung. Bilanz wird aus Kennzahlen-Gleichheit nicht separat abgefragt (konservativ).",
+      "when": [
+        { "path": "jurisdiction.isMspProvider", "op": "eq", "value": true },
+        {
+          "any": [
+            { "questionId": "MSP-06", "op": "eq", "value": "no_shared" },
+            { "questionId": "MSP-06", "op": "eq", "value": "partial_unclear" }
+          ]
+        },
+        { "path": "grunddaten.gesamtUmsatz", "op": "gt", "value": 10000 }
+      ],
+      "then": {
+        "set": {
+          "jurisdiction.directlyRegulated": true,
+          "jurisdiction.classification": "important",
+          "jurisdiction.mspAggregationApplied": true
         },
         "addRoadmapPacks": [
           "P1_GOV_REG"

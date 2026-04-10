@@ -27,7 +27,7 @@ export const presets: Preset[] = [
   {
     id: 'kv-rd-plus-zentral-it',
     title: 'KV mit RD + zentralem IT-Betrieb für Töchter',
-    description: 'Doppelbetroffenheit: RD-gGmbH + KV betreibt zentral IT für mehrere Tochter-gGmbHs (MSP nach § 2 Nr. 26 BSIG).',
+    description: 'Doppelbetroffenheit: RD-gGmbH + KV betreibt zentral IT für mehrere Tochter-gGmbHs (MSP nach § 2 Nr. 26 BSIG). IT-seitig verflochten → § 28 Abs. 4 BSIG Aggregation greift.',
     answers: {
       'ORG-01': 'ev_plus_multi_sub',
       'OPS-01': 'yes',
@@ -39,6 +39,7 @@ export const presets: Preset[] = [
       'MSP-03': 'daughter_companies',
       'MSP-04': 'yes_allocation',
       'MSP-05': 'kv_ev',
+      'MSP-06': 'no_shared',
       'THR-01': 180,
     },
   },
@@ -54,6 +55,7 @@ export const presets: Preset[] = [
       'MSP-03': 'daughter_companies',
       'MSP-04': 'yes_contract',
       'MSP-05': 'kv_ev',
+      'MSP-06': 'no_shared',
       'THR-01': 75,
     },
   },
@@ -69,6 +71,23 @@ export const presets: Preset[] = [
       'MSP-03': 'only_own',
       'MSP-04': 'no',
       'MSP-05': 'kv_ev',
+      'MSP-06': 'yes_independent',
+    },
+  },
+  {
+    id: 'kv-msp-independent',
+    title: 'DRK-IT-GmbH, IT-seitig unabhängig',
+    description: 'Eigenständige DRK-IT-GmbH mit getrenntem Tenant, eigenen Admins und klarer IT-Unabhängigkeit nach § 28 Abs. 4 BSIG — Schwellenwerte werden isoliert auf Ebene der GmbH geprüft, keine Aggregation.',
+    answers: {
+      'ORG-01': 'mixed_other',
+      'OPS-01': 'no',
+      'MSP-01': 'yes',
+      'MSP-02': 'hosting',
+      'MSP-03': 'other_drk',
+      'MSP-04': 'yes_contract',
+      'MSP-05': 'own_gmbh',
+      'MSP-06': 'yes_independent',
+      'THR-01': 65,
     },
   },
 ];

@@ -327,6 +327,16 @@ export function evaluateAssessment(answers: WizardAnswers, grunddaten?: Grunddat
   const roadmapPacks = new Set<string>();
   const triggeredRules: Array<{ id: string; description: string }> = [];
 
+  // Propagate grunddaten into the rule context so rules can reference
+  // `grunddaten.gesamtVzae` etc. — needed for the MSP-Pfad konsolidierte
+  // Schwellenwertprüfung nach § 28 Abs. 4 BSIG.
+  if (grunddaten?.gesamtVzae != null) {
+    setPath(result, 'grunddaten.gesamtVzae', grunddaten.gesamtVzae);
+  }
+  if (grunddaten?.gesamtUmsatz != null) {
+    setPath(result, 'grunddaten.gesamtUmsatz', grunddaten.gesamtUmsatz);
+  }
+
   for (const rule of ruleset.rules as Rule[]) {
     executeRule(rule, answers, result, roadmapPacks, triggeredRules);
   }
@@ -348,6 +358,8 @@ export function evaluateAssessment(answers: WizardAnswers, grunddaten?: Grunddat
     regulationSector,
     directlyRegulated: (getPath(result, 'jurisdiction.directlyRegulated') as boolean) ?? false,
     classification: (getPath(result, 'jurisdiction.classification') as string) ?? 'none',
+    mspAggregationWarning: (getPath(result, 'jurisdiction.mspAggregationWarning') as boolean) ?? false,
+    mspAggregationApplied: (getPath(result, 'jurisdiction.mspAggregationApplied') as boolean) ?? false,
   };
 
   const technicalScope = {

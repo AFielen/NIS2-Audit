@@ -138,6 +138,10 @@ export interface JurisdictionResult {
   regulationSector: RegulationSector;
   directlyRegulated: boolean;
   classification: string;
+  /** True if § 28 Abs. 4 BSIG aggregation of verbundene Unternehmen should be checked */
+  mspAggregationWarning: boolean;
+  /** True if directlyRegulated was only reached via konsolidierte (Verbund-)Kennzahlen */
+  mspAggregationApplied: boolean;
 }
 
 /** Technical scope determination */

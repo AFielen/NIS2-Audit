@@ -110,6 +110,56 @@ export default function ExecutiveSummary({ result }: ExecutiveSummaryProps) {
         </div>
       )}
 
+      {/* § 28 Abs. 4 BSIG Aggregation Warning — only for MSP path with IT interdependency */}
+      {result.jurisdiction.isMspProvider && result.jurisdiction.mspAggregationWarning && (
+        <div
+          className="p-4 rounded-lg border-l-4 mb-4"
+          style={{ borderLeftColor: 'var(--info)', background: 'var(--info-bg)' }}
+        >
+          <div className="flex items-start gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                 className="shrink-0 mt-0.5" style={{ color: 'var(--info)' }}>
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+            <div>
+              <div className="text-sm font-bold mb-1" style={{ color: 'var(--info)' }}>
+                Hinweis: § 28 Abs. 4 BSIG – Zurechnung verbundener Unternehmen
+              </div>
+              <div className="text-sm space-y-2" style={{ color: 'var(--text-light)' }}>
+                <p>
+                  Sie haben angegeben, dass der IT-erbringende Rechtsträger mit dem Verbund IT-seitig verflochten ist
+                  (gemeinsame Identitäten / Admins / Systeme). Damit greift in der Regel KEINE Ausnahme nach § 28 Abs. 4 BSIG —
+                  die Schwellenwerte sind nicht nur isoliert auf Ebene des IT-Rechtsträgers zu prüfen, sondern unter Einbeziehung
+                  verbundener Unternehmen nach KMU-Empfehlung 2003/361/EG.
+                </p>
+                <p>
+                  <strong>Praktisch:</strong> Bei verbundenen Unternehmen (&gt; 50 % Beteiligung / Kontrolle) werden die Mitarbeiter-
+                  und Finanzkennzahlen in der Regel VOLL hinzugerechnet, bei Partnerunternehmen (25–50 %) anteilig. Für den typischen
+                  DRK-Verbund bedeutet das: Die Gesamt-VZÄ und der Gesamtumsatz des KV (inkl. Tochter-gGmbHs) sind maßgeblich, nicht
+                  nur die des IT-erbringenden Rechtsträgers.
+                </p>
+                {result.jurisdiction.mspAggregationApplied && (
+                  <p className="font-semibold" style={{ color: 'var(--text)' }}>
+                    ⚠ Ihre Betroffenheit wurde automatisch auf Basis der Verbund-Kennzahlen (Gesamt-VZÄ / Gesamtumsatz des Verbands)
+                    berechnet. Ohne die IT-Verflechtung mit dem Verbund wäre die isolierte Schwellenwertprüfung auf Ebene des
+                    IT-Rechtsträgers ggf. nicht erreicht worden.
+                  </p>
+                )}
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                  Eine Nicht-Zurechnung nach § 28 Abs. 4 BSIG setzt eine nachweisbare IT-seitige Unabhängigkeit voraus
+                  („rechtliche, wirtschaftliche und tatsächliche Umstände mit Blick auf die Beschaffenheit und den Betrieb der
+                  informationstechnischen Systeme") — bei echter Zentral-IT für Töchter praktisch kaum zu begründen. Im Zweifel
+                  juristisch prüfen lassen.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Full-scope warning for C and D — sector-aware */}
       {(result.outcome.type === 'C' || result.outcome.type === 'D') && (() => {
         const sector = result.jurisdiction.regulationSector;

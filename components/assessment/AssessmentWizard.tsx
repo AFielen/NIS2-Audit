@@ -24,7 +24,7 @@ const SECTION_LABELS: Record<string, string> = {
 const SECTION_DESCRIPTIONS: Record<string, string> = {
   org: 'Organisationsmodell und Verbandsstruktur Ihres DRK-Kreisverbands.',
   ops: 'Rettungsdienstliche Leistungen und sektorale Zuordnung.',
-  msp: 'Zentraler IT-Betrieb für andere juristische Personen (Managed Services nach § 2 Nr. 26 BSIG, Sektor Digitale Infrastruktur).',
+  msp: 'Zweite Betroffenheits-Route: Betreibt Ihre Einheit operative IT für andere juristische Personen (Tochter-gGmbHs, andere KVs, externe Dritte), kann sie selbst als Managed Service Provider nach § 2 Nr. 26 BSIG unter NIS-2 fallen — unabhängig vom Rettungsdienst (Sektor »Digitale Infrastruktur«, Anlage 1 BSIG). Die Prüfung erfolgt in vier Schritten: operative Leistung → Kundenkreis (Inhouse-Abgrenzung) → Schwellenwerte → Zurechnung verbundener Unternehmen nach § 28 Abs. 4 BSIG. Ausführliche Erklärung auf der Hilfe-Seite.',
   thresholds: 'Schwellenwerte des relevanten Rechtsträgers (VZÄ, Umsatz, Bilanzsumme).',
   it: 'Gemeinsame IT-Infrastruktur zwischen Einheiten.',
   separation: 'Harte technische Trennung zwischen Rettungsdienst und restlichem Verband.',
