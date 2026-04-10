@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import type { WizardState, WizardAnswers, Preset, RulesetQuestion, Grunddaten } from '@/lib/types';
+import type { WizardState, WizardAnswers, Preset, RulesetQuestion, Grunddaten, VisibilityCondition } from '@/lib/types';
 import { loadWizardState, saveWizardState, createEmptyState, clearWizardState } from '@/lib/storage';
 import { evaluateAssessment, getRulesetQuestions, getRulesetSections } from '@/lib/rules/evaluate';
 import { decodeState } from '@/lib/state-codec';
@@ -14,6 +14,7 @@ import QuestionCard from './QuestionCard';
 const SECTION_LABELS: Record<string, string> = {
   org: 'Organisation',
   ops: 'Leistungen',
+  msp: 'IT-Dienstleister',
   thresholds: 'Schwellenwerte',
   it: 'IT-Struktur',
   separation: 'Harte Trennung',
@@ -23,6 +24,7 @@ const SECTION_LABELS: Record<string, string> = {
 const SECTION_DESCRIPTIONS: Record<string, string> = {
   org: 'Organisationsmodell und Verbandsstruktur Ihres DRK-Kreisverbands.',
   ops: 'Rettungsdienstliche Leistungen und sektorale Zuordnung.',
+  msp: 'Zweite Betroffenheits-Route: Betreibt Ihre Einheit operative IT für andere juristische Personen (Tochter-gGmbHs, andere KVs, externe Dritte), kann sie selbst als Managed Service Provider nach § 2 Nr. 26 BSIG unter NIS-2 fallen — unabhängig vom Rettungsdienst (Sektor »Digitale Infrastruktur«, Anlage 1 BSIG). Die Prüfung erfolgt in vier Schritten: operative Leistung → Kundenkreis (Inhouse-Abgrenzung) → Schwellenwerte → Zurechnung verbundener Unternehmen nach § 28 Abs. 4 BSIG. Ausführliche Erklärung auf der Hilfe-Seite.',
   thresholds: 'Schwellenwerte des relevanten Rechtsträgers (VZÄ, Umsatz, Bilanzsumme).',
   it: 'Gemeinsame IT-Infrastruktur zwischen Einheiten.',
   separation: 'Harte technische Trennung zwischen Rettungsdienst und restlichem Verband.',
@@ -173,11 +175,15 @@ export default function AssessmentWizard() {
 
   const isQuestionVisible = useCallback((q: RulesetQuestion): boolean => {
     if (!q.visibleIf) return true;
-    return q.visibleIf.every(cond => {
+    const evalCond = (cond: VisibilityCondition): boolean => {
+      if (cond.any) return cond.any.some(evalCond);
+      if (cond.all) return cond.all.every(evalCond);
+      if (!cond.questionId || !cond.op) return true;
       const answer = state.answers[cond.questionId];
       if (cond.op === 'eq') return answer === cond.value;
       return true;
-    });
+    };
+    return q.visibleIf.every(evalCond);
   }, [state.answers]);
 
   const getVisibleQuestionsForSection = useCallback((section: string): RulesetQuestion[] => {

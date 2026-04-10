@@ -22,9 +22,20 @@ export function generiereVorstandBriefing(
     vorstand: grunddaten.vorstand || '',
 
     betroffenheitLabel: isBetroffenWahrscheinlich ? 'Wahrscheinlich betroffen' : 'Möglicherweise betroffen',
-    betroffenheitGrund: result.jurisdiction.isRdProvider
-      ? `Rettungsdienst-Leistungen + ${vzae > 0 ? vzae + ' VZÄ' : 'Schwellenwert geprüft'} → Gesundheitssektor NIS-2`
-      : result.outcome.summary,
+    betroffenheitGrund: (() => {
+      const sector = result.jurisdiction.regulationSector;
+      const vzaeTxt = vzae > 0 ? `${vzae} VZÄ` : 'Schwellenwert geprüft';
+      if (sector === 'both') {
+        return `Rettungsdienst (Sektor Gesundheit) + zentraler IT-Betrieb für andere juristische Personen (Sektor Digitale Infrastruktur, § 2 Nr. 26 BSIG) + ${vzaeTxt} → Doppelbetroffenheit NIS-2`;
+      }
+      if (sector === 'digital_infrastructure') {
+        return `Zentraler IT-Betrieb für andere juristische Personen als Managed Service Provider (§ 2 Nr. 26 BSIG) + ${vzaeTxt} → Sektor Digitale Infrastruktur, Anlage 1 BSIG`;
+      }
+      if (sector === 'health') {
+        return `Rettungsdienst-Leistungen + ${vzaeTxt} → Gesundheitssektor NIS-2`;
+      }
+      return result.outcome.summary;
+    })(),
     einstufung: result.jurisdiction.classification || 'Einstufung unklar – Rechtsberatung empfohlen',
 
     pflichten: [

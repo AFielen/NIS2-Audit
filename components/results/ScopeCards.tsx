@@ -8,21 +8,38 @@ interface ScopeCardsProps {
 
 export default function ScopeCards({ result }: ScopeCardsProps) {
   const { jurisdiction, scope } = result;
+  const sector = jurisdiction.regulationSector;
+  const isMspOnly = sector === 'digital_infrastructure';
+  const isBoth = sector === 'both';
 
-  // Derive legal scope text
+  // Derive legal scope text — sector-aware (RD only / MSP only / both)
   let legalSummary: string;
   let legalDetails: string;
-  if (!jurisdiction.isRdProvider) {
-    legalSummary = 'Kein rettungsdienstlicher Trigger';
-    legalDetails = 'Da kein Rettungsdienst betrieben wird, ergibt sich aus diesem Tool kein sektoraler Trigger.';
+  if (sector === 'none') {
+    legalSummary = 'Kein sektoraler Trigger';
+    legalDetails = 'Es wurde weder Rettungsdienst noch zentraler IT-Betrieb für andere juristische Personen angegeben. Aus diesem Tool ergibt sich kein direkter NIS-2-Trigger.';
   } else if (jurisdiction.directlyRegulated) {
-    legalSummary = jurisdiction.classification === 'especially_important'
+    const classLabel = jurisdiction.classification === 'especially_important'
       ? 'Besonders wichtige Einrichtung'
       : 'Wichtige Einrichtung';
-    legalDetails = 'Der relevante Rechtsträger überschreitet die NIS-2-Schwellenwerte und wird direkt reguliert.';
+    if (isBoth) {
+      legalSummary = `${classLabel} (Gesundheit + Digitale Infrastruktur)`;
+      legalDetails = 'Der relevante Rechtsträger überschreitet die NIS-2-Schwellenwerte und wird über zwei Sektoren parallel reguliert: Rettungsdienst als Gesundheitsdienstleister (Anlage 1 BSIG, Sektor Gesundheit) UND zentraler IT-Betrieb für andere juristische Personen als Managed Service Provider (§ 2 Nr. 26 BSIG, Sektor Digitale Infrastruktur).';
+    } else if (isMspOnly) {
+      legalSummary = `${classLabel} (Digitale Infrastruktur)`;
+      legalDetails = 'Der relevante Rechtsträger ist als Managed Service Provider (§ 2 Nr. 26 BSIG) direkt reguliert — Sektor »Digitale Infrastruktur / IKT-Dienstleistungsmanagement« nach Anlage 1 BSIG. Die Schwellenwerte (≥ 50 VZÄ oder > 10 Mio € Umsatz UND > 10 Mio € Bilanz) sind erfüllt.';
+    } else {
+      legalSummary = `${classLabel} (Gesundheit)`;
+      legalDetails = 'Der relevante Rechtsträger überschreitet die NIS-2-Schwellenwerte und wird als Gesundheitsdienstleister (Rettungsdienst) direkt reguliert.';
+    }
   } else {
     legalSummary = 'Schwellenwerte nicht erreicht';
-    legalDetails = 'Der Rettungsdienst wird betrieben, aber die Schwellenwerte (VZÄ, Umsatz, Bilanzsumme) werden nicht überschritten.';
+    const triggerPhrase = isBoth
+      ? 'Rettungsdienst und zentraler IT-Betrieb für Dritte werden erbracht'
+      : isMspOnly
+        ? 'Zentraler IT-Betrieb für andere juristische Personen wird erbracht'
+        : 'Der Rettungsdienst wird betrieben';
+    legalDetails = `${triggerPhrase}, aber die Schwellenwerte (≥ 50 VZÄ oder > 10 Mio € Umsatz UND > 10 Mio € Bilanz) werden nicht überschritten. Hinweis: § 28 Abs. 3 BSIG kennt eine enge Ausnahme für »vernachlässigbare Geschäftstätigkeiten« — bei echtem operativem IT-Betrieb hilft sie praktisch kaum. Im Grenzfall juristisch prüfen lassen.`;
   }
 
   // Derive technical scope text
@@ -32,12 +49,18 @@ export default function ScopeCards({ result }: ScopeCardsProps) {
 
   let techSummary: string;
   let techDetails: string;
-  if (techFactors.length === 0 && scope.technical.hardSeparationPossible) {
+  if (isMspOnly) {
+    // MSP-only: hard-separation irrelevant, IT-Betrieb selbst ist der Scope
+    techSummary = 'IT-Betrieb ist Regulierungsgegenstand';
+    techDetails = 'Beim MSP-Pfad ist die IT-Betriebsleistung als solche der Regulierungsgegenstand. Eine Scope-Begrenzung durch technische Trennung ist nicht möglich — alle IT-Systeme, Prozesse und Zugänge, die dem Betrieb für Dritte dienen, fallen unter NIS-2.';
+  } else if (techFactors.length === 0 && scope.technical.hardSeparationPossible) {
     techSummary = 'Technischer Scope begrenzbar';
     techDetails = 'Eine harte Trennung ist nachgewiesen. Der Scope lässt sich auf den Rettungsdienst begrenzen.';
   } else if (techFactors.length > 0) {
     techSummary = 'Gesamter Kreisverband im NIS-2-Scope';
-    techDetails = 'Ohne harte Trennung erstreckt sich der NIS-2-Scope auf den gesamten DRK-Kreisverband — nicht nur auf den Rettungsdienst. Alle IT-Systeme, Netzwerke und Prozesse des Verbands müssen die Anforderungen erfüllen.';
+    techDetails = isBoth
+      ? 'Ohne harte Trennung erstreckt sich der NIS-2-Scope aus dem RD-Pfad auf den gesamten DRK-Kreisverband. Zusätzlich ist der MSP-Pfad separat geregelt (IT-Betrieb ist selbst reguliert).'
+      : 'Ohne harte Trennung erstreckt sich der NIS-2-Scope auf den gesamten DRK-Kreisverband — nicht nur auf den Rettungsdienst. Alle IT-Systeme, Netzwerke und Prozesse des Verbands müssen die Anforderungen erfüllen.';
   } else {
     techSummary = 'Keine Shared-IT-Faktoren erkannt';
     techDetails = 'Es wurden keine gemeinsamen IT-Abhängigkeiten angegeben.';
@@ -95,13 +118,15 @@ export default function ScopeCards({ result }: ScopeCardsProps) {
             ))}
           </ul>
         )}
-        {/* Hard separation status */}
-        <div className="mt-3 p-2 rounded-lg text-sm" style={{
-          background: scope.technical.hardSeparationPossible ? 'var(--success-bg)' : 'var(--warning-bg)',
-          color: scope.technical.hardSeparationPossible ? 'var(--success)' : '#b45309',
-        }}>
-          Harte Trennung: {scope.technical.hardSeparationPossible ? '8/8 Kriterien erfüllt' : 'Nicht vollständig nachgewiesen'}
-        </div>
+        {/* Hard separation status — nur wenn RD-Pfad aktiv ist */}
+        {jurisdiction.isRdProvider && (
+          <div className="mt-3 p-2 rounded-lg text-sm" style={{
+            background: scope.technical.hardSeparationPossible ? 'var(--success-bg)' : 'var(--warning-bg)',
+            color: scope.technical.hardSeparationPossible ? 'var(--success)' : '#b45309',
+          }}>
+            Harte Trennung: {scope.technical.hardSeparationPossible ? '8/8 Kriterien erfüllt' : 'Nicht vollständig nachgewiesen'}
+          </div>
+        )}
       </div>
     </div>
   );
