@@ -15,13 +15,17 @@ interface ExportActionsProps {
 
 export default function ExportActions({ result, answers, grunddaten }: ExportActionsProps) {
   const [qrSvg, setQrSvg] = useState<string>('');
+  const [stateUrl, setStateUrl] = useState<string>('');
+  const [kopiert, setKopiert] = useState(false);
+  const [ctaHinweis, setCtaHinweis] = useState(false);
 
   useEffect(() => {
     try {
       const encoded = encodeState({ answers, grunddaten });
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL || (typeof window !== 'undefined' ? window.location.origin : '');
-      const stateUrl = `${baseUrl}/check?state=${encoded}`;
-      const svg = generateQrSvg(stateUrl, 120);
+      const url = `${baseUrl}/check?state=${encoded}`;
+      setStateUrl(url);
+      const svg = generateQrSvg(url, 120);
       setQrSvg(svg);
     } catch (e) {
       console.warn('QR code generation failed:', e);
@@ -33,7 +37,29 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
   };
 
   const handleExportJSON = () => {
-    downloadJSON(result, answers);
+    downloadJSON(result, answers, grunddaten);
+  };
+
+  const handleCopyLink = async () => {
+    if (!stateUrl) return;
+    try {
+      await navigator.clipboard.writeText(stateUrl);
+      setKopiert(true);
+      setTimeout(() => setKopiert(false), 2000);
+    } catch {
+      // Fallback: select input if clipboard fails
+    }
+  };
+
+  const handleCopyForManager = async () => {
+    if (!stateUrl) return;
+    try {
+      await navigator.clipboard.writeText(stateUrl);
+      setCtaHinweis(true);
+      setTimeout(() => setCtaHinweis(false), 5000);
+    } catch {
+      // Fallback: select input if clipboard fails
+    }
   };
 
   return (
@@ -78,6 +104,37 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
               <div className="mt-2 p-2 rounded text-xs" style={{ background: 'var(--warning-bg)', color: '#b45309' }}>
                 <strong>Hinweis:</strong> Behandeln Sie diesen QR-Code vertraulich. Wer ihn scannt, kann alle Ihre Audit-Antworten einsehen.
               </div>
+              {/* Copyable URL */}
+              {stateUrl && (
+                <div className="mt-3 w-full">
+                  <label className="text-xs font-semibold block mb-1" style={{ color: 'var(--text-muted)' }}>
+                    Link zum Wiederherstellen:
+                  </label>
+                  <div className="flex gap-1">
+                    <input
+                      readOnly
+                      value={stateUrl}
+                      className="drk-input flex-1 text-xs font-mono"
+                      style={{ textOverflow: 'ellipsis' }}
+                      onFocus={(e) => e.target.select()}
+                    />
+                    <button
+                      onClick={handleCopyLink}
+                      className="drk-btn-secondary shrink-0 px-2 text-xs"
+                      title="Link kopieren"
+                    >
+                      {kopiert ? (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+                      ) : (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -93,6 +150,9 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
           </Link>
           <button onClick={handleExportJSON} className="drk-btn-secondary flex-1">
             JSON exportieren
+          </button>
+          <button onClick={handleCopyLink} className="drk-btn-secondary flex-1" disabled={!stateUrl}>
+            {kopiert ? 'Kopiert!' : 'Link kopieren'}
           </button>
         </div>
 
@@ -114,6 +174,23 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
             Neuen Check starten
           </button>
         </div>
+
+        {/* CTA: In NIS-2 Manager übernehmen */}
+        {stateUrl && (
+          <div className="mt-3 p-4 rounded-xl" style={{ background: 'var(--drk-bg)', border: '2px solid var(--drk)' }}>
+            <button
+              onClick={handleCopyForManager}
+              className="drk-btn-primary w-full py-2.5 text-sm font-semibold"
+            >
+              Ergebnis in NIS-2 Manager übernehmen
+            </button>
+            {ctaHinweis && (
+              <p className="text-xs mt-2 text-center" style={{ color: 'var(--drk)' }}>
+                Link kopiert. Öffne <strong>drk-isms.de</strong> und füge den Link im Import-Bereich ein.
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </>
   );
