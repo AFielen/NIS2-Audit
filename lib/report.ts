@@ -1,4 +1,4 @@
-import type { AssessmentResult, WizardAnswers, OutcomeType, RulesetQuestion } from './types';
+import type { AssessmentResult, WizardAnswers, OutcomeType, RulesetQuestion, Grunddaten } from './types';
 import { getRulesetQuestions } from './rules/evaluate';
 
 function collectUnknownItems(answers: WizardAnswers): Array<{ questionId: string; label: string }> {
@@ -34,7 +34,7 @@ export function getOutcomeBgColor(outcome: OutcomeType): string {
   return OUTCOME_BG_COLORS[outcome];
 }
 
-export function exportJSON(result: AssessmentResult, answers: WizardAnswers): string {
+export function exportJSON(result: AssessmentResult, answers: WizardAnswers, grunddaten?: Grunddaten): string {
   const unknownItems = collectUnknownItems(answers);
   const exportData = {
     version: '1.1.0',
@@ -47,12 +47,13 @@ export function exportJSON(result: AssessmentResult, answers: WizardAnswers): st
     triggeredRules: result.triggeredRules,
     unknownItems,
     answers,
+    grunddaten,
   };
   return JSON.stringify(exportData, null, 2);
 }
 
-export function downloadJSON(result: AssessmentResult, answers: WizardAnswers): void {
-  const json = exportJSON(result, answers);
+export function downloadJSON(result: AssessmentResult, answers: WizardAnswers, grunddaten?: Grunddaten): void {
+  const json = exportJSON(result, answers, grunddaten);
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');

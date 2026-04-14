@@ -37,7 +37,7 @@ export default function ExportActions({ result, answers, grunddaten }: ExportAct
   };
 
   const handleExportJSON = () => {
-    downloadJSON(result, answers);
+    downloadJSON(result, answers, grunddaten);
   };
 
   const handleCopyLink = async () => {
